@@ -2,7 +2,6 @@ const { Schema, model, Types } = require('mongoose');
 
 const ingredientSchema = new Schema({
     titleIngredient: { type: String, required: true, unique: true },
-    image: { type: String, required: [true, 'Image URL is required'] },
     recipesID: { type: [Types.ObjectId], default: [], ref: 'Recipe' }
 });
 

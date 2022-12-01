@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const categoryController = require('./controllers/categoryController');
+const ingredientController = require('./controllers/IngredientController');
 const recipeController = require('./controllers/recipeController');
 const cors = require('./middlewares/cors');
 
@@ -25,6 +26,7 @@ async function start() {
 
     app.use('/recipe', recipeController);
     app.use('/category', categoryController);
+    app.use('/ingredient', ingredientController);
 
     // app.use('/users', authController);
     // app.use('/data/catalog', dataController);

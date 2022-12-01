@@ -2,21 +2,26 @@ const { Schema, model, Types } = require('mongoose');
 
 const recipeSchema = new Schema({
     titleRecipe: { type: String, required: true, minlength: [3, 'Title must be at least 3 characters long'] },
-    subHeading: { type: String, minlength: [3, 'Intro must be at least 3 characters long'] },
+    shortDescription: { type: String, minlength: [3, 'Intro must be at least 3 characters long'] },
     category: {
         type: [Types.ObjectId],
         default: [],
         required: true,
         ref: 'Category'
     },
-    type: { type: [String], default: [], required: true, minlength: [3, 'Type must be at least 3 characters long'] },
+    meal: {
+        type: String,
+        required: true,
+        enum: ['breakfast', 'lunch', 'dinner', 'snacks', 'drinks', 'special-occasion','other'],
+        default: ['other'],
+    },
     preparationTime: { type: Number },
     cookingTime: { type: Number, min: [1, 'Time for cooking must be at least 1 min'] },
     servings: { type: Number, min: [1, 'Serving must be at least 1'] },
     difficulty: {
         type: String,
         required: true,
-        enum: ['super easy', 'easy', 'moderate', 'hard'],
+        enum: ['easy', 'moderate', 'hard'],
         default: ['easy']
     },
     mainIngredient: {
@@ -25,10 +30,8 @@ const recipeSchema = new Schema({
         ref: 'Ingredient'
     },
     ingredients: {
-        type: [Types.ObjectId],
+        type: [String],
         default: [],
-        required: true,
-        ref: 'Ingredient'
     },
     preparation: { type: [String], default: [], required: true, minlength: [10, 'Preparation must be at least 10 characters long'] },
     season: {

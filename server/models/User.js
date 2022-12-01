@@ -5,7 +5,7 @@ const userSchema = new Schema({
     username: { type: String, required: true, minlength: [3, 'Username must be at least 3 character long'] },
     email: { type: String, required: true },
     hashedPassword: { type: String, required: true },
-    // roles: { type: [{ type: String, enum: ['user', 'admin'] }], default: ['user'] } if have time
+    // roles: { type: [{ type: String, enum: ['user', 'admin'] }], default: ['user'] } //if have time
 });
 
 
