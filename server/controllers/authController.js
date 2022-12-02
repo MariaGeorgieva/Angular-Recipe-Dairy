@@ -1,5 +1,6 @@
 const authController = require('express').Router();
 const { body, validationResult } = require('express-validator');
+const { hasUser } = require('../middlewares/guards');
 
 const { register, login, logout } = require('../services/authService');
 const { parseError } = require('../util/parser');
@@ -33,7 +34,11 @@ authController.post('/login', async (req, res) => {
     }
 });
 
-authController.get('/logout', async (req, res) => {
+authController.get('/profile', hasUser(), async (req, res) => {
+
+});
+
+authController.get('/logout', hasUser(), async (req, res) => {
     const token = req.token;
     await logout(token);
     res.status(204).end();
