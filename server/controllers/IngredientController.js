@@ -1,26 +1,29 @@
-const {getAllIngredients, createIngredient } = require('../services/ingredientService');
+const { getAllIngredients, createIngredient } = require('../services/ingredientService');
+const { parseError } = require('../util/parser');
 
 const ingredientController = require('express').Router();
 
-// const { hasUser } = require('../middlewares/guards');
-
-// const { parseError } = require('../util/parser');
-
-
 ingredientController.get('/', async (req, res) => {
-    let categories = [];
-    categories = await getAllIngredients();
-    res.json(categories);
+    try {
+        const categories = await getAllIngredients();
+        res.json(categories);
+    } catch (error) {
+        const message = parseError(err);
+        res.status(400).json({ message });
+    }
+
 });
 
-// ingredientController.post('/', hasUser(), isAdmin(), async (req, res) => {
-    ingredientController.post('/', async (req, res) => {
+ingredientController.post('/', async (req, res) => {
     try {
-        const data = req.body;
+        const data = {
+            titleIngredient: req.body.titleIngredient
+        }
         const ingredient = await createIngredient(data);
         res.json(ingredient);
     } catch (err) {
-        res.status(400).json({ err });
+        const message = parseError(err);
+        res.status(400).json({ message });
     }
 });
 
