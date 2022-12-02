@@ -10,13 +10,13 @@ const session = require('./middlewares/session');
 const trimBody = require('./middlewares/trimBody');
 
 
-const connectionString = 'mongodb://127.0.0.1:27017/recipesDB';
+
 const env = process.env.NODE_ENV || 'development';
 
 const config = {
     development: {
         port: process.env.PORT || 3030,
-        dbURL: 'mongodb://127.0.0.1:27017/forum',
+        dbURL: 'mongodb://127.0.0.1:27017/recipesDB',
         origin: ['http://localhost:5555', 'http://localhost:4200']
     },
     production: {
