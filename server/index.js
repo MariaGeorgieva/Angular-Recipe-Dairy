@@ -48,8 +48,8 @@ async function start() {
     });
 
     app.use('/auth', authController);
-    app.use('/category', isAdmin(), categoryController);
-    app.use('/ingredient', isAdmin(), ingredientController);
+    app.use('/category', categoryController);//isAdmin(), 
+    app.use('/ingredient', ingredientController); // isAdmin(),
     app.use('/recipe', recipeController);
 
     app.listen(config[env].port, () => console.log(`Server is running on port ${config[env].port}.`));

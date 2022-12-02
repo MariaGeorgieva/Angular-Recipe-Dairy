@@ -11,6 +11,9 @@ import { FooterComponent } from './core/footer/footer.component';
 import { NavigationComponent } from './core/navigation/navigation.component';
 import { HomepageComponent } from './core/homepage/homepage.component';
 import { PageNotFoundComponent } from './core/page-not-found/page-not-found.component';
+import { CreateRecipeComponent } from './recipe/create-recipe/create-recipe.component';
+import { RecipeCategoryComponent } from './recipe/recipe-category/recipe-category.component';
+import { RecipeIngredientComponent } from './recipe/recipe-ingredient/recipe-ingredient.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +25,10 @@ import { PageNotFoundComponent } from './core/page-not-found/page-not-found.comp
     FooterComponent,
     NavigationComponent,
     HomepageComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    CreateRecipeComponent,
+    RecipeCategoryComponent,
+    RecipeIngredientComponent
   ],
   imports: [
     BrowserModule,

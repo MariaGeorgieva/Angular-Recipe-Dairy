@@ -43,7 +43,12 @@ const recipeSchema = new Schema({
     // createdAt: { type: }
     image: { type: String, required: [true, 'Image URL is required'] },
     ownerID: { type: Types.ObjectId, ref: 'User', required: true },
-    likes: {
+    userLiked: {
+        type: [Types.ObjectId],
+        default: [],
+        ref: 'User'
+    },
+    userSaved: {
         type: [Types.ObjectId],
         default: [],
         ref: 'User'

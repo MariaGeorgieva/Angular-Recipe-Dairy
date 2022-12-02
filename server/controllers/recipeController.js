@@ -1,10 +1,9 @@
+const { hasUser } = require('../middlewares/guards');
 const { getAllRecipes } = require('../services/recipeService');
 
 const recipeController = require('express').Router();
 
-// const { hasUser } = require('../middlewares/guards');
-
-// const { parseError } = require('../util/parser');
+const { parseError } = require('../util/parser');
 
 
 recipeController.get('/', async (req, res) => {
@@ -14,7 +13,7 @@ recipeController.get('/', async (req, res) => {
 });
 
 // recipeController.post('/', hasUser(), async (req, res) => {
-recipeController.post('/', async (req, res) => {
+recipeController.post('/', hasUser(), async (req, res) => {
     try {
         const recipe = await create(data);
         res.json(recipe);

@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model, Types } = require('mongoose');
 
 
 const userSchema = new Schema({
@@ -9,6 +9,21 @@ const userSchema = new Schema({
         type: String,
         enum: ['user', 'admin'],
         default: ['user']
+    },
+    ownRecipe: {
+        type: [Types.ObjectId],
+        default: [],
+        ref: 'Recipe'
+    },
+    likedRecipes: {
+        type: [Types.ObjectId],
+        default: [],
+        ref: 'Recipe'
+    },
+    savedRecipes: {
+        type: [Types.ObjectId],
+        default: [],
+        ref: 'Recipe'
     }
 });
 

@@ -10,6 +10,11 @@ const routes: Routes = [
     component: HomepageComponent
   },
   {
+    path: 'category',
+    pathMatch: 'full',
+    // component: 
+  },
+  {
     path: 'not-found',
     component: PageNotFoundComponent
   },
