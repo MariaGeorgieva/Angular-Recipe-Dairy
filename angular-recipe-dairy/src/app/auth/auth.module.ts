@@ -8,6 +8,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { RegisterComponent } from './register/register.component';
 
 
+
 @NgModule({
   declarations: [
     LoginComponent,

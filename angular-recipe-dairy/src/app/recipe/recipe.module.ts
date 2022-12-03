@@ -20,6 +20,9 @@ import { RecipeMainComponent } from './recipe-main/recipe-main.component';
   imports: [
     CommonModule,
     RecipeRoutingModule
+  ],
+  exports: [
+    RecipeListComponent
   ]
 })
 export class RecipeModule { }

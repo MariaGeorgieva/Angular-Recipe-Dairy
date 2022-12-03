@@ -1,39 +1,29 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './auth/login/login.component';
-import { RegisterComponent } from './auth/register/register.component';
-import { LogoutComponent } from './auth/logout/logout.component';
-import { ProfileComponent } from './auth/profile/profile.component';
-import { FooterComponent } from './core/footer/footer.component';
-import { NavigationComponent } from './core/navigation/navigation.component';
-import { HomepageComponent } from './core/homepage/homepage.component';
-import { PageNotFoundComponent } from './core/page-not-found/page-not-found.component';
-import { CreateRecipeComponent } from './recipe/create-recipe/create-recipe.component';
-import { RecipeCategoryComponent } from './recipe/recipe-category/recipe-category.component';
-import { RecipeIngredientComponent } from './recipe/recipe-ingredient/recipe-ingredient.component';
+import { HttpClientModule } from '@angular/common/http';
+import { AppRoutingModule } from './app-routing.module';
+import { AuthModule } from './auth/auth.module';
+import { CoreModule } from './core/core.module';
+import { RecipeModule } from './recipe/recipe.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    RegisterComponent,
-    LogoutComponent,
-    ProfileComponent,
-    FooterComponent,
-    NavigationComponent,
-    HomepageComponent,
-    PageNotFoundComponent,
-    CreateRecipeComponent,
-    RecipeCategoryComponent,
-    RecipeIngredientComponent
   ],
   imports: [
+    AuthModule,
+    RecipeModule,
+    //the child must be under
+    AppRoutingModule,
     BrowserModule,
-    AppRoutingModule
+    //core must be after BrowserModule
+    CoreModule,
+    HttpClientModule,
+    // SharedModule,
   ],
+
   providers: [],
   bootstrap: [AppComponent]
 })
