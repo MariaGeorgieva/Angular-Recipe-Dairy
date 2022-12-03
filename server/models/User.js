@@ -10,7 +10,7 @@ const userSchema = new Schema({
         enum: ['user', 'admin'],
         default: ['user']
     },
-    ownRecipe: {
+    ownRecipes: {
         type: [Types.ObjectId],
         default: [],
         ref: 'Recipe'

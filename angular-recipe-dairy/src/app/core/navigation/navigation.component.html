@@ -1,9 +1,102 @@
-<p>navigation works!</p>
-<header>
-    <ul>
-        <li> <a routerLink="/">Home</a></li>
-        <li> <a routerLink="/login">Login</a></li>
-        <li><a routerLink="/auth/register">Register</a></li>
-    </ul>
+<p>
+  <mat-toolbar id="top-toolbar">
+    <button mat-button color="primary" routerLink="/recipe">
+      <mat-icon>call</mat-icon>
+      (+100) 123 456 7890
+    </button>
+    <!-- <mat-divider [vertical]="true" ></mat-divider> -->
+    <button mat-button color="primary" routerLink="/recipe">
+      <mat-icon>mail</mat-icon>
+      contacts@recipe-diary.com
+    </button>
+    <button mat-button color="primary" routerLink="/recipe">
+      <mat-icon>location_on</mat-icon>
+      Sofia, Bulgaria
+    </button>
+    <span class="example-spacer"></span>
+    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="facebook"></mat-icon>
+    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="share"></mat-icon>
 
-</header>
+  </mat-toolbar>
+</p>
+<p>
+  <mat-toolbar id="main-toolbar">
+    <button mat-button color="primary" routerLink="/">
+      <mat-icon>home</mat-icon>
+      Recipe Diary
+    </button>
+    <span class="example-spacer"></span>
+
+    <section>
+      <div class="example-button-row">
+        <button mat-button color="primary" routerLink="/recipe">
+          <mat-icon>menu_book</mat-icon>
+          All Recipes
+        </button>
+
+        <!-- Recipe Categories -->
+        <button routerLink="/recipe/categories" mat-button [matMenuTriggerFor]="menuCategories">
+          Recipes Categories <mat-icon>arrow_drop_down</mat-icon>
+        </button>
+        <mat-menu #menuCategories="matMenu">
+          <!-- for each category -->
+          <button mat-menu-item>Item 1</button>
+          <button mat-menu-item>Item 2</button>
+        </mat-menu>
+        <!-- End Recipe Categories -->
+
+      </div>
+    </section>
+    <span class="example-spacer"></span>
+
+    <section>
+      <div class="example-button-row">
+        <button mat-button color="primary" routerLink="/login">
+          <mat-icon>login</mat-icon>
+          Login
+        </button>
+        <button mat-button color="primary" routerLink="/register">
+          <mat-icon>app_registration</mat-icon>
+          Register
+        </button>
+      </div>
+
+      <!-- Profile Links -->
+      <span class="fill-remaining-space">
+        <button mat-button [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger"
+          (mouseover)="menuTrigger.openMenu()">
+          <mat-icon>person</mat-icon>
+          Profile
+        </button>
+
+        <mat-menu class="profile-menu" #menu="matMenu" [overlapTrigger]="false">
+          <span (mouseleave)="menuTrigger.closeMenu()">
+            <button mat-menu-item color="primary" routerLink="/recipe/create">
+              <mat-icon>library_add</mat-icon>
+              Add Recipe
+            </button>
+            <button mat-menu-item routerLink="/user/created-recipes">
+              <mat-icon>list</mat-icon>
+              <span>My Recipes</span>
+            </button>
+            <button mat-menu-item routerLink="/user/favorite-recipes">
+              <mat-icon>favorite</mat-icon>
+              <span>Liked Recipes</span>
+            </button>
+            <button mat-menu-item routerLink="/user/saved-recipes">
+              <mat-icon>bookmarks</mat-icon>
+              <span>Saved Recipes</span>
+            </button>
+            <button mat-menu-item routerLink="/logout">
+              <mat-icon>logout</mat-icon>
+              Logout
+            </button>
+
+          </span>
+        </mat-menu>
+      </span>
+
+      <!-- End Profile Links -->
+    </section>
+  </mat-toolbar>
+</p>

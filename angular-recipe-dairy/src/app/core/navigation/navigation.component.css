@@ -1,0 +1,69 @@
+#top-toolbar {
+  background-color: #558B2F;
+  color: #fff;
+  height: 36px;
+  font-size: 12px;
+  position: relative;
+  margin-bottom: -10px;
+}
+
+mat-menu {
+  background-color: white;
+  color: #558B2F;
+}
+
+#main-toolbar {
+  background-color: white;
+  color: #558B2F;
+  /* position: relative; */
+  height: 72px;
+  transition: .2s;
+  /* z-index: 9; */
+  box-shadow: 0 3px 1px -2px #0003, 0 2px 2px #00000024, 0 1px 5px #0000001f;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+section {
+  display: table;
+}
+
+.example-label {
+  display: table-cell;
+  font-size: 14px;
+  margin-left: 8px;
+  min-width: 120px;
+}
+
+.example-button-row {
+  display: table-cell;
+  max-width: 600px;
+}
+
+.example-button-row .mat-mdc-button-base {
+  margin: 8px 8px 8px 0;
+}
+
+.example-flex-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.example-button-container {
+  display: flex;
+  justify-content: center;
+  width: 120px;
+}
+
+ button   {
+  text-transform: uppercase;
+}
