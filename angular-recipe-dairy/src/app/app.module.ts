@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
-import { AppRoutingModule } from './app-routing.module';
 import { AuthModule } from './auth/auth.module';
 import { CoreModule } from './core/core.module';
 import { RecipeModule } from './recipe/recipe.module';
@@ -16,9 +16,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   imports: [
     AuthModule,
     RecipeModule,
+    AppRoutingModule,
     //the child must be under
     BrowserModule,
-    AppRoutingModule,
     //core must be after BrowserModule
     CoreModule,
     HttpClientModule,
