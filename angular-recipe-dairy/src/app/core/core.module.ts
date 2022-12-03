@@ -17,6 +17,7 @@ import {MatDividerModule} from '@angular/material/divider';
 
 
 
+
 @NgModule({
   declarations: [
     HomepageComponent,
@@ -35,6 +36,7 @@ import {MatDividerModule} from '@angular/material/divider';
     MatListModule,
     MatMenuModule,
     MatDividerModule,
+
     // SharedModule,
 
   ],
@@ -43,7 +45,7 @@ import {MatDividerModule} from '@angular/material/divider';
     HomepageComponent,
     FooterComponent,
     PageNotFoundComponent,
-    NavigationComponent
+    NavigationComponent,
   ]
 })
 export class CoreModule { }

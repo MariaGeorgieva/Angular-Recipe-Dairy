@@ -17,8 +17,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AuthModule,
     RecipeModule,
     //the child must be under
-    AppRoutingModule,
     BrowserModule,
+    AppRoutingModule,
     //core must be after BrowserModule
     CoreModule,
     HttpClientModule,
