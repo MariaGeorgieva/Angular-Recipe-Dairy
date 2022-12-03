@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AuthModule } from './auth/auth.module';
 import { CoreModule } from './core/core.module';
 import { RecipeModule } from './recipe/recipe.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { RecipeModule } from './recipe/recipe.module';
     //core must be after BrowserModule
     CoreModule,
     HttpClientModule,
+    BrowserAnimationsModule,
     // SharedModule,
   ],
 
