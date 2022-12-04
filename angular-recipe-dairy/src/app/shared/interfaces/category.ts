@@ -6,6 +6,6 @@ export interface ICategory {
     image: string;
     recipesID: IRecipe[];
     __v: number;
-    created_at: string;
-    updated_at: string;
+    // created_at: string;
+    // updated_at: string;
 }

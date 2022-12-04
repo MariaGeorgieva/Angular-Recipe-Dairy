@@ -1,1 +1,20 @@
-<p>recipe-category works!</p>
+<div class="container">
+<mat-grid-list cols="4" rowHeight="1:1">
+    <mat-grid-tile *ngFor="let category of categoryList">
+        <mat-card class="example-card">
+            <mat-card-header>
+                <mat-card-title>{{category.titleCategory}}</mat-card-title>
+                <!-- <mat-card-subtitle>{{card.cardSubTitle}}</mat-card-subtitle> -->
+            </mat-card-header>
+            <img mat-card-image src="{{category.image}}" alt="{{category.titleCategory}}">
+            <mat-card-content>
+                <p>TODO a few words</p>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-button>view all recipes</button>
+            </mat-card-actions>
+            <mat-card-footer>{{category.titleCategory}}</mat-card-footer>
+        </mat-card>
+    </mat-grid-tile>
+</mat-grid-list>
+</div>

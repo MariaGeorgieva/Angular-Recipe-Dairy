@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const mongoose = require('mongoose');
 const authController = require('./controllers/authController');
 const categoryController = require('./controllers/categoryController');
@@ -9,7 +10,7 @@ const { isAdmin, hasUser } = require('./middlewares/guards');
 const session = require('./middlewares/session');
 const trimBody = require('./middlewares/trimBody');
 
-
+global.__basedir = __dirname;
 
 const env = process.env.NODE_ENV || 'development';
 
@@ -39,6 +40,10 @@ async function start() {
     }));
 
     app.use(express.json());
+    app.use(express.static(path.resolve(__basedir, 'static')));
+    // app.use(express.static(path.join( __dirname,'./dist/angular-recipe-dairy')));
+    // express.static(path.join( __dirname,'./dist/angular-recipe-dairy'));
+
     app.use(cors());
     app.use(session());
     app.use(trimBody());

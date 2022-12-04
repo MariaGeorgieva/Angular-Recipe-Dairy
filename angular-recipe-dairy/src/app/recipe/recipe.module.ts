@@ -7,6 +7,14 @@ import { CreateRecipeComponent } from './create-recipe/create-recipe.component';
 import { RecipeListComponent } from './recipe-list/recipe-list.component';
 import { RecipeDetailsComponent } from './recipe-details/recipe-details.component';
 import { RecipeMainComponent } from './recipe-main/recipe-main.component';
+import { HttpClientModule } from '@angular/common/http';
+import { RecipeCategoryComponent } from './recipe-category/recipe-category.component';
+
+import {MatCardModule} from '@angular/material/card';
+import {MatGridListModule} from '@angular/material/grid-list';
+
+
+
 
 
 @NgModule({
@@ -15,11 +23,15 @@ import { RecipeMainComponent } from './recipe-main/recipe-main.component';
     CreateRecipeComponent,
     RecipeListComponent,
     RecipeDetailsComponent,
-    RecipeMainComponent
+    RecipeMainComponent,
+    RecipeCategoryComponent
   ],
   imports: [
     CommonModule,
-    RecipeRoutingModule
+    RecipeRoutingModule,
+    HttpClientModule, // TODO not sure for here or just i port on app.module
+    MatCardModule,
+    MatGridListModule
   ],
   exports: [
     RecipeListComponent

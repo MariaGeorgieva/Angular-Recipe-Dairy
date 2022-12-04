@@ -1,0 +1,25 @@
+.container {
+    margin-top: 50px;
+    margin-bottom: 50px;
+
+}
+
+.example-card {
+    width: 313px;
+    margin-right: 16px;
+    /* height: auto; */
+    margin-bottom: 32px;
+    flex-shrink: 0;
+    box-shadow: 0 2px 1px -1px #0003, 0 1px 1px #00000024, 0 1px 3px #0000001f;
+    background: white;
+    color: #000000de;
+    transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+    /* position: relative; */
+    padding: 16px;
+    border-radius: 4px;
+    /* width: 100%! ; */
+}
+
+.example-header-image {
+    background-size: cover;
+}
