@@ -1,16 +1,20 @@
-<p>register works!</p>
-<div class="example-container">
-    <mat-form-field>
-      <input matInput placeholder="Input">
-    </mat-form-field>
-  
-    <mat-form-field>
-      <textarea matInput placeholder="Textarea"></textarea>
-    </mat-form-field>
-  
-    <mat-form-field>
-      <mat-select placeholder="Select">
-        <mat-option value="option">Option</mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
+<mat-card>
+  <mat-card-content>
+    <form #registerForm="ngForm">
+      <h2>Register</h2>
+      <!-- <mat-error *ngIf="!loginValid">
+              The username and password were not recognized
+          </mat-error> -->
+      <mat-form-field>
+        <input matInput placeholder="Email" ngModel name="username" required>
+
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="password" placeholder="Password" ngModel type="password" name="password" required>
+
+      </mat-form-field>
+      <button mat-raised-button color="primary" [disabled]="!registerForm.form.valid">Registers</button>
+    </form>
+    
+  </mat-card-content>
+</mat-card>

@@ -1,3 +1,4 @@
+<!-- Top Bar -->
 <p>
   <mat-toolbar id="top-toolbar">
     <button mat-button color="primary" routerLink="/recipe">
@@ -16,13 +17,20 @@
     <span class="example-spacer"></span>
     <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="facebook"></mat-icon>
     <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="share"></mat-icon>
-
   </mat-toolbar>
 </p>
+<!-- /End Top Bar -->
+<!-- Main Bar -->
 <p>
   <mat-toolbar id="main-toolbar">
-    <button mat-button routerLink="/">
-      <mat-icon>home</mat-icon>
+    <!-- Logo -->
+    <a routerLink="/" class="logo" href="/">
+      <div class="logo">
+        <mat-icon svgIcon="cook-book" class="logo"></mat-icon>
+      </div>
+    </a>
+    <!-- <mat-icon svgIcon="logo" class="logo"></mat-icon> -->
+    <button mat-button routerLink="/" class="cookies">
       Recipe Diary
     </button>
     <span class="example-spacer"></span>
@@ -60,7 +68,7 @@
         <button mat-button [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger"
           (mouseover)="menuTrigger.openMenu()">
           <mat-icon>person</mat-icon>
-           Profile
+          Profile
         </button>
 
         <mat-menu class="profile-menu" #menu="matMenu" [overlapTrigger]="false">
@@ -88,7 +96,7 @@
               <mat-icon>bookmarks</mat-icon>
               <span>Saved Recipes</span>
             </button>
-           
+
             <button mat-menu-item routerLink="/logout">
               <mat-icon>logout</mat-icon>
               Logout
