@@ -1,5 +1,5 @@
 <div>
-    <mat-grid-list cols="4" rowHeight="1:1" class="container">
+    <mat-grid-list cols="4" rowHeight="1:1.5" class="container">
         <mat-grid-tile *ngFor="let category of categoryList" class="my-mat-grid-tile">
             <mat-card class="my-card">
                 <img mat-card-image class="my-card-image" src="{{category.image}}" alt="{{category.titleCategory}}">
@@ -9,7 +9,7 @@
                 </mat-card-header>
                 
                 <mat-card-actions>
-                    <button mat-button>view all recipes</button>
+                    <button mat-raised-button color="primary">view all recipes</button>
                 </mat-card-actions>
                 <!-- <mat-card-footer>{{category.titleCategory}}</mat-card-footer> -->
             </mat-card>

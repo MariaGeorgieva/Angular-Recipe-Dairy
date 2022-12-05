@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 
@@ -13,12 +14,11 @@ export class LoginComponent {
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private authService: AuthService 
-  ) {
+    private authService: AuthService
+  ) { }
 
-  }
-
-  loginHandler(): void {
+  loginHandler(loginForm: NgForm): void {
+    if (loginForm.invalid) { return; }
     this.authService.user = {
       username: 'mlove',
     } as any;

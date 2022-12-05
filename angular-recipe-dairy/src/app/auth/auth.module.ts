@@ -9,10 +9,11 @@ import { ProfileComponent } from './profile/profile.component';
 import { RegisterComponent } from './register/register.component';
 
 import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatFormFieldModule, MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import {MatSelectModule} from '@angular/material/select';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,9 @@ import {MatSelectModule} from '@angular/material/select';
     RegisterComponent,
     LogoutComponent,
     ProfileComponent,
+  ],
+  providers: [
+    {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}}
   ],
   imports: [
     CommonModule,
@@ -29,7 +33,8 @@ import {MatSelectModule} from '@angular/material/select';
     MatCardModule,
     MatButtonModule,
     FormsModule,
-    MatSelectModule
+    MatSelectModule,
+    MatIconModule
     // ReactiveFormsModule,
     // SharedModule
   ]

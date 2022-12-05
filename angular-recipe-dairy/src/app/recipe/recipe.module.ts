@@ -10,8 +10,9 @@ import { RecipeMainComponent } from './recipe-main/recipe-main.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RecipeCategoryComponent } from './recipe-category/recipe-category.component';
 
-import {MatCardModule} from '@angular/material/card';
-import {MatGridListModule} from '@angular/material/grid-list';
+import { MatCardModule } from '@angular/material/card';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatButtonModule } from '@angular/material/button';
 
 
 
@@ -31,7 +32,8 @@ import {MatGridListModule} from '@angular/material/grid-list';
     RecipeRoutingModule,
     HttpClientModule, // TODO not sure for here or just i port on app.module
     MatCardModule,
-    MatGridListModule
+    MatGridListModule,
+    MatButtonModule
   ],
   exports: [
     RecipeListComponent

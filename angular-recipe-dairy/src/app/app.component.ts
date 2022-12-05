@@ -13,10 +13,10 @@ export class AppComponent {
   constructor(
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer) {
-    this.matIconRegistry.addSvgIcon(
-      "logo",
-      this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/svg/logo.svg")
-    );
+    // this.matIconRegistry.addSvgIcon(
+    //   "logo",
+    //   this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/svg/logo.svg")
+    // );
     this.matIconRegistry.addSvgIcon(
       "recipes",
       this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/svg/recipes.svg")

@@ -1,20 +1,50 @@
 <mat-card>
   <mat-card-content>
     <form #registerForm="ngForm">
-      <h2>Register</h2>
+      <!-- Logo -->
+      <div class="title-register">
+        <mat-icon svgIcon="recipes" class="logo"></mat-icon>
+        <h2>Register</h2>
+      </div>
       <!-- <mat-error *ngIf="!loginValid">
               The username and password were not recognized
           </mat-error> -->
-      <mat-form-field>
-        <input matInput placeholder="Email" ngModel name="username" required>
 
-      </mat-form-field>
+      <!-- Username -->
       <mat-form-field>
-        <input matInput type="password" placeholder="Password" ngModel type="password" name="password" required>
-
+        <mat-label>Enter your username</mat-label>
+        <input matInput placeholder="Username" ngModel name="username" required>
       </mat-form-field>
-      <button mat-raised-button color="primary" [disabled]="!registerForm.form.valid">Registers</button>
+
+      <!-- Email -->
+      <mat-form-field>
+        <mat-label>Enter your email</mat-label>
+        <input matInput placeholder="Email" ngModel name="email" email required>
+      </mat-form-field>
+
+      <!-- Password -->
+      <mat-form-field>
+        <mat-label>Enter your password</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'" placeholder="Password" ngModel type="password"
+          name="password" required>
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <!-- Repeat Password -->
+      <mat-form-field>
+        <mat-label>Repeat your password</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'" placeholder="Repeat Password" ngModel type="password"
+          name="password" required>
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+      <button mat-raised-button color="accent" [disabled]="!registerForm.form.valid">Registers</button>
     </form>
-    
+
   </mat-card-content>
 </mat-card>
