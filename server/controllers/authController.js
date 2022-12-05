@@ -34,9 +34,6 @@ authController.post('/login', async (req, res) => {
     }
 });
 
-authController.get('/profile', hasUser(), async (req, res) => {
-
-});
 
 authController.get('/logout', hasUser(), async (req, res) => {
     const token = req.token;

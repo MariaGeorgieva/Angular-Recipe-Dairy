@@ -1,3 +1,4 @@
+const { hasUser, isAdmin } = require('../middlewares/guards');
 const { getAllCategories, createCategory } = require('../services/categoryService');
 const { parseError } = require('../util/parser');
 
@@ -15,7 +16,7 @@ categoryController.get('/', async (req, res) => {
 
 });
 
-categoryController.post('/',  async (req, res) => {
+categoryController.post('/',hasUser(), isAdmin(),  async (req, res) => {
     try {
         const data = {
             titleCategory: req.body.titleCategory,

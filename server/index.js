@@ -9,6 +9,7 @@ const cors = require('./middlewares/cors');
 const { isAdmin, hasUser } = require('./middlewares/guards');
 const session = require('./middlewares/session');
 const trimBody = require('./middlewares/trimBody');
+const userController = require('./controllers/userController');
 
 global.__basedir = __dirname;
 
@@ -53,9 +54,10 @@ async function start() {
     });
 
     app.use('/auth', authController);
-    app.use('/category', categoryController);//isAdmin(), 
-    app.use('/ingredient', ingredientController); // isAdmin(),
+    app.use('/category', categoryController);
+    app.use('/ingredient', isAdmin(), ingredientController);
     app.use('/recipe', recipeController);
+    app.use('/user', hasUser(), userController);
 
     app.listen(config[env].port, () => console.log(`Server is running on port ${config[env].port}.`));
 }
