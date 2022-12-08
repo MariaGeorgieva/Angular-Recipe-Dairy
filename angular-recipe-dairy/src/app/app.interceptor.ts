@@ -1,5 +1,5 @@
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { Injectable, Provider } from "@angular/core";
+import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { Observable } from "rxjs";
 
 import { environment } from '../environments/environments'
@@ -14,7 +14,7 @@ export class AppInterceptor implements HttpInterceptor {
 
 
         if (req.url.startsWith('/')) {
-            req = req.clone({ url: req.url.replace("/", apiURL + "/"), withCredentials: true });
+            req = req.clone({ url: req.url.replace("/", apiURL + "/")});
         }
 
         return next.handle(req);
