@@ -13,7 +13,7 @@ const recipeSchema = new Schema({
         type: String,
         required: true,
         enum: ['breakfast', 'lunch', 'dinner', 'snacks', 'drinks', 'special-occasion','other'],
-        default: ['other'],
+        default: 'other',
     },
     preparationTime: { type: Number },
     cookingTime: { type: Number, min: [1, 'Time for cooking must be at least 1 min'] },
@@ -22,7 +22,7 @@ const recipeSchema = new Schema({
         type: String,
         required: true,
         enum: ['easy', 'moderate', 'hard'],
-        default: ['easy']
+        default: 'easy'
     },
     mainIngredient: {
         type: Types.ObjectId,

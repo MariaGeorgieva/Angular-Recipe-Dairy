@@ -8,7 +8,7 @@ const userSchema = new Schema({
     roles: {
         type: String,
         enum: ['user', 'admin'],
-        default: ['user']
+        default: 'user'
     },
     ownRecipes: {
         type: [Types.ObjectId],

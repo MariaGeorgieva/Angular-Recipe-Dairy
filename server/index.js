@@ -42,8 +42,7 @@ async function start() {
 
     app.use(express.json());
     app.use(express.static(path.resolve(__basedir, 'static')));
-    // app.use(express.static(path.join( __dirname,'./dist/angular-recipe-dairy')));
-    // express.static(path.join( __dirname,'./dist/angular-recipe-dairy'));
+
 
     app.use(cors());
     app.use(session());

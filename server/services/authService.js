@@ -11,6 +11,7 @@ async function register(username, email, password, repass) {
     const existingUsername = await User.findOne({ username }).collation({ locale: 'en', strength: 2 });
     const existingEmail = await User.findOne({ email }).collation({ locale: 'en', strength: 2 });
 
+    console.log("AuthService " + username, email, password, repass);
     if (existingUsername) {
         throw new Error('Username is already taken');
     }
