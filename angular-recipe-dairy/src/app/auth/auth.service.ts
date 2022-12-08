@@ -1,23 +1,62 @@
-import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Injectable, OnDestroy } from '@angular/core';
+import { BehaviorSubject, catchError, filter, of, Subscription, tap } from 'rxjs';
 import { IUser } from '../shared/interfaces/user';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
 
-  // test data
+export class AuthService implements OnDestroy {
 
-  user: IUser | null = {
-    username: 'mlove',
-    // email: 'test@gmail.bg',
-    // tel: '00359 123123123'
-  } as any;
+  private user$$ = new BehaviorSubject<undefined | null | IUser>(undefined);
+
+  user$ = this.user$$.asObservable()
+    .pipe(filter((val): val is IUser | null => val !== undefined));
+
+  user: IUser | null = null;
 
   get isLoggedIn() {
     return this.user !== null;
   }
 
-  
-  constructor() { }
+  subscription: Subscription;
+
+  constructor(private http: HttpClient) {
+    this.subscription = this.user$
+      .subscribe(user => {
+        this.user = user;
+      });
+  }
+
+  register(username: string, email: string, password: string, rePassword: string) {
+    return this.http.post<IUser>('/auth/register', { username, email, password, rePassword })
+      .pipe(tap(user => this.user$$.next(user)));
+  }
+
+  login(email: string, password: string) {
+    return this.http.post<IUser>('/auth/login', { email, password })
+      .pipe(tap(user => this.user$$.next(user)));
+  }
+
+  logout() {
+    return this.http.get<void>('/auth/logout')
+      .pipe(tap(() => this.user$$.next(null)));
+  }
+
+  getProfile() {
+    return this.http.get<IUser>('/user/profile')
+      .pipe(
+        tap(user => this.user$$.next(user)),
+        catchError((err) => {
+          this.user$$.next(null);
+          return of(err); //  send err to next catch
+        })
+      );
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
 }

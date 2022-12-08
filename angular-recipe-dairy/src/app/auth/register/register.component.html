@@ -1,50 +1,123 @@
-<mat-card>
+<!-- <mat-card>
   <mat-card-content>
-    <form #registerForm="ngForm">
-      <!-- Logo -->
-      <div class="title-register">
+    <form #registerForm="ngForm" (ngSubmit)="registerHandler(registerForm)">
+       Logo -->
+<!-- <div class="title-register">
         <mat-icon svgIcon="recipes" class="logo"></mat-icon>
         <h2>Register</h2>
-      </div>
-      <!-- <mat-error *ngIf="!loginValid">
+      </div> -->
+<!-- <mat-error *ngIf="!loginValid">
               The username and password were not recognized
           </mat-error> -->
 
-      <!-- Username -->
-      <mat-form-field>
+<!-- Username -->
+<!-- <mat-form-field>
         <mat-label>Enter your username</mat-label>
-        <input matInput placeholder="Username" ngModel name="username" required>
-      </mat-form-field>
+        <input matInput placeholder="Username" ngModel name="username" minlength="3" required>
+      </mat-form-field> -->
 
-      <!-- Email -->
-      <mat-form-field>
+<!-- Email -->
+<!-- <mat-form-field>
         <mat-label>Enter your email</mat-label>
         <input matInput placeholder="Email" ngModel name="email" email required>
-      </mat-form-field>
+      </mat-form-field> -->
 
-      <!-- Password -->
-      <mat-form-field>
+<!-- Password -->
+<!-- <mat-form-field>
         <mat-label>Enter your password</mat-label>
         <input matInput [type]="hide ? 'password' : 'text'" placeholder="Password" ngModel type="password"
-          name="password" required>
+          name="password" minlength="5" required>
         <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
           [attr.aria-pressed]="hide">
           <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
         </button>
-      </mat-form-field>
+      </mat-form-field> -->
 
-      <!-- Repeat Password -->
-      <mat-form-field>
+<!-- Repeat Password -->
+<!-- <mat-form-field>
         <mat-label>Repeat your password</mat-label>
         <input matInput [type]="hide ? 'password' : 'text'" placeholder="Repeat Password" ngModel type="password"
-          name="password" required>
+          name="rePassword"  minlength="5" required>
         <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
           [attr.aria-pressed]="hide">
           <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
         </button>
-      </mat-form-field>
-      <button mat-raised-button color="accent" [disabled]="!registerForm.form.valid">Registers</button>
+      </mat-form-field> -->
+<!-- Button -->
+<!-- <button mat-raised-button color="accent" [disabled]="!registerForm.form.valid">Create Account</button>
     </form>
 
   </mat-card-content>
-</mat-card>
+</mat-card> -->
+
+
+<form [formGroup]="form" class="register" (ngSubmit)="registerHandler()">
+
+  <fieldset>
+    <h2>Registration Form</h2>
+    <div class="title-register">
+      <h2>
+        <mat-icon svgIcon="recipes" class="logo"></mat-icon>
+        Register
+      </h2>
+    </div>
+    <!-- username -->
+    <p class="field field-icon">
+      <label for="username"><span><i class="fas fa-user"></i></span></label>
+      <input class="input-error" type="text" formControlName="username" id="username" placeholder="Johny">
+    </p>
+    <ng-container *ngIf="form.get('username')?.touched">
+      <p *ngIf="form.get('username')?.errors?.['required']" class="error">
+        Username is required!
+      </p>
+      <p *ngIf="form.get('username')?.errors?.['minlength']" class="error">
+        Username should be longer than 5 chars
+      </p>
+    </ng-container>
+
+    <!-- email -->
+    <p class="field field-icon">
+      <label for="email"><span><i class="fas fa-envelope"></i></span></label>
+      <input type="email" formControlName="email" id="email" placeholder="john.doe@gmail.com">
+    </p>
+    <ng-container *ngIf="form.get('email')?.touched">
+      <p class="error" *ngIf="form.get('email')?.errors?.['required']">
+        Email is required!
+      </p>
+    </ng-container>
+
+
+    <!-- password -->
+    <ng-container formGroupName="pass">
+      <p class="field field-icon">
+        <label for="password"><span><i class="fas fa-lock"></i></span></label>
+        <input type="password" formControlName="password" id="password" placeholder="******">
+      </p>
+      <ng-container *ngIf="form.get('pass')?.get('password')?.touched">
+        <p class="error" *ngIf="form.get('pass')?.get('password')?.errors?.['required']">
+          Password is required!
+        </p>
+        <p class="error" *ngIf="form.get('pass')?.get('password')?.errors?.['minlength']">
+          Password must be at least 5 characters!
+        </p>
+      </ng-container>
+
+      <!-- rePassword -->
+      <p class="field field-icon">
+        <label for="rePassword"><span><i class="fas fa-lock"></i></span></label>
+        <input type="password" formControlName="rePassword" id="rePassword" placeholder="******">
+      </p>
+
+      <p *ngIf="form.get('pass')?.errors?.['sameValueGroupValidator'] && form.get('pass')?.get('rePassword')?.touched"
+        class="error">Repeat Password does not match
+        password!</p>
+    </ng-container>
+    <button [disabled]="form.invalid">Create Account</button>
+
+    <p class="text-center">
+      Have an account?
+      <a routerLink="/auth/login">Log In</a>
+    </p>
+
+  </fieldset>
+</form>

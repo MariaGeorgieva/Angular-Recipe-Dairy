@@ -19,12 +19,11 @@ export class LoginComponent {
 
   loginHandler(loginForm: NgForm): void {
     if (loginForm.invalid) { return; }
-    this.authService.user = {
-      username: 'mlove',
-    } as any;
+    const { email, password } = loginForm.value;
+    this.authService.login(email!, password!)
+      .subscribe(user => {
+        this.router.navigate(['/']);
 
-    const returnUrl = this.activatedRoute.snapshot.queryParams['returnUrl'] || '/';
-
-    this.router.navigate([returnUrl]);
+      });
   }
 }

@@ -8,10 +8,13 @@ import { AuthModule } from './auth/auth.module';
 import { CoreModule } from './core/core.module';
 import { RecipeModule } from './recipe/recipe.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { appInterceptorProvider } from './app.interceptor';
+import { AuthenticateComponent } from './authenticate/authenticate.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    AuthenticateComponent,
   ],
   imports: [
     AuthModule,
@@ -26,7 +29,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     // SharedModule,
   ],
 
-  providers: [],
+  providers: [appInterceptorProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
