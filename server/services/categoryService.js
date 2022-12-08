@@ -6,7 +6,7 @@ async function getAllCategories() {
 }
 
 async function getCategoryById(categoryId) {
-    return Category.find(categoryId).populate();
+    return Category?.find(categoryId).populate();
 }
 
 // create Category, admin permission

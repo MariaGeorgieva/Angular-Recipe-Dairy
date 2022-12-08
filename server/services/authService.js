@@ -11,7 +11,6 @@ async function register(username, email, password, repass) {
     const existingUsername = await User.findOne({ username }).collation({ locale: 'en', strength: 2 });
     const existingEmail = await User.findOne({ email }).collation({ locale: 'en', strength: 2 });
 
-    console.log("AuthService " + username, email, password, repass);
     if (existingUsername) {
         throw new Error('Username is already taken');
     }
@@ -33,17 +32,15 @@ async function register(username, email, password, repass) {
     return createToken(user);
 }
 
-async function login(username, email, password) {
-    const user = '';
-
+async function login(email, password) {
+    let user = '';
+    
     if (email) {
         user = await User.findOne({ email }).collation({ locale: 'en', strength: 2 });
-    } else if (username) {
-        user = await User.findOne({ username }).collation({ locale: 'en', strength: 2 });
     }
 
     if (!user) {
-        throw new Error('Incorrect email/username or password');
+        throw new Error('Incorrect email or password');
     }
 
     const match = await bcrypt.compare(password, user.hashedPassword);
@@ -70,6 +67,7 @@ function createToken(user) {
         _id: user._id,
         username: user.username,
         email: user.email,
+        role: user.role,
         accessToken: jwt.sign(payload, secret)
     };
 }

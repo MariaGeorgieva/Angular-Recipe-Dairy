@@ -9,11 +9,19 @@ userController.get('/admin', isAdmin(), async (req, res) => {
 });
 
 userController.get('/profile', async (req, res) => {
+    // try {
+    //     const categories = await getAllCategories();
+    //     res.json(categories);
+    // } catch (err) {
+    //     const message = parseError(err);
+    //     res.status(400).json({ message });
+    // }
 });
 
 userController.get('/created-recipes', async (req, res) => {
 
 });
+
 userController.get('/saved-recipes', async (req, res) => {
 
 });

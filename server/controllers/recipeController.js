@@ -7,6 +7,7 @@ const { parseError } = require('../util/parser');
 
 
 recipeController.get('/', async (req, res) => {
+
     let recipes = [];
     recipes = await getAllRecipes();
     res.json(recipes);

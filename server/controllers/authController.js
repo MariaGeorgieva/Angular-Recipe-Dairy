@@ -7,7 +7,7 @@ const { parseError } = require('../util/parser');
 
 
 authController.post('/register', isGuest(),
-body('username').isLength({ min: 3 }).withMessage('Username must be at least 3 character long'),
+    body('username').isLength({ min: 3 }).withMessage('Username must be at least 3 character long'),
     body('email').isEmail().withMessage('Invalid email'),
     body('password').isLength({ min: 5 }).withMessage('Password must be at least 5 characters long'),
     async (req, res) => {
@@ -16,8 +16,6 @@ body('username').isLength({ min: 3 }).withMessage('Username must be at least 3 c
             if (errors.length > 0) {
                 throw errors;
             }
-        
-
             const token = await register(req.body.username, req.body.email, req.body.password, req.body.rePassword);
             res.json(token);
         } catch (error) {
@@ -27,8 +25,11 @@ body('username').isLength({ min: 3 }).withMessage('Username must be at least 3 c
     });
 
 authController.post('/login', isGuest(), async (req, res) => {
+    console.log("User login controller "+req.user);
     try {
-        const token = await login(req.body.username, req.body.email, req.body.password);
+        const token = await login(req.body.email, req.body.password);
+    console.log("Token login controller "+req.user + token);
+
         res.json(token);
     } catch (error) {
         const message = parseError(error);

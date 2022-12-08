@@ -5,7 +5,8 @@ const { parseError } = require('../util/parser');
 const categoryController = require('express').Router();
 
 
-categoryController.get('/', async (req, res) => {
+categoryController.get('/',async (req, res) => {
+    console.log("User "+req.user);
     try {
         const categories = await getAllCategories();
         res.json(categories);
