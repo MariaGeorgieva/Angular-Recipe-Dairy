@@ -13,7 +13,6 @@ recipeController.get('/', async (req, res) => {
     res.json(recipes);
 });
 
-// recipeController.post('/', hasUser(), async (req, res) => {
 recipeController.post('/', hasUser(), async (req, res) => {
     try {
         const recipe = await create(data);

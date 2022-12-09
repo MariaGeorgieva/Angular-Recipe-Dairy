@@ -1,9 +1,10 @@
 function hasUser() {
     return (req, res, next) => {
+        console.log("Guard hasUser(): " + req.user);
         if (req.user) {
             next();
         } else {
-            res.status(401).json({ message: 'Please log in' });
+            res.status(401).json({ message: 'Please log in!' });
         }
     };
 }

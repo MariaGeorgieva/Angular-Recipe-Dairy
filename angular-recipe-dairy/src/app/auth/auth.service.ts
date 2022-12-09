@@ -3,6 +3,7 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject, catchError, filter, of, Subscription, tap } from 'rxjs';
 import { IUser } from '../shared/interfaces/user';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -34,9 +35,14 @@ export class AuthService implements OnDestroy {
       .pipe(tap(user => this.user$$.next(user)));
   }
 
+
   login(email: string, password: string) {
     return this.http.post<IUser>('/auth/login', { email, password })
-      .pipe(tap(user => this.user$$.next(user)));
+      .pipe(tap(user =>
+        // this.setToken(this.user),
+        this.user$$.next(user))
+      );
+
   }
 
   logout() {
@@ -44,8 +50,16 @@ export class AuthService implements OnDestroy {
       .pipe(tap(() => this.user$$.next(null)));
   }
 
+  // setToken(accessToken: string): void {
+  //   return localStorage.setItem('accessToken', accessToken);
+  // }
+
+  // getToken() {
+  //   return localStorage.getItem('accessToken');
+  // }
+
   getProfile() {
-    return this.http.get<IUser>('/user/profile')
+    return this.http.get<IUser>('/user/profile')//{withCredentials:true} cookies 
       .pipe(
         tap(user => this.user$$.next(user)),
         catchError((err) => {
@@ -53,6 +67,11 @@ export class AuthService implements OnDestroy {
           return of(err); //  send err to next catch
         })
       );
+  }
+
+  setProfile(username: string, email: string) {
+    return this.http.put<IUser>('/user/profile', { username, email })
+      .pipe(tap(user => this.user$$.next(user)));
   }
 
   ngOnDestroy(): void {

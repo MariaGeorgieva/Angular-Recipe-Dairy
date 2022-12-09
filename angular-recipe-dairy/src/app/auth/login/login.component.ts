@@ -21,9 +21,15 @@ export class LoginComponent {
     if (loginForm.invalid) { return; }
     const { email, password } = loginForm.value;
     this.authService.login(email!, password!)
-      .subscribe(user => {
-        this.router.navigate(['/']);
+      .subscribe(
+        user => {
+          // this.authService.setToken(JSON.stringify(user));  //works but try Ilia Idakiev
 
-      });
+
+          console.log("login component " + user.roles + user.email);
+
+          this.router.navigate(['/']);
+
+        });
   }
 }

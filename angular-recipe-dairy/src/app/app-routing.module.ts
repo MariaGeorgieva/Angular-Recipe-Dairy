@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { HomepageComponent } from './core/homepage/homepage.component';
 import { PageNotFoundComponent } from './core/page-not-found/page-not-found.component';
 
@@ -20,7 +20,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],//for lazyLoading
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
