@@ -59,7 +59,7 @@ async function start() {
 
     app.use('/auth', authController);
     app.use('/category', categoryController);
-    app.use('/ingredient', isAdmin(), ingredientController);
+    app.use('/ingredient', ingredientController);// isAdmin(), 
     app.use('/recipe', recipeController);
     app.use('/user', hasUser(), userController);
 

@@ -30,7 +30,7 @@ async function deleteCategory(categoryId) {
 
 async function getRecipesByCategory(categoryId) {
     const allRecipes = await Category?.findById(categoryId);
-    return Category?.find({ allRecipes: recipesID }).populate();
+    return Category?.findOne({ allRecipes: recipesID }).populate();
 }
 
 module.exports = {

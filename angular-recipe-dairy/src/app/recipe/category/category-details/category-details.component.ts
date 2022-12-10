@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ICategory } from 'src/app/shared/interfaces/category';
-import { RecipeService } from '../recipe.service';
+import { RecipeService } from '../../recipe.service';
 
 @Component({
   selector: 'app-category-details',

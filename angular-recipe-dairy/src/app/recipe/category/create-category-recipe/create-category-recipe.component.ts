@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { RecipeService } from '../recipe.service';
+import { RecipeService } from '../../recipe.service';
 
 @Component({
   selector: 'app-create-category-recipe',

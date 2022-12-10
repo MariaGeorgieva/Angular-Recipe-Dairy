@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 
 import { RecipeRoutingModule } from './recipe-routing.module';
 import { EditRecipeComponent } from './edit-recipe/edit-recipe.component';
@@ -7,30 +8,28 @@ import { CreateRecipeComponent } from './create-recipe/create-recipe.component';
 import { RecipeListComponent } from './recipe-list/recipe-list.component';
 import { RecipeDetailsComponent } from './recipe-details/recipe-details.component';
 import { RecipeMainComponent } from './recipe-main/recipe-main.component';
-import { HttpClientModule } from '@angular/common/http';
-import { RecipeCategoryComponent } from './recipe-category/recipe-category.component';
-import { CreateCategoryRecipeComponent } from './create-category-recipe/create-category-recipe.component';
+
+import { RecipeCategoryComponent } from './category/recipe-category/recipe-category.component';
+import { CreateCategoryRecipeComponent } from './category/create-category-recipe/create-category-recipe.component';
+import { CategoryDetailsComponent } from './category/category-details/category-details.component';
 
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
-import { CategoryDetailsComponent } from './category-details/category-details.component';
-
-
-
-
+import { RecipeIngredientComponent } from './ingredient/recipe-ingredient/recipe-ingredient.component';
 
 @NgModule({
   declarations: [
-    EditRecipeComponent,
     CreateRecipeComponent,
+    EditRecipeComponent,
     RecipeListComponent,
     RecipeDetailsComponent,
     RecipeMainComponent,
     RecipeCategoryComponent,
     CreateCategoryRecipeComponent,
-    CategoryDetailsComponent
+    CategoryDetailsComponent,
+    RecipeIngredientComponent
   ],
   imports: [
     CommonModule,
@@ -44,7 +43,9 @@ import { CategoryDetailsComponent } from './category-details/category-details.co
   exports: [
     RecipeListComponent,
     CreateRecipeComponent,
-    CreateCategoryRecipeComponent
+    RecipeCategoryComponent,
+    CreateCategoryRecipeComponent,
+    CategoryDetailsComponent
   ]
 })
 export class RecipeModule { }

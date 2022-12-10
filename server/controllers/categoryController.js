@@ -44,9 +44,10 @@ categoryController.get('/:id', async (req, res) => {
 
 });
 
-categoryController.put('/:id', async (req, res) => {
+categoryController.put('/:id', async (req, res) => {//hasUser(), isAdmin(),
     const id = req.params.id;
     const data = req.body;
+
     try {
         await updateCategory(id, data);
         const updatedCategory = await getCategoryById(id);
@@ -59,7 +60,7 @@ categoryController.put('/:id', async (req, res) => {
 });
 
 
-categoryController.delete('/:id', async (req, res) => {
+categoryController.delete('/:id', async (req, res) => {//hasUser(), isAdmin(),
     const id = req.params.id;
     await deleteCategory(id)
     res.status(200).json('Category Deleted!')

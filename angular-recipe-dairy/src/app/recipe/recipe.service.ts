@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environments'
 import { ICategory } from '../shared/interfaces/category';
+import { IIngredient } from '../shared/interfaces/ingredient';
+import { IRecipe } from '../shared/interfaces/recipe';
 
 const apiUrl = environment.apiURL;
 
@@ -12,7 +14,8 @@ const apiUrl = environment.apiURL;
 export class RecipeService {
 
   constructor(private httpClient: HttpClient) { }
-
+  
+  // Recipes Categories
   loadAllRecipeCategories() {
     return this.httpClient.get<ICategory[]>(`${apiUrl}/category`);
   }
@@ -21,16 +24,31 @@ export class RecipeService {
     return this.httpClient.post<ICategory[]>(`${apiUrl}/category/create`, { titleCategory: titleCategory, image: image });
   }
 
-  getCategoryById(id:number){
+  getCategoryById(id: number) {
     return this.httpClient.get<ICategory>(`${apiUrl}/category/${id}`);
   }
 
   updateCategoryForRecipes(id: string | undefined, titleCategory: string, image: string) {
     return this.httpClient.put<ICategory>(`${apiUrl}/category/${id}`, { titleCategory: titleCategory, image: image });
   }
+
   deleteCategoryForRecipes(id: string | undefined) {
     return this.httpClient.delete<ICategory>(`${apiUrl}/category/${id}`);
   }
 
+  // Ingredient 
+
+  loadAllIngredients() {
+    return this.httpClient.get<IIngredient[]>(`${apiUrl}/ingredient`);
+  }
+  
+  getIngredientById(id: number) {
+    return this.httpClient.get<IIngredient>(`${apiUrl}/ingredient/${id}`);
+  }
+
+  // Recipes 
+  getRecipeById(id: number) {
+    return this.httpClient.get<IRecipe>(`${apiUrl}/recipe/${id}`);
+  }
 
 }
