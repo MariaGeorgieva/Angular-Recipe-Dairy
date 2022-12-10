@@ -48,6 +48,7 @@ import { ErrorComponent } from './error/error.component';
     FooterComponent,
     PageNotFoundComponent,
     NavigationComponent,
+    ErrorComponent
   ]
 })
 export class CoreModule { }

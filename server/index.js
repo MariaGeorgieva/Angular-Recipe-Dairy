@@ -6,6 +6,7 @@ const categoryController = require('./controllers/categoryController');
 const ingredientController = require('./controllers/IngredientController');
 const recipeController = require('./controllers/recipeController');
 const cors = require('./middlewares/cors');
+// const cors = require('cors');
 const { isAdmin, hasUser } = require('./middlewares/guards');
 const session = require('./middlewares/session');
 const trimBody = require('./middlewares/trimBody');
@@ -45,7 +46,10 @@ async function start() {
     // }));
 
 
-    app.use(cors());
+    app.use(cors({
+        origin: config.origin,
+        credentials: true
+    }));
     app.use(session());
     app.use(trimBody());
 

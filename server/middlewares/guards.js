@@ -11,6 +11,7 @@ function hasUser() {
 
 function isGuest() {
     return (req, res, next) => {
+        console.log("Guard isGuest(): " + req.user);
         if (req.user) {
             res.status(400).json({ message: 'You are already logged in' });
         } else {
@@ -21,6 +22,7 @@ function isGuest() {
 
 function isAdmin(role) {
     return (req, res, next) => {
+        console.log("Guard isAdmin(): " + req.user);
         if (req.user == undefined || req.user.roles.includes(role) == false) {
             // res.redirect('/auth/login');
             res.redirect('/login');

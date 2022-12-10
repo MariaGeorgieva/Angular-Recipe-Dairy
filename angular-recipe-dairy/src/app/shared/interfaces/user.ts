@@ -7,5 +7,6 @@ export interface IUser {
     ownRecipes: string[];
     likedRecipes: string[];
     savedRecipes: string[];
+    accessToken?: string;//don't know does needed
     __v: number;
 }

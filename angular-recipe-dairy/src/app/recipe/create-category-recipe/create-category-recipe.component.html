@@ -1,0 +1,44 @@
+
+<div class="new-theme-border">
+    <div class="header-background">
+        <span>New Category</span>
+    </div>
+    <form #form="ngForm" (ngSubmit)="newCategoryHandler(form)">
+        <!-- Category Title -->
+        <div class="new-theme-title">
+            <label for="categoryTitle">Category Title <span class="red">*</span></label>
+            <input type="text" name="titleCategory" #titleCategory="ngModel" ngModel required [minlength]="3"
+                id="categoryTitle">
+
+            <ng-container *ngIf="titleCategory.touched">
+                <p class="error" *ngIf="titleCategory.errors?.['required']">
+                    Category title is required.
+                </p>
+                <p class="error" *ngIf="titleCategory.errors?.['minlength']">
+                    Category title must be at least {{titleCategory.errors?.['minlength']['requiredLength']}} characters
+                    long.
+                </p>
+            </ng-container>
+        </div>
+
+        <!-- Category Image -->
+        <div class="new-theme-content">
+            <label for="image">Image Url <span class="red">*</span></label>
+            <textarea type="text" #imageInput="ngModel" ngModel required [minlength]="3" name="image" id="postText"
+                rows="8" class="height"></textarea>
+            <ng-container *ngIf="imageInput.touched">
+                <p class="error" *ngIf="imageInput.errors?.['required']">
+                    The field is required.
+                </p>
+                <p class="error" *ngIf="imageInput.errors?.['minlength']">
+                    Image must be at least {{imageInput.errors?.['minlength']['requiredLength']}} characters long.
+                </p>
+            </ng-container>
+        </div>
+        <div class="new-theme-buttons">
+            <button class="cancel" type="button" routerLink="/category/">Cancel</button>
+            <button class="public" [disabled]="form.invalid">Create Category</button>
+        </div>
+
+    </form>
+</div>

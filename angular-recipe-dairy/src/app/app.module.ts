@@ -15,29 +15,29 @@ import { SharedModule } from './shared/shared.module';
 import { API_ERROR } from './shared/constants';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    AuthenticateComponent,
-  ],
-  imports: [
-    AuthModule,
-    RecipeModule,
-    AppRoutingModule,
-    //the child must be under
-    BrowserModule,
-    //core must be after BrowserModule
-    CoreModule,
-    // import HttpClientModule after BrowserModule.
-    HttpClientModule,
-    BrowserAnimationsModule,
-    SharedModule
-  ],
-
-  providers: [appInterceptorProvider,
-    {
-      provide: API_ERROR,
-      useValue: new BehaviorSubject(null)
-    }],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        AuthenticateComponent,
+    ],
+    providers: [appInterceptorProvider,
+        {
+            provide: API_ERROR,
+            useValue: new BehaviorSubject(null)
+        }
+    ],
+    bootstrap: [AppComponent],
+    imports: [
+        AuthModule,
+        RecipeModule,
+        AppRoutingModule,
+        //the child must be under
+        BrowserModule,
+        //core must be after BrowserModule
+        CoreModule,
+        // import HttpClientModule after BrowserModule.
+        HttpClientModule,
+        BrowserAnimationsModule,
+        SharedModule,
+    ]
 })
 export class AppModule { }

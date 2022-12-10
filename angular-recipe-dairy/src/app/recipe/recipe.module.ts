@@ -9,10 +9,13 @@ import { RecipeDetailsComponent } from './recipe-details/recipe-details.componen
 import { RecipeMainComponent } from './recipe-main/recipe-main.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RecipeCategoryComponent } from './recipe-category/recipe-category.component';
+import { CreateCategoryRecipeComponent } from './create-category-recipe/create-category-recipe.component';
 
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatButtonModule } from '@angular/material/button';
+import { FormsModule } from '@angular/forms';
+import { CategoryDetailsComponent } from './category-details/category-details.component';
 
 
 
@@ -25,7 +28,9 @@ import { MatButtonModule } from '@angular/material/button';
     RecipeListComponent,
     RecipeDetailsComponent,
     RecipeMainComponent,
-    RecipeCategoryComponent
+    RecipeCategoryComponent,
+    CreateCategoryRecipeComponent,
+    CategoryDetailsComponent
   ],
   imports: [
     CommonModule,
@@ -33,10 +38,13 @@ import { MatButtonModule } from '@angular/material/button';
     HttpClientModule, // TODO not sure for here or just i port on app.module
     MatCardModule,
     MatGridListModule,
-    MatButtonModule
+    MatButtonModule,
+    FormsModule,
   ],
   exports: [
-    RecipeListComponent
+    RecipeListComponent,
+    CreateRecipeComponent,
+    CreateCategoryRecipeComponent
   ]
 })
 export class RecipeModule { }

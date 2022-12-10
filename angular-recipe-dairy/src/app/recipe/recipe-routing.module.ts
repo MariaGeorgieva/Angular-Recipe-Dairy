@@ -1,5 +1,7 @@
 // import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CategoryDetailsComponent } from './category-details/category-details.component';
+import { CreateCategoryRecipeComponent } from './create-category-recipe/create-category-recipe.component';
 import { CreateRecipeComponent } from './create-recipe/create-recipe.component';
 import { EditRecipeComponent } from './edit-recipe/edit-recipe.component';
 import { RecipeCategoryComponent } from './recipe-category/recipe-category.component';
@@ -9,8 +11,27 @@ import { RecipeMainComponent } from './recipe-main/recipe-main.component';
 const routes: Routes = [
   {
     path: 'category',
-    title: 'Recipe Categories',
-    component: RecipeCategoryComponent
+
+
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        component: RecipeCategoryComponent,
+      },
+
+      {
+        path: 'create',
+        component: CreateCategoryRecipeComponent
+
+      },
+      {
+        path: ':id',
+        component: CategoryDetailsComponent
+
+      },
+     
+    ],
   },
   {
     path: 'ingredient',

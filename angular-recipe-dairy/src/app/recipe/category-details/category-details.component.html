@@ -1,0 +1,55 @@
+<p>category-details works!</p>
+
+<div class="container">
+    <ng-container *ngIf="!inEditMode">
+        <div class="title">
+            <h1>Category Details Page</h1>
+        </div>
+        <article class="category">
+            <p class="titleCategory">{{category?.titleCategory}}</p>
+            <div class="image">
+                <img src={{category?.image}} alt="{{category?.titleCategory}}">
+            </div>
+            <div class="info">
+                <div class="buttons">
+                    <!-- <ng-container *ngIf="isAuthor"> -->
+                    <button routerLink="/category">Back to categories</button>
+                    <button (click)="inEditMode = true">Edit Category</button>
+                    <button (click)="delete()">Delete</button>
+                    <!-- </ng-container> -->
+                    <!-- <ng-container *ngIf="!isAuthor">
+                        <button>Add to favourite</button>
+                    </ng-container> -->
+                </div>
+            </div>
+        </article>
+    </ng-container>
+
+
+    <ng-container *ngIf="inEditMode">
+        <div class="title">
+            <h1>Edit Category</h1>
+        </div>
+        <div class="form">
+            <h1 class="h1">Edit Car</h1>
+            <form #form="ngForm" (ngSubmit)="editCategory(form)">
+                <label>Category Title</label>
+                <input #titleCategory="ngModel" ngModel type="text" name="titleCategory" required minlength="3"
+                    [ngModel]="category?.titleCategory">
+                <ng-container *ngIf="titleCategory.touched">
+                    <p class="error" *ngIf="titleCategory.errors?.['required']">Title is required!</p>
+                    <p class="error" *ngIf="titleCategory.errors?.['minlength']">Title should have at least 3 characters!
+                    </p>
+                </ng-container>
+
+                <label>ImageUrl</label>
+                <input #imageUrl="ngModel" ngModel type="text" name="image" required [ngModel]="category?.image">
+                <ng-container *ngIf="imageUrl.touched">
+                    <p class="error" *ngIf="imageUrl.errors?.['required']">ImageUrl is required!</p>
+                </ng-container>
+                
+                <input [disabled]="form.invalid" type="submit" value="Edit Category">
+            </form>
+        </div>
+    </ng-container>
+</div>

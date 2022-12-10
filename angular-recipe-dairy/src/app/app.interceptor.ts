@@ -17,23 +17,22 @@ export class AppInterceptor implements HttpInterceptor {
     private authService: AuthService
   ) { }
 
+  accessToken: string | null = localStorage.getItem('accessToken');
+
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    // const accessToken = this.authService.getToken();
     // console.log('app interceptor token: ' + accessToken);//have token
 
-    // if (accessToken) {
-    //   req = req.clone({
-    //     setHeaders: {
-    //       Authorization: `${accessToken}`
-    //     }
-    //   });
-    // }
-
-
-    if (req.url.startsWith('/')) {
-      req = req.clone({ url: req.url.replace('/', apiURL + '/') })//withCredentials: true 
+    if (this.accessToken) {
+      req.clone({
+        url: req.url.replace('/', apiURL + '/'),
+        setHeaders: { 'X-Authorization': this.accessToken }
+      });
     }
+
+    // if (req.url.startsWith('/')) {
+    //   req = req.clone({ url: req.url.replace('/', apiURL + '/') })//withCredentials: true 
+    // }
     return next.handle(req).pipe(
       catchError(err => of(err).pipe( // combineLatest([err], this.authService.user$).pipe(take(1))
         switchMap((err) => {
