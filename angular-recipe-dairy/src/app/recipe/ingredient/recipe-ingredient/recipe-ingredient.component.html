@@ -1,6 +1,8 @@
 <div>
     <mat-grid-list cols="4" rowHeight="1:1" class="container">
         <mat-grid-tile *ngFor="let ingredient of ingredientList" class="my-mat-grid-tile">
+
+            <!-- Details Mode -->
             <ng-container *ngIf="!inEditMode">
                 <mat-card class="my-card">
                     <mat-card-actions>
@@ -14,6 +16,30 @@
                     </mat-card-actions>
                 </mat-card>
             </ng-container>
+
+            <!-- Edit Mode -->
+
+            <ng-container *ngIf="inEditMode">
+                <mat-card class="my-card">
+                    <form #form="ngForm" (ngSubmit)="editIngredient(form, ingredient._id)">
+                        <label>Ingredient Title</label>
+                        <input #titleIngredient="ngModel" ngModel type="text" name="titleIngredient" required
+                            minlength="3" [ngModel]="ingredient?.titleIngredient">
+                        <ng-container *ngIf="titleIngredient.touched">
+                            <p class="error" *ngIf="titleIngredient.errors?.['required']">Title is required!</p>
+                            <p class="error" *ngIf="titleIngredient.errors?.['minlength']">Title should have at
+                                least 3 characters!
+                            </p>
+                        </ng-container>
+                        <button mat-raised-button color="accent" [routerLink]="'/ingredient'">
+                            <mat-icon>cancel</mat-icon>
+                        </button>
+                        <input [disabled]="form.invalid" type="submit" value="Edit Ingredient">
+                    </form>
+                </mat-card>
+            </ng-container>
+
+            
         </mat-grid-tile>
     </mat-grid-list>
 </div>

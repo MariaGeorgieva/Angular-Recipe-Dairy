@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IIngredient } from 'src/app/shared/interfaces/ingredient';
 import { RecipeService } from '../../recipe.service';
@@ -9,7 +10,7 @@ import { RecipeService } from '../../recipe.service';
   templateUrl: './recipe-ingredient.component.html',
   styleUrls: ['./recipe-ingredient.component.css']
 })
-export class RecipeIngredientComponent implements OnInit{
+export class RecipeIngredientComponent implements OnInit {
 
   ingredientList: IIngredient[] | null = null;
   ingredient: IIngredient | undefined;
@@ -28,22 +29,25 @@ export class RecipeIngredientComponent implements OnInit{
       }
     })
   }
-//TODO EDIT
-  // editCategory(form: NgForm) {
-  //   // if(this.userService.user?._id != this.category?.owner._id || !this.token){
-  //   //   this.router.navigate(['**'])
-  //   // }
-  //   const id = this.category?._id;
-  //   const {titleCategory, image } = form.value
-  //   this.recipeService.updateCategoryForRecipes(id, titleCategory, image).subscribe({
-  //     next: (category) => {
-  //       this.category = category
-  //       this.inEditMode = false;
-  //     },
-  //     error: (err) => console.log(err)
-  //   })
-  // }
-  delete(_id: string): void{
+  //TODO EDIT
+
+  editIngredient(form: NgForm, _id: string) {
+    //TODO
+    // if(this.userService.user?._id != this.category?.owner._id || !this.token){
+    //   this.router.navigate(['**'])
+    // }
+    // const id = this.ingredient?._id;
+    const { titleIngredient } = form.value
+    this.recipeService.updateIngredient(_id, titleIngredient).subscribe({
+      next: (ingredient) => {
+        this.ingredient = ingredient
+        this.inEditMode = false;
+      },
+      error: (err) => console.log(err)
+    })
+  }
+
+  delete(_id: string): void {
     // if(this.userService.user?._id != this.category?.owner._id || !this.token){
     //   this.router.navigate(['**'])
     // }
@@ -54,3 +58,5 @@ export class RecipeIngredientComponent implements OnInit{
     })
   }
 }
+
+

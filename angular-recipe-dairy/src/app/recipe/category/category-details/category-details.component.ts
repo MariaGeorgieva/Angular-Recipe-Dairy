@@ -27,6 +27,7 @@ export class CategoryDetailsComponent {
     this.recipeService.getCategoryById(id).subscribe({
       next: (category) => {
         this.category = category
+        //TODO
         // if(this.userService.user?._id == category.owner._id){
         //   this.isAuthor = true
         // }else {
