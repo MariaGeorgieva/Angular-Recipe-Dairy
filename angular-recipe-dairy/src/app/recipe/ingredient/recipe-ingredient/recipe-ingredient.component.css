@@ -1,0 +1,27 @@
+.mat-mdc-list-item-icon {
+    color: rgba(0, 0, 0, 0.54);
+}
+
+/* .my-card {
+    background-color: white;
+color: black    ;
+}
+*/
+
+.mat-raised-button{
+    color: rgba(0, 0, 0, 0.54);
+} 
+
+mat-card {
+    /* card padding other cards row/column*/
+    /* width: calc(100% - 20px);
+    height: calc(100% - 20px); */
+    background-color: white;
+    color: black;
+}
+
+.container {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+

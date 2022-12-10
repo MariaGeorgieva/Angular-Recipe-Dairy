@@ -47,7 +47,7 @@
             Recipes Categories <mat-icon>restaurant_menu</mat-icon>
           </button>
           <button mat-button routerLink="/ingredient">
-           All Ingredients  <mat-icon>restaurant_menu</mat-icon>
+            All Ingredients <mat-icon>restaurant_menu</mat-icon>
           </button>
         </div>
       </section>
@@ -68,26 +68,40 @@
 
         <!-- Profile Links -->
         <span class="fill-remaining-space">
-          <button mat-button color="primary" routerLink="/profile" [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger"
-            (mouseover)="menuTrigger.openMenu()">
+          <button mat-button color="primary" routerLink="/profile" [matMenuTriggerFor]="menu"
+            #menuTrigger="matMenuTrigger" (mouseover)="menuTrigger.openMenu()">
             <mat-icon>person</mat-icon>
             Profile
           </button>
 
           <mat-menu class="profile-menu" #menu="matMenu" [overlapTrigger]="false">
             <span (mouseleave)="menuTrigger.closeMenu()">
+
+              <!-- Admin Dashboard -->
               <button mat-menu-item routerLink="/admin">
                 <mat-icon>admin_panel_settings</mat-icon>
                 Admin Dashboard
               </button>
+
+              <!-- Create Category Recipe  -->
               <button mat-menu-item routerLink="/category/create">
                 <mat-icon>admin_panel_settings</mat-icon>
                 Create Category Recipe
               </button>
+
+               <!-- Create Ingredient Recipe  -->
+               <button mat-menu-item routerLink="/ingredient/create">
+                <mat-icon>admin_panel_settings</mat-icon>
+                Create Ingredient Recipe
+              </button>
+
+              <!--  My Profile -->
               <button mat-menu-item routerLink="/profile">
                 <mat-icon>person</mat-icon>
                 My Profile
               </button>
+
+               <!--   Add Recipe -->
               <button mat-menu-item routerLink="/recipe/create">
                 <mat-icon>library_add</mat-icon>
                 Add Recipe
@@ -121,22 +135,17 @@
       </section>
     </mat-toolbar-row>
   </mat-toolbar>
-  </p>
+</p>
 
-  <ng-template #nav>
-    <a
-      mat-button
-      routerLink="/"
-      class="home-button"
-      title="Home page of Prog blog"
-    >
-      <mat-icon inline="true" aria-label="Home page">home</mat-icon>
-      <span>Prog blog</span>
-    </a>
-  </ng-template>
-  
+<ng-template #nav>
+  <a mat-button routerLink="/" class="home-button" title="Home page of Prog blog">
+    <mat-icon inline="true" aria-label="Home page">home</mat-icon>
+    <span>Prog blog</span>
+  </a>
+</ng-template>
+
 <!-- On scroll up -->
-  <!-- <mat-toolbar color="primary">
+<!-- <mat-toolbar color="primary">
     <ng-container *ngTemplateOutlet="nav"></ng-container>
   </mat-toolbar>
   

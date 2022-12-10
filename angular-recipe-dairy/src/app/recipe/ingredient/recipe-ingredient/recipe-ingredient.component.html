@@ -1,19 +1,19 @@
-<p>recipe-ingredient works!</p>
 <div>
-    <mat-grid-list cols="4" rowHeight="1:1.5" class="container">
+    <mat-grid-list cols="4" rowHeight="1:1" class="container">
         <mat-grid-tile *ngFor="let ingredient of ingredientList" class="my-mat-grid-tile">
-            <mat-card class="my-card">
-                <mat-card-header>
-                    <mat-card-title>{{ingredient.titleIngredient}}</mat-card-title>
-                </mat-card-header>
-                
-                <mat-card-actions>
-                    <!-- <button [routerLink]="['/ingredient', ingredient._id]">Details</button> -->
-                    <button mat-raised-button color="primary">view all recipes</button>
-                </mat-card-actions>
-            </mat-card>
+            <ng-container *ngIf="!inEditMode">
+                <mat-card class="my-card">
+                    <mat-card-actions>
+                        <mat-card-title>{{ingredient.titleIngredient}}</mat-card-title>
+                        <button mat-raised-button color="accent" (click)="delete(ingredient._id)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                        <button mat-raised-button color="accent" (click)="inEditMode = true">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                    </mat-card-actions>
+                </mat-card>
+            </ng-container>
         </mat-grid-tile>
     </mat-grid-list>
 </div>
-
-

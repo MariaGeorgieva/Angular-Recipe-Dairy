@@ -1,11 +1,11 @@
 
-<div class="new-theme-border">
+<div class="container">
     <div class="header-background">
         <span>New Category</span>
     </div>
     <form #form="ngForm" (ngSubmit)="newCategoryHandler(form)">
         <!-- Category Title -->
-        <div class="new-theme-title">
+        <div class="title">
             <label for="categoryTitle">Category Title <span class="red">*</span></label>
             <input type="text" name="titleCategory" #titleCategory="ngModel" ngModel required [minlength]="3"
                 id="categoryTitle">
@@ -22,8 +22,8 @@
         </div>
 
         <!-- Category Image -->
-        <div class="new-theme-content">
-            <label for="image">Image Url <span class="red">*</span></label>
+        <div class="container">
+            <label for="image">Image <span class="red">*</span></label>
             <textarea type="text" #imageInput="ngModel" ngModel required [minlength]="3" name="image" id="postText"
                 rows="8" class="height"></textarea>
             <ng-container *ngIf="imageInput.touched">
@@ -31,11 +31,12 @@
                     The field is required.
                 </p>
                 <p class="error" *ngIf="imageInput.errors?.['minlength']">
+                    <!-- TODO -->
                     Image must be at least {{imageInput.errors?.['minlength']['requiredLength']}} characters long.
                 </p>
             </ng-container>
         </div>
-        <div class="new-theme-buttons">
+        <div class="buttons">
             <button class="cancel" type="button" routerLink="/category/">Cancel</button>
             <button class="public" [disabled]="form.invalid">Create Category</button>
         </div>

@@ -54,6 +54,7 @@ export class CategoryDetailsComponent {
       error: (err) => console.log(err)
     })
   }
+  
   delete(){
     // if(this.userService.user?._id != this.category?.owner._id || !this.token){
     //   this.router.navigate(['**'])

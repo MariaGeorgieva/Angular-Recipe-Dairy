@@ -14,7 +14,7 @@ const apiUrl = environment.apiURL;
 export class RecipeService {
 
   constructor(private httpClient: HttpClient) { }
-  
+
   // Recipes Categories
   loadAllRecipeCategories() {
     return this.httpClient.get<ICategory[]>(`${apiUrl}/category`);
@@ -41,14 +41,38 @@ export class RecipeService {
   loadAllIngredients() {
     return this.httpClient.get<IIngredient[]>(`${apiUrl}/ingredient`);
   }
-  
+
   getIngredientById(id: number) {
     return this.httpClient.get<IIngredient>(`${apiUrl}/ingredient/${id}`);
   }
+  createIngredient(titleIngredient: string) {
+    return this.httpClient.post<IIngredient[]>(`${apiUrl}/ingredient/create`, { titleIngredient: titleIngredient });
+  }
+
+  updateIngredient(id: string | undefined, titleIngredient: string) {
+    return this.httpClient.put<IIngredient>(`${apiUrl}/ingredient/${id}`, { titleIngredient: titleIngredient });
+  }
+
+  deleteIngredient(id: string | undefined) {
+    return this.httpClient.delete<IIngredient>(`${apiUrl}/ingredient/${id}`);
+  }
+
 
   // Recipes 
+  loadAllRecipes() {
+    return this.httpClient.get<IRecipe[]>(`${apiUrl}/recipe`);
+  }
   getRecipeById(id: number) {
     return this.httpClient.get<IRecipe>(`${apiUrl}/recipe/${id}`);
+  }
+
+  //TODO
+  updateRecipe(id: string | undefined, titleIngredient: string) {
+    return this.httpClient.put<IRecipe>(`${apiUrl}/recipe/${id}`, { titleIngredient: titleIngredient });
+  }
+
+  deleteRecipes(id: string | undefined) {
+    return this.httpClient.delete<IRecipe>(`${apiUrl}/recipe/${id}`);
   }
 
 }

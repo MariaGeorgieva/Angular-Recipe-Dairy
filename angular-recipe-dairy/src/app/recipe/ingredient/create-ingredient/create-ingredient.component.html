@@ -1,0 +1,30 @@
+<p>create-ingredient works!</p>
+
+<div class="container">
+    <div class="header-background">
+        <span>New Category</span>
+    </div>
+    <form #form="ngForm" (ngSubmit)="newIngredientHandler(form)">
+        <!-- Category Title -->
+        <div class="title">
+            <label for="titleIngredient">Ingredient Title <span class="red">*</span></label>
+            <input type="text" name="titleIngredient" #titleIngredient="ngModel" ngModel required [minlength]="3"
+                id="categoryTitle">
+
+            <ng-container *ngIf="titleIngredient.touched">
+                <p class="error" *ngIf="titleIngredient.errors?.['required']">
+                    Ingredient title is required.
+                </p>
+                <p class="error" *ngIf="titleIngredient.errors?.['minlength']">
+                    Category title must be at least {{titleIngredient.errors?.['minlength']['requiredLength']}} characters
+                    long.
+                </p>
+            </ng-container>
+        </div>
+        <div class="buttons">
+            <button class="cancel" type="button" routerLink="/ingredient/">Cancel</button>
+            <button class="public" [disabled]="form.invalid">Create Ingredient</button>
+        </div>
+
+    </form>
+</div>
