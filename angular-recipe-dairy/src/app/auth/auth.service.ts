@@ -38,16 +38,30 @@ export class AuthService implements OnDestroy {
 
   login(email: string, password: string) {
     return this.http.post<IUser>('/auth/login', { email, password })
-      .pipe(tap(user =>
-        // this.setToken(this.user),
-        this.user$$.next(user))
-      );
+      // .pipe(tap(user =>
+      //   // this.setToken(this.user),
+      //   // store user details and jwt token in local storage to keep user logged in between page refreshes
+      //   localStorage.setItem('user', JSON.stringify('user'));
+      //   this.user$$.next(this.user);
+      // );
+      .pipe(tap(user => {
+        // store user details and jwt token in local storage to keep user logged in between page refreshes
+        localStorage.setItem('user', JSON.stringify(user));
+        console.log(user);
+        
+        this.user$$.next(user);
+        return user;
+      }));
+    // }
 
   }
 
   logout() {
     return this.http.get<void>('/auth/logout')
-      .pipe(tap(() => this.user$$.next(null)));
+      .pipe(tap(() => {
+        localStorage.removeItem('user');
+        this.user$$.next(null)
+      }));
   }
 
   // setToken(accessToken: string): void {

@@ -18,6 +18,19 @@ export class AppInterceptor implements HttpInterceptor {
   ) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+
+    // const accessToken = this.authService.getToken();
+    // console.log('app interceptor token: ' + accessToken);//have token
+
+    // if (accessToken) {
+    //   req = req.clone({
+    //     setHeaders: {
+    //       Authorization: `${accessToken}`
+    //     }
+    //   });
+    // }
+
+
     if (req.url.startsWith('/')) {
       req = req.clone({ url: req.url.replace('/', apiURL + '/') })//withCredentials: true 
     }
