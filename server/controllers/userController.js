@@ -1,7 +1,7 @@
 const userController = require('express').Router();
 const { body, validationResult } = require('express-validator');
-const { isAdmin } = require('../middlewares/guards');
-const { getProfile } = require('../services/userService');
+const { isAdmin, hasUser } = require('../middlewares/guards');
+const { getUserProfile } = require('../services/userService');
 
 const { parseError } = require('../util/parser');
 
@@ -17,11 +17,11 @@ userController.get('/admin', isAdmin(), async (req, res) => {
     }
 });
 
-userController.get('/profile', async (req, res) => {
+userController.get('/profile', hasUser(), async (req, res) => {
 
     console.log("userController req.user: "+ req.user);
     try {
-        const userData = await getProfile(req.user.email);
+        const userData = await getUserProfile(req.user.email);
         console.log("userController userData: "+ userData);
         res.json(userData);
     } catch (err) {

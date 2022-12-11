@@ -12,6 +12,7 @@ const session = require('./middlewares/session');
 const trimBody = require('./middlewares/trimBody');
 const userController = require('./controllers/userController');
 
+
 global.__basedir = __dirname;
 
 const env = process.env.NODE_ENV || 'development';
@@ -57,11 +58,12 @@ async function start() {
         res.json({ message: 'REST service operational' });
     });
 
+
     app.use('/auth', authController);
     app.use('/category', categoryController);
     app.use('/ingredient', ingredientController);// isAdmin(), 
     app.use('/recipe', recipeController);
-    app.use('/user', hasUser(), userController);
+    app.use('/user',  userController); //hasUser(),
 
     app.listen(config[env].port, () => console.log(`Server is running on port ${config[env].port}.`));
 }

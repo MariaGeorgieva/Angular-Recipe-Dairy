@@ -28,7 +28,6 @@ ingredientController.post('/create', async (req, res) => {
 });
 
 ingredientController.get('/:id', async (req, res) => {
-    console.log(req.params.id);
     try {
         const ingredient = await getIngredientIdById(req.params.id);
         res.json(ingredient);

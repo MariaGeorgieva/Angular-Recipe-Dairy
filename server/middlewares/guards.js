@@ -1,6 +1,6 @@
 function hasUser() {
     return (req, res, next) => {
-        console.log("Guard hasUser(): " + req.user);
+        console.log("hasUser(): " + req.user);
         if (req.user) {
             next();
         } else {

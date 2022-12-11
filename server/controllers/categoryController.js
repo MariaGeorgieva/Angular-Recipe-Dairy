@@ -33,7 +33,6 @@ categoryController.post('/create', async (req, res) => { //hasUser(), isAdmin(),
 });
 
 categoryController.get('/:id', async (req, res) => {
-    console.log(req.params.id);
     try {
         const category = await getCategoryById(req.params.id);
         res.json(category);
