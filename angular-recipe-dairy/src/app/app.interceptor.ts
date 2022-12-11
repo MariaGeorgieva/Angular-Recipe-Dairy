@@ -1,7 +1,7 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { Inject, Injectable, Provider } from "@angular/core";
 import { Router } from "@angular/router";
-import { BehaviorSubject, catchError, combineLatest, map, Observable, of, switchMap, take, throwError, withLatestFrom, zip } from "rxjs";
+import { BehaviorSubject, catchError, map, Observable, of, switchMap, take, throwError,  zip } from "rxjs";
 import { environment } from '../environments/environments';
 import { AuthService } from "./auth/auth.service";
 import { API_ERROR } from "./shared/constants";
@@ -21,7 +21,7 @@ export class AppInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    // console.log('app interceptor token: ' + accessToken);//have token
+    console.log('app interceptor token: ' + this.accessToken);//have token
 
     if (this.accessToken) {
       req.clone({

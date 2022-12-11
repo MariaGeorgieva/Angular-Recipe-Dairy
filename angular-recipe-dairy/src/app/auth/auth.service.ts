@@ -49,13 +49,7 @@ export class AuthService implements OnDestroy {
 
   login(email: string, password: string) {
     return this.http.post<IUser>('/auth/login', { email, password })
-      // .pipe(tap(user =>
-      //   // this.setToken(this.user),
-      //   // store user details and jwt token in local storage to keep user logged in between page refreshes
-      //   localStorage.setItem('user', JSON.stringify('user'));
-      //   this.user$$.next(this.user);
-      // );
-      .pipe(tap((user) => {
+           .pipe(tap((user) => {
         // store user details and jwt token in local storage to keep user logged in between page refreshes
         localStorage.setItem('accessToken', JSON.stringify(user));
         this.user$$.next(user);
@@ -70,18 +64,10 @@ export class AuthService implements OnDestroy {
     return this.http.get<void>('/auth/logout')
       .pipe(tap(() => {
         localStorage.removeItem('accessToken');
-        // localStorage.clear();//not now does it needed
+        localStorage.clear();//not now does it needed
         this.user$$.next(null)
       }));
   }
-
-  // setToken(accessToken: string): void {
-  //   return localStorage.setItem('accessToken', accessToken);
-  // }
-
-  // getToken() {
-  //   return localStorage.getItem('accessToken');
-  // }
 
   getProfile() {
     return this.http.get<IUser>('/user/profile')//{withCredentials:true} if cookies-parser
