@@ -1,7 +1,7 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { Inject, Injectable, Provider } from "@angular/core";
 import { Router } from "@angular/router";
-import { BehaviorSubject, catchError, map, Observable, of, switchMap, take, throwError,  zip } from "rxjs";
+import { BehaviorSubject, catchError, map, Observable, of, switchMap, take, throwError, zip } from "rxjs";
 import { environment } from '../environments/environments';
 import { AuthService } from "./auth/auth.service";
 import { API_ERROR } from "./shared/constants";
@@ -17,22 +17,15 @@ export class AppInterceptor implements HttpInterceptor {
     private authService: AuthService
   ) { }
 
-  accessToken: string | null = localStorage.getItem('accessToken');
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    console.log('app interceptor token: ' + this.accessToken);//have token
-
-    if (this.accessToken) {
-      req.clone({
+    if (req.url.startsWith('/')) {
+      req = req.clone({
         url: req.url.replace('/', apiURL + '/'),
-        setHeaders: { 'X-Authorization': this.accessToken }
-      });
+        withCredentials: true
+      })//
     }
-
-    // if (req.url.startsWith('/')) {
-    //   req = req.clone({ url: req.url.replace('/', apiURL + '/') })//withCredentials: true 
-    // }
     return next.handle(req).pipe(
       catchError(err => of(err).pipe( // combineLatest([err], this.authService.user$).pipe(take(1))
         switchMap((err) => {

@@ -11,10 +11,7 @@ import { AuthService } from '../auth.service';
 
 export class LoginComponent {
 
-  constructor(
-    private activatedRoute: ActivatedRoute,
-    private router: Router,
-    private authService: AuthService
+  constructor(private activatedRoute: ActivatedRoute, private router: Router, private authService: AuthService
   ) { }
 
   loginHandler(loginForm: NgForm): void {
@@ -23,13 +20,11 @@ export class LoginComponent {
     this.authService.login(email!, password!)
       .subscribe(
         user => {
-          // this.authService.setToken(JSON.stringify(user));  //works but try Ilia Idakiev
-
-
-          console.log("login component " + user.roles + user.email);
-
-          this.router.navigate(['/']);
+          this.router.navigate(['/recipe']);
 
         });
+        const returnUrl = this.activatedRoute.snapshot.queryParams['returnUrl'] || '/';
+
+        this.router.navigate([returnUrl]);
   }
 }

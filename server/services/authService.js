@@ -1,15 +1,15 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const { authCookieName } = require('../app-config');
 const User = require('../models/User');
-
 
 const secret = 'TwIdhjw*ACShA$yz';
 
 const tokenBlacklist = new Set();
 
 async function register(username, email, password, repass) {
-    const existingUsername = await User.findOne({ username }).collation({ locale: 'en', strength: 2 });
     const existingEmail = await User.findOne({ email }).collation({ locale: 'en', strength: 2 });
+    const existingUsername = await User.findOne({ username }).collation({ locale: 'en', strength: 2 });
 
     if (existingUsername) {
         throw new Error('Username is already taken');
@@ -29,12 +29,13 @@ async function register(username, email, password, repass) {
         hashedPassword: await bcrypt.hash(password, 10)
     });
 
-    return createToken(user);
+    //old
+    return createToken(user) ;
 }
 
 async function login(email, password) {
     let user = '';
-    
+
     if (email) {
         user = await User.findOne({ email }).collation({ locale: 'en', strength: 2 });
     }
@@ -49,6 +50,8 @@ async function login(email, password) {
         throw new Error('Incorrect email or password');
     }
 
+ 
+    // old
     return createToken(user);
 }
 
@@ -56,13 +59,14 @@ async function logout(token) {
     tokenBlacklist.add(token);
 }
 
+
 function createToken(user) {
     const payload = {
         _id: user._id,
         username: user.username,
         email: user.email,
         role: user.role,
-     
+
     };
 
     return {
@@ -86,5 +90,5 @@ module.exports = {
     register,
     login,
     logout,
-    parseToken
+    parseToken,
 };

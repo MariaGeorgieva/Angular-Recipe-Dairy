@@ -18,25 +18,17 @@ export class AuthService implements OnDestroy {
 
   user: IUser | null = null;
 
-  get isLoggedIn(): boolean{
+  get isLoggedIn(): boolean {
     console.log('get isLoggedIn()' + this.user);
-    
     return this.user !== null;
   }
-  // get isLoggedIn(): boolean {
-  //   if (this.user) {
-  //     return true
-  //   } else {
-  //     return false
-  //   }
-  // }
+
 
   subscription: Subscription;
 
   constructor(private http: HttpClient, private router: Router) {
     this.subscription = this.user$
       .subscribe(user => {
-        localStorage.getItem('accessToken');
         this.user = user;
       });
   }
@@ -46,31 +38,20 @@ export class AuthService implements OnDestroy {
       .pipe(tap(user => this.user$$.next(user)));
   }
 
-
   login(email: string, password: string) {
-    return this.http.post<IUser>('/auth/login', { email, password })
-           .pipe(tap((user) => {
-        // store user details and jwt token in local storage to keep user logged in between page refreshes
-        localStorage.setItem('accessToken', JSON.stringify(user));
-        this.user$$.next(user);
-
-        return user;
-      }));
-    // }
-
+    return this.http.post<any>('/auth/login', { email, password })
+      .pipe(tap(user => this.user$$.next(user)));;
   }
 
   logout() {
-    return this.http.get<void>('/auth/logout')
+    return this.http.post<void>('/auth/logout', {}, { withCredentials: true })
       .pipe(tap(() => {
-        localStorage.removeItem('accessToken');
-        localStorage.clear();//not now does it needed
         this.user$$.next(null)
-      }));
+      })); 
   }
 
   getProfile() {
-    return this.http.get<IUser>('/user/profile')//{withCredentials:true} if cookies-parser
+    return this.http.get<any>('/user/profile')//{withCredentials:true} if cookies-parser
       .pipe(
         tap(user => {
           this.user$$.next(user)

@@ -14,12 +14,10 @@ export class AuthenticateComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.getProfile().subscribe({
-      next: (user) => {
-        // this.authService.user = user;
+      next: () => {
         this.isAuthenticating = false;
       },
       error: () => {
-        // this.authService.user = null;
         this.isAuthenticating = false;
       }
     })

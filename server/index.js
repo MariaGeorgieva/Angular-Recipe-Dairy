@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
+const cookieParser = require('cookie-parser');
 const authController = require('./controllers/authController');
 const categoryController = require('./controllers/categoryController');
 const ingredientController = require('./controllers/IngredientController');
@@ -11,9 +12,12 @@ const { isAdmin, hasUser } = require('./middlewares/guards');
 const session = require('./middlewares/session');
 const trimBody = require('./middlewares/trimBody');
 const userController = require('./controllers/userController');
+const auth = require('./middlewares/auth');
+// const {authMiddleware} = require('./middlewares/auth');
 
 
 global.__basedir = __dirname;
+
 
 const env = process.env.NODE_ENV || 'development';
 
@@ -29,7 +33,7 @@ const config = {
         origin: []
     }
 };
-
+const jwtSecret = 'TwIdhjw*ACShA$yz';
 start();
 
 async function start() {
@@ -40,19 +44,13 @@ async function start() {
     
     app.use(express.json());
     app.use(express.static(path.resolve(__basedir, 'static')));
-
-    // app.use(cors({
-    //     origin: config.origin,
-    //     credentials: true
-    // }));
-
-
-    app.use(cors({
-        origin: config.origin,
-        credentials: true
-    }));
-    app.use(session());
+    app.use(cookieParser());
+    // app.use(authMiddleware());
+    // app.use(auth());
     app.use(trimBody());
+    app.use(cors());
+    app.use(session());
+   
 
     app.get('/', (req, res) => {
         res.json({ message: 'REST service operational' });
