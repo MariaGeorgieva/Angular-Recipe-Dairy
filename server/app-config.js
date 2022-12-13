@@ -1,4 +1,4 @@
-const authCookieName = 'accessToken';
+const authCookieName = 'auth-cookie';
 
 module.exports = {
     authCookieName,

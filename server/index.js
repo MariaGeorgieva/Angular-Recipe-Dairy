@@ -13,7 +13,7 @@ const session = require('./middlewares/session');
 const trimBody = require('./middlewares/trimBody');
 const userController = require('./controllers/userController');
 const auth = require('./middlewares/auth');
-// const {authMiddleware} = require('./middlewares/auth');
+
 
 
 global.__basedir = __dirname;
@@ -50,7 +50,6 @@ async function start() {
     app.use(trimBody());
     app.use(cors());
     app.use(session());
-   
 
     app.get('/', (req, res) => {
         res.json({ message: 'REST service operational' });

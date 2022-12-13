@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../auth.service';
@@ -10,6 +10,11 @@ import { AuthService } from '../auth.service';
 })
 
 export class LoginComponent {
+  @ViewChild(
+    NgForm,
+    { static: true }
+  ) form!: ElementRef<HTMLInputElement>;
+
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router, private authService: AuthService
   ) { }
@@ -20,11 +25,11 @@ export class LoginComponent {
     this.authService.login(email!, password!)
       .subscribe(
         user => {
-          this.router.navigate(['/recipe']);
+          this.router.navigate(['/']);
 
         });
-        const returnUrl = this.activatedRoute.snapshot.queryParams['returnUrl'] || '/';
+    const returnUrl = this.activatedRoute.snapshot.queryParams['returnUrl'] || '/';
 
-        this.router.navigate([returnUrl]);
+    this.router.navigate([returnUrl]);
   }
 }

@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/auth/auth.service';
 // import {
 //   ChangeDetectionStrategy,
 //   Component,
@@ -18,14 +20,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./navigation.component.css']
 })
 export class NavigationComponent {
-  // scrollUp$ = of(isPlatformBrowser(this.platformId)).pipe(
-  //   filter(isBrowser => isBrowser),
-  //   switchMap(() => fromEvent(document, 'scroll')),
-  //   throttleTime(50),
-  //   map(() => window.scrollY),
-  //   pairwise(),
-  //   map(([prevScrollY, currentScrollY]) => prevScrollY > currentScrollY)
-  // );
+  constructor(private authService: AuthService, private router: Router) { }
+  get isLoggedIn() {
+    return this.authService.isLoggedIn;
+  }
 
-  // constructor(@Inject(PLATFORM_ID) private platformId: object) {}
+  get user() {
+    return this.authService.user;
+  }
+
 }

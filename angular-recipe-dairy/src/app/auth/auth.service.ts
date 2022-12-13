@@ -19,7 +19,7 @@ export class AuthService implements OnDestroy {
   user: IUser | null = null;
 
   get isLoggedIn(): boolean {
-    console.log('get isLoggedIn()' + this.user);
+    console.log('get isLoggedIn()' + this.user?.email);
     return this.user !== null;
   }
 

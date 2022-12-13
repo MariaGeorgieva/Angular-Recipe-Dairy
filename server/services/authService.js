@@ -1,11 +1,13 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { authCookieName } = require('../app-config');
+// const { createToken } = require('../middlewares/jwt');
 const User = require('../models/User');
+const tokenBlacklist = require('../models/tokenBlacklistModel');
+const { authCookieName } = require('../app-config');
 
 const secret = 'TwIdhjw*ACShA$yz';
 
-const tokenBlacklist = new Set();
+// const tokenBlacklist = new Set();
 
 async function register(username, email, password, repass) {
     const existingEmail = await User.findOne({ email }).collation({ locale: 'en', strength: 2 });
@@ -29,8 +31,7 @@ async function register(username, email, password, repass) {
         hashedPassword: await bcrypt.hash(password, 10)
     });
 
-    //old
-    return createToken(user) ;
+    return createToken(user);
 }
 
 async function login(email, password) {
@@ -50,16 +51,22 @@ async function login(email, password) {
         throw new Error('Incorrect email or password');
     }
 
- 
-    // old
     return createToken(user);
+    // return createToken(user);
 }
 
 async function logout(token) {
-    tokenBlacklist.add(token);
+    // console.log('Logout!!!');
+    // tokenBlacklist.create(token)
+    // res.clearCookie(authCookieName)
+    //     .status(204)
+    //     .send({ message: 'Logged out!' });
+
 }
 
-
+// function createToken(data) {
+//     return jwt.sign(data, secret, { expiresIn: '1d' });
+// }
 function createToken(user) {
     const payload = {
         _id: user._id,
@@ -69,26 +76,75 @@ function createToken(user) {
 
     };
 
-    return {
-        _id: user._id,
-        username: user.username,
-        email: user.email,
-        role: user.role,
-        accessToken: jwt.sign(payload, secret)
-    };
+    // return {
+    //     _id: user._id,
+    //     username: user.username,
+    //     email: user.email,
+    //     role: user.role,
+    //     accessToken: jwt.sign(payload, secret)
+    // };
+    return jwt.sign(payload, secret, { expiresIn: '1d' });
 }
 
+async function blacklistToken(token) {
+    return tokenBlacklist?.findOne({ token });
+}
+// function verifyToken(token) {
+//     return new Promise((resolve, reject) => {
+//         jwt.verify(token, secret, (err, data) => {
+//             if (err) {
+//                 reject(err);
+//                 return;
+//             }
+//             resolve(data);
+//         });
+//     });
+// }
 function parseToken(token) {
-    if (tokenBlacklist.has(token)) {
-        throw new Error('Token is blacklisted');
-    }
+    // const blacklistedToken = blacklistedToken(token);
+    // console.log()
+    // if (blacklistedToken) {
+    //     throw new Error('Token is blacklisted');
+    // }
 
-    return jwt.verify(token, secret);
+    // return jwt.verify(token, secret);
+    return new Promise((resolve, reject) => {
+                jwt.verify(token, secret, (err, data) => {
+                    if (err) {
+                        reject(err);
+                        return;
+                    }
+                    resolve(data);
+                });
+            });
 }
+// function parseToken(token) {
+//     try {
+//         const data = jwt.verify(token, secret);
+//         console.log('Parse data' + data)
+//         return data;
+//     } catch (error) {
+//         throw new Error('Invalid access token!')
+//     }
+//     // const blacklistedToken = blacklistedToken(token);
+//     // console.log("Parse Token Result blacklistedToken: " + blacklistedToken)
+//     // if (blacklistedToken) {
+//     //     console.log("Have blacklistedToken: ")
+//     //     throw new Error('Token is blacklisted');
+
+//     // }
+//     // if (tokenBlacklist.has(token)) {
+//     //     throw new Error('Token is blacklisted');
+//     // }
+
+//     // return jwt.verify(token, secret);
+// }
 
 module.exports = {
     register,
     login,
     logout,
     parseToken,
+    blacklistToken
+
 };
