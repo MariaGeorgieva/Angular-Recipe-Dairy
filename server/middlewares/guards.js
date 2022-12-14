@@ -1,10 +1,7 @@
-const { authCookieName } = require("../app-config");
-
 function hasUser() {
     return (req, res, next) => {
-        const token = req.cookies[authCookieName] || '';
         console.log("hasUser(): " + req.user);
-        if (token) {
+        if (req.user) {
             next();
         } else {
             res.status(401).json({ message: 'Please log in!' });

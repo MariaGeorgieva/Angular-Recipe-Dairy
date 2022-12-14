@@ -12,7 +12,7 @@ const { isAdmin, hasUser } = require('./middlewares/guards');
 const session = require('./middlewares/session');
 const trimBody = require('./middlewares/trimBody');
 const userController = require('./controllers/userController');
-const auth = require('./middlewares/auth');
+// const auth = require('./middlewares/auth');
 
 
 
@@ -41,7 +41,7 @@ async function start() {
     console.log('Database connected!');
 
     const app = express();
-    
+
     app.use(express.json());
     app.use(express.static(path.resolve(__basedir, 'static')));
     app.use(cookieParser());
@@ -55,12 +55,12 @@ async function start() {
         res.json({ message: 'REST service operational' });
     });
 
-
+   
     app.use('/auth', authController);
     app.use('/category', categoryController);
     app.use('/ingredient', ingredientController);// isAdmin(), 
     app.use('/recipe', recipeController);
-    app.use('/user',  userController); //hasUser(),
+    app.use('/user', userController); //hasUser(),
 
     app.listen(config[env].port, () => console.log(`Server is running on port ${config[env].port}.`));
 }

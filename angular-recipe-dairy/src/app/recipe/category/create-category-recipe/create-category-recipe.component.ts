@@ -18,7 +18,7 @@ export class CreateCategoryRecipeComponent {
     if (form.invalid) { return; }
     const { titleCategory, image } = form.value;
 
-    this.recipeService.createCategoryForRecipes(titleCategory, image)
+    this.recipeService.createCategoryForRecipes(titleCategory, image )
       .subscribe(() => {
         this.router.navigate(['/category'])
       })

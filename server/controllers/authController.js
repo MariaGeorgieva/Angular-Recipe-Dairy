@@ -3,7 +3,7 @@ const { body, validationResult } = require('express-validator');
 const { authCookieName } = require('../app-config');
 const { hasUser, isGuest } = require('../middlewares/guards');
 
-const { register, login, logout, blacklistToken } = require('../services/authService');
+const { register, login, logout, blacklistToken, createToken } = require('../services/authService');
 const { parseError } = require('../util/parser');
 
 
@@ -34,16 +34,14 @@ authController.post('/register', isGuest(),
     });
 
 authController.post('/login', async (req, res) => {//isGuest(),
+    console.log('Login')
     try {
-        // const user = await login(req.body.email, req.body.password);
-        const token = await login(req.body.email, req.body.password);
-        // const token = createToken(user);
+
+        const user = await login(req.body.email, req.body.password);
+        const token = createToken(user);
         res.cookie(authCookieName, token, { httpOnly: true })
-        // res.status(200).send(user);
-        res.status(201).json(token)
-        // res.json({ message: "Logged in successfully 😊 👌" });
-        // res.status(200)
-        //     // .send(user);
+        res.status(201).json(user)
+
     } catch (error) {
         const message = parseError(error);
         res.status(401).json({ message });
@@ -57,7 +55,7 @@ authController.post('/logout', async (req, res) => {  //hasUser(),
     console.log("authController logout IN: ");
     try {
         const token = req.cookies[authCookieName];
-       await  blacklistToken(token);
+        await blacklistToken(token);
         res.clearCookie(authCookieName)
             .status(204)
             .json({ message: 'Logged out!' });

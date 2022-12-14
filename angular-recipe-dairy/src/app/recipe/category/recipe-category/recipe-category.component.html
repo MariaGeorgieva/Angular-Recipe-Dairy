@@ -8,8 +8,8 @@
                 </mat-card-header>
                 
                 <mat-card-actions>
-                    <button [routerLink]="['/category', category._id]">Details</button>
-                    <button mat-raised-button color="primary">view all recipes</button>
+                    <button mat-raised-button [routerLink]="['/category', category._id]" color="primary">Details</button>
+                    <button mat-raised-button [routerLink]="['/category', category._id]" color="primary">view all recipes</button>
                 </mat-card-actions>
             </mat-card>
         </mat-grid-tile>

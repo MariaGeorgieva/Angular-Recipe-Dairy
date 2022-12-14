@@ -23,11 +23,11 @@ export class LoginComponent {
     if (loginForm.invalid) { return; }
     const { email, password } = loginForm.value;
     this.authService.login(email!, password!)
-      .subscribe(
-        user => {
-          this.router.navigate(['/']);
+      .subscribe(user => {
+        this.router.navigate(['/']);
 
-        });
+      });
+      
     const returnUrl = this.activatedRoute.snapshot.queryParams['returnUrl'] || '/';
 
     this.router.navigate([returnUrl]);

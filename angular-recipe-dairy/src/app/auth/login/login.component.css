@@ -1,15 +1,28 @@
-.example-container mat-form-field + mat-form-field {
-    margin-left: 8px;
-  }
+.example-container mat-form-field+mat-form-field {
+  margin-left: 8px;
+}
 
-  mat-card {
-    max-width: 400px;
-    margin: 2em auto;
-    text-align: center;
-  }
-  
-  mat-form-field {
-    display: block;
-  }
+mat-card {
+  max-width: 600px;
+  margin: 2em auto;
+  text-align: center;
+  box-shadow: 0 3px 5px -1px #0003, 0 6px 10px #00000024, 0 1px 18px #0000001f;
+  /* background-color: white; */
+}
 
-  
+mat-form-field {
+  display: block;
+  color: black;
+}
+
+.green-background {
+  background-color: #558b2f;
+  padding-top: 10px;
+  margin-bottom: 20px;
+  color: white;
+}
+
+.white-background{
+  background-color: white;
+  color: black;
+}

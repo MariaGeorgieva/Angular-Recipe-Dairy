@@ -20,12 +20,12 @@
       <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="facebook"></mat-icon>
       <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="share"></mat-icon>
     </mat-toolbar-row>
-    <!-- /End Top Bar -->
+    <!-- End Top Bar -->
 
     <!-- Main Bar -->
     <mat-toolbar-row id="main-toolbar">
       <!-- Logo -->
-      <a routerLink="/" class="logo" href="/">
+      <a routerLink="/" class="logo">
         <div class="logo">
           <mat-icon svgIcon="cook-book" class="logo"></mat-icon>
         </div>
@@ -39,7 +39,7 @@
       <!-- Recipe  -->
       <section>
         <div class="example-button-row">
-          <button mat-button color="primary" routerLink="/recipe">
+          <button  mat-button color="mat-body-2" routerLink="/recipe">
             <mat-icon>menu_book</mat-icon>
             All Recipes
           </button>
@@ -49,6 +49,12 @@
           <button mat-button routerLink="/ingredient">
             All Ingredients <mat-icon>restaurant_menu</mat-icon>
           </button>
+          <!--   Add Recipe -->
+          <button mat-menu-item routerLink="/recipe/create">
+            <mat-icon>library_add</mat-icon>
+            Add Recipe
+          </button>
+
         </div>
       </section>
       <!-- End Recipe -->
@@ -106,11 +112,6 @@
                   My Profile
                 </button>
 
-                <!--   Add Recipe -->
-                <button mat-menu-item routerLink="/recipe/create">
-                  <mat-icon>library_add</mat-icon>
-                  Add Recipe
-                </button>
 
                 <button mat-menu-item routerLink="/user/created-recipes">
                   <mat-icon>list</mat-icon>
@@ -128,8 +129,8 @@
                 </button>
 
                 <!-- <button mat-menu-item routerLink="/logout" > -->
-                  <button mat-menu-item routerLink="/logout" >
-                 
+                <button mat-menu-item routerLink="/logout">
+
                   <mat-icon>logout</mat-icon>
                   Logout
                 </button>

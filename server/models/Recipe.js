@@ -12,7 +12,7 @@ const recipeSchema = new Schema({
     meal: {
         type: String,
         required: true,
-        enum: ['breakfast', 'lunch', 'dinner', 'snacks', 'drinks', 'special-occasion','other'],
+        enum: ['breakfast', 'lunch', 'dinner', 'snack', 'drinks', 'special-occasion','other'],
         default: 'other',
     },
     preparationTime: { type: Number },
@@ -36,7 +36,8 @@ const recipeSchema = new Schema({
     preparation: { type: [String], default: [], required: true, minlength: [10, 'Preparation must be at least 10 characters long'] },
     season: {
         type: [String],
-        enum: ['spring', 'summer', 'fall', 'winter', 'all season'],
+        required: true,
+        enum: ['spring', 'summer', 'autumn', 'winter', 'all-season'],
         default: ['all season']
     },
     stars: { type: Number, min: 1, max: 5, default: 0 },

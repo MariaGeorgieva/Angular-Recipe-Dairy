@@ -15,7 +15,6 @@ export class RecipeIngredientComponent implements OnInit {
   ingredientList: IIngredient[] | null = null;
   ingredient: IIngredient | undefined;
   inEditMode: boolean = false;
-  token: string | null = localStorage.getItem('accessToken')
 
   constructor(private recipeService: RecipeService, private activatedRoute: ActivatedRoute, private router: Router) { }
 

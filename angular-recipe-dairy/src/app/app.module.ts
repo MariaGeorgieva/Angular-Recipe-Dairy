@@ -13,6 +13,7 @@ import { AppInterceptor, appInterceptorProvider } from './app.interceptor';
 import { AuthenticateComponent } from './authenticate/authenticate.component';
 import { SharedModule } from './shared/shared.module';
 import { API_ERROR } from './shared/constants';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 @NgModule({
     declarations: [
@@ -43,6 +44,7 @@ import { API_ERROR } from './shared/constants';
         HttpClientModule,
         BrowserAnimationsModule,
         SharedModule,
+        MatSidenavModule
     ]
 })
 export class AppModule { }

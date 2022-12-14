@@ -51,7 +51,7 @@ async function login(email, password) {
         throw new Error('Incorrect email or password');
     }
 
-    return createToken(user);
+    return user
     // return createToken(user);
 }
 
@@ -145,6 +145,7 @@ module.exports = {
     login,
     logout,
     parseToken,
-    blacklistToken
+    blacklistToken,
+    createToken
 
 };

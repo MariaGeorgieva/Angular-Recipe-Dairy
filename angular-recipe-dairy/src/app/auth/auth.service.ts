@@ -19,7 +19,7 @@ export class AuthService implements OnDestroy {
   user: IUser | null = null;
 
   get isLoggedIn(): boolean {
-    console.log('get isLoggedIn()' + this.user?.email);
+    console.log('Auth service isLoggedIn()' + this.user?.roles);
     return this.user !== null;
   }
 
@@ -47,11 +47,11 @@ export class AuthService implements OnDestroy {
     return this.http.post<void>('/auth/logout', {}, { withCredentials: true })
       .pipe(tap(() => {
         this.user$$.next(null)
-      })); 
+      }));
   }
 
   getProfile() {
-    return this.http.get<any>('/user/profile')//{withCredentials:true} if cookies-parser
+    return this.http.get<any>('/user/profile', { withCredentials: true }) //if cookies-parser
       .pipe(
         tap(user => {
           this.user$$.next(user)

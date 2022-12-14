@@ -1,0 +1,25 @@
+@use '@angular/material' as mat;
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "src/my-material.scss";
+@import url('https://fonts.googleapis.com/css2?family=Cookie&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jost&display=swap');
+/* @import "~@angular/material/prebuilt-themes/purple-green.css"; */
+// @include mat.all-component-themes($my-material);
+// @include angular-recipe-dairy($my-material);
+// @include my-app-theme($my-material);
+
+
+
+
+html,
+body {
+
+    height: 100%;
+}
+
+body {
+    background-color: white;
+    background: white;
+    margin: 0;
+    font-family: Jost, sans-serif;
+}
