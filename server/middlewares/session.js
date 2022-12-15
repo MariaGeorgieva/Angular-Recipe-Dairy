@@ -16,7 +16,7 @@ module.exports = () => (req, res, next) => {
             payload.then((user) => {
                 req.user = user;
                 req.isLoggedIn = true;
-                console.log("Assign user._id: " + req.user._id);
+                console.log("Assign user._id: " + req.user.roles);
               
             });
         } catch (err) {

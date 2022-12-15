@@ -17,11 +17,11 @@ userController.get('/admin', isAdmin(), async (req, res) => {
     }
 });
 
-userController.get('/profile', hasUser(), async (req, res) => {
+userController.get('/profile', async (req, res) => {
 
     console.log("userController req.user: "+ req.user);
     try {
-        const userData = await getUserProfile(req.user.email);
+        const userData = await getUserProfile(req.user?.email);
         console.log("userController userData: "+ userData);
         res.json(userData);
     } catch (err) {

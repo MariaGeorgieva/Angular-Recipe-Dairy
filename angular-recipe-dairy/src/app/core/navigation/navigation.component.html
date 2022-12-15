@@ -39,9 +39,15 @@
       <!-- Recipe  -->
       <section>
         <div class="example-button-row">
-          <button  mat-button color="mat-body-2" routerLink="/recipe">
+          <button mat-button color="mat-body-2" routerLink="/recipe">
             <mat-icon>menu_book</mat-icon>
             All Recipes
+          </button>
+          <!--   Add Recipe -->
+          <button mat-button routerLink="/recipe/create">
+            <mat-icon>library_add</mat-icon>
+            Add Recipe
+
           </button>
           <button mat-button routerLink="/category">
             Recipes Categories <mat-icon>restaurant_menu</mat-icon>
@@ -49,11 +55,7 @@
           <button mat-button routerLink="/ingredient">
             All Ingredients <mat-icon>restaurant_menu</mat-icon>
           </button>
-          <!--   Add Recipe -->
-          <button mat-menu-item routerLink="/recipe/create">
-            <mat-icon>library_add</mat-icon>
-            Add Recipe
-          </button>
+
 
         </div>
       </section>
@@ -112,6 +114,11 @@
                   My Profile
                 </button>
 
+                <!--   Add Recipe -->
+                <button mat-menu-item routerLink="/recipe/create">
+                  <mat-icon>library_add</mat-icon>
+                  Add Recipe
+                </button>
 
                 <button mat-menu-item routerLink="/user/created-recipes">
                   <mat-icon>list</mat-icon>

@@ -20,12 +20,12 @@ function isGuest() {
     };
 }
 
-function isAdmin(role) {
+function isAdmin() {
     return (req, res, next) => {
         console.log("Guard isAdmin(): " + req.user);
-        if (req.user == undefined || req.user.roles.includes(role) == false) {
-            // res.redirect('/auth/login');
-            res.redirect('/login');
+        if (req.user == undefined || req.user.roles.includes('roles') == false) {
+            res.redirect('/auth/login');
+            // res.redirect('/login');
         } else {
             if (req.user.roles == 'admin') {
                 next();

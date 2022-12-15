@@ -7,29 +7,29 @@ import { IUser } from '../shared/interfaces/user';
   templateUrl: './authenticate.component.html',
   styleUrls: ['./authenticate.component.css']
 })
-export class AuthenticateComponent {
+export class AuthenticateComponent implements OnInit{
 
-  isAuthenticating = false;
+  isAuthenticating = true;
   user: IUser | null = null;
 
   get isLoggedIn(): boolean {
-   
+
     console.log('Authenticate isLoggedIn()' + this.user?.roles);
-    
+
     return this.user !== null;
   }
   constructor(private authService: AuthService) { }
 
-  // ngOnInit(): void {
+  ngOnInit(): void {
     
-    // this.authService.getProfile().subscribe({
-    //   next: () => {
+    this.authService.getProfile().subscribe({
+    next: () => {
 
-    //     this.isAuthenticating = false;
-    //   },
-    //   error: () => {
-    //     this.isAuthenticating = false;
-    //   }
-    // })
-  // }
+      this.isAuthenticating = false;
+    },
+    error: () => {
+      this.isAuthenticating = false;
+    }
+  })
+  }
 }

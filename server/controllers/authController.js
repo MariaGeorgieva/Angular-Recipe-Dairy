@@ -18,14 +18,10 @@ authController.post('/register', isGuest(),
                 throw errors;
             }
 
-            const token = await register(req.body.username, req.body.email, req.body.password, req.body.rePassword);
-            // const user = await register(req.body.username, req.body.email, req.body.password, req.body.rePassword);
-
+            const user = await register(req.body.username, req.body.email, req.body.password, req.body.rePassword);
+            const token = createToken(user);
             res.cookie(authCookieName, token, { httpOnly: true })
-            res.json(token); // attachToken(req, res, user);
-            // res.json(user);
-
-            // res.status(201).json(user)
+            res.res.status(201).json(user); 
 
         } catch (error) {
             const message = parseError(error);
@@ -33,7 +29,7 @@ authController.post('/register', isGuest(),
         }
     });
 
-authController.post('/login', async (req, res) => {//isGuest(),
+authController.post('/login', isGuest(), async (req, res) => {//isGuest(),
     console.log('Login')
     try {
 
@@ -58,7 +54,7 @@ authController.post('/logout', async (req, res) => {  //hasUser(),
         await blacklistToken(token);
         res.clearCookie(authCookieName)
             .status(204)
-            .json({ message: 'Logged out!' });
+            .send({ message: 'Logged out!' });
     } catch (error) {
         const message = parseError(error);
         res.status(400).json({ message });

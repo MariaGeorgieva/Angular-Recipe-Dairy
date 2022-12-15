@@ -31,7 +31,7 @@ async function register(username, email, password, repass) {
         hashedPassword: await bcrypt.hash(password, 10)
     });
 
-    return createToken(user);
+    return user;
 }
 
 async function login(email, password) {
@@ -87,7 +87,7 @@ function createToken(user) {
 }
 
 async function blacklistToken(token) {
-    return tokenBlacklist?.findOne({ token });
+    return tokenBlacklist.create({ token });
 }
 // function verifyToken(token) {
 //     return new Promise((resolve, reject) => {

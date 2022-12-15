@@ -19,15 +19,20 @@ import { CreateIngredientComponent } from './ingredient/create-ingredient/create
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatButtonModule } from '@angular/material/button';
-import { FormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatInputModule } from '@angular/material/input';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/material/core';
+// import { MaterialExampleModule } from 'src/material.module';
+import {MatNativeDateModule} from '@angular/material/core';
+
+
 
 @NgModule({
   declarations: [
@@ -47,6 +52,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     RecipeRoutingModule,
     HttpClientModule, // TODO not sure for here or just import on app.module
     FormsModule,
+    ReactiveFormsModule,
     MatCardModule,
     MatGridListModule,
     MatButtonModule,
@@ -59,7 +65,10 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatIconModule,
     MatButtonModule,
     MatFormFieldModule,
-    MatDialogModule
+    MatDialogModule,
+    MatNativeDateModule
+    
+    // MaterialExampleModule
   ],
   exports: [
     RecipeListComponent,
@@ -67,6 +76,9 @@ import { MatDialogModule } from '@angular/material/dialog';
     RecipeCategoryComponent,
     CreateCategoryRecipeComponent,
     CategoryDetailsComponent
+  ],
+  providers: [
+    {provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher}
   ]
 })
 export class RecipeModule { }

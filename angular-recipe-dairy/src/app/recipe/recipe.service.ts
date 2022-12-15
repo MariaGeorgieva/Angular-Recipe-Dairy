@@ -65,8 +65,11 @@ export class RecipeService {
   getRecipeById(id: number) {
     return this.httpClient.get<IRecipe>(`${apiUrl}/recipe/${id}`);
   }
-  createRecipe(data:{}) {
-    return this.httpClient.post<IRecipe[]>(`${apiUrl}/recipe/create`,  data );
+  createRecipe(
+    titleRecipe: string | undefined | null,
+    shortDescription: string | undefined | null,
+    selectedCategory: ICategory[] | null | undefined) {
+    return this.httpClient.post<IRecipe[]>(`${apiUrl}/recipe/create`, { titleRecipe, shortDescription, selectedCategory });
   }
   //TODO
   updateRecipe(id: string | undefined, titleIngredient: string) {

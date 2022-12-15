@@ -12,6 +12,7 @@ const { isAdmin, hasUser } = require('./middlewares/guards');
 const session = require('./middlewares/session');
 const trimBody = require('./middlewares/trimBody');
 const userController = require('./controllers/userController');
+const auth = require('./middlewares/auth');
 // const auth = require('./middlewares/auth');
 
 
@@ -49,7 +50,8 @@ async function start() {
     // app.use(auth());
     app.use(trimBody());
     app.use(cors());
-    app.use(session());
+    // app.use(session());
+    app.use(auth());
 
     app.get('/', (req, res) => {
         res.json({ message: 'REST service operational' });

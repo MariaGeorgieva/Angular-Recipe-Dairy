@@ -1,33 +1,35 @@
 const jwt = require('./jwt');
 const { authCookieName } = require('../app-config');
-const userModel = require('../models/User');
-
-// const {
-//     tokenBlacklistModel
-// } = require('../models');
+const User = require('../models/User');
+const tokenBlacklist = require('../models/tokenBlacklistModel');
 
 
 
 function auth(redirectUnauthenticated = true) {
-
+    console.log('Auth Middleware')
     return function (req, res, next) {
         const token = req.cookies[authCookieName] || '';
+        console.log("token " + token);
+        if(token == ''){return next()}
         Promise.all([
             jwt.verifyToken(token),
-            tokenBlacklistModel.findOne({ ...token })
+            tokenBlacklist?.findOne({ token })
         ])
             .then(([data, blacklistedToken]) => {
                 if (blacklistedToken) {
+                    console.log("blacklistedToken")
                     return Promise.reject(new Error('blacklisted token'));
                 }
-                userModel.findById(data.id)
+                User?.findOne({ email: data.email })
                     .then(user => {
+                        console.log("Find it in Auth" + user.username)
                         req.user = user;
-                        req.isLogged = true;
+                        req.isLoggedIn = true;
                         next();
                     })
             })
             .catch(err => {
+                console.log("Error Auth")
                 if (!redirectUnauthenticated) {
                     next();
                     return;
@@ -39,6 +41,7 @@ function auth(redirectUnauthenticated = true) {
                         .send({ message: "Invalid token!" });
                     return;
                 }
+                console.log("Nothing Auth")
                 next(err);
             });
     }
