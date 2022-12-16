@@ -13,10 +13,8 @@ recipeController.get('/', async (req, res) => {
     res.json(recipes);
 });
 
-recipeController.post('/create', async (req, res) => {// hasUser(),
+recipeController.post('/create', hasUser(), async (req, res) => {// hasUser(),
 
-    console.log("Create Recipe ");
-    console.log("req.user:  " + req.user);
     try {
         const data = {
             titleRecipe: req.body.titleRecipe,
@@ -31,12 +29,14 @@ recipeController.post('/create', async (req, res) => {// hasUser(),
             ingredients: req.body.ingredients,
             preparation: req.body.preparation,
             season: req.body.season,
+            imageUrl: req.body.imageUrl,
             ownerID: req.user._id
         }
 
         const recipe = await createRecipe(data);
         res.json(recipe);
     } catch (err) {
+        const message = parseError(err);
         res.status(400).json({ message });
     }
 });

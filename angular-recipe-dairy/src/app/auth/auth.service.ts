@@ -19,7 +19,6 @@ export class AuthService implements OnDestroy {
   user: IUser | null = null;
 
   get isLoggedIn(): boolean {
-    console.log('Auth service isLoggedIn()' + this.user?.roles);
     return this.user !== null;
   }
 
@@ -39,7 +38,7 @@ export class AuthService implements OnDestroy {
   }
 
   login(email: string, password: string) {
-    return this.http.post<any>('/auth/login', { email, password })
+    return this.http.post<IUser>('/auth/login', { email, password })
       .pipe(tap(user => this.user$$.next(user)));;
   }
 

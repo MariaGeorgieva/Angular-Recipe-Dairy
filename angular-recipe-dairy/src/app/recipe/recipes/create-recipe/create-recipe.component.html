@@ -1,223 +1,148 @@
-<mat-card class="my-card">
-    <mat-card-header>
-        <div mat-card-avatar>
-            <div class="logo">
-                <!-- <mat-icon svgIcon="recipes" class="logo"></mat-icon> -->
-            </div>
-        </div>
-        <mat-card-title>
-            Add your favorite recipe to your Recipe Diary
-        </mat-card-title>
-    </mat-card-header>
+<mat-card>
+    <mat-card-title>
+        <h2>Create Recipe</h2>
+    </mat-card-title>
     <mat-card-content>
-        <form class="example-form" [formGroup]="form" (ngSubmit)="newRecipeHandler()">
-            <!-- <form class="example-form" #form="ngForm" (ngSubmit)="newRecipeHandler(form)"> -->
 
-            <!-- Title -->
+        <form #form="ngForm" (ngSubmit)="newRecipeHandler(form)">
+
+            <!-- Title  -->
             <mat-form-field class="example-full-width">
-                <mat-label>Add Recipe Title</mat-label>
-                <input type="text" formControlName="titleRecipe" id="titleRecipe" />
-                <!-- Title Errors -->
-                <ng-container *ngIf="form.get('titleRecipe')?.touched">
-                    <mat-error class="error" *ngIf="form.get('titleRecipe')?.errors?.['required']">
-                        Recipe title is <strong>required</strong>
-                    </mat-error>
-                    <mat-error class="error" *ngIf="form.get('titleRecipe')?.errors?.['minlength']">
-                        Recipe title must be at least 5 characters long.
-                    </mat-error>
-                </ng-container>
-            </mat-form-field>
-
-            <!-- Description -->
-            <mat-form-field class="example-full-width">
-                <mat-label>Add short Description</mat-label>
-                <textarea matInput type="text" formControlName="shortDescription" id="shortDescription"></textarea>
-                <!-- Description Errors -->
-                <ng-container *ngIf="form.get('shortDescription')?.touched">
-                    <mat-error class="error" *ngIf="form.get('shortDescription')?.errors?.['required']">
-                        Description is <strong>required</strong>
-                    </mat-error>
-                    <mat-error class="error" *ngIf="form.get('shortDescription')?.errors?.['minlength']">
-                        Description title must be at least 5 characters long.
-                    </mat-error>
-                </ng-container>
-            </mat-form-field>
-
-            <!-- Category -->
-            <!-- <p> -->
-            <mat-form-field appearance="fill">
-                <mat-label>Choose Category</mat-label>
-                <select matNativeControl [formControl]="categoryControl" name="category">
-                    <option>None</option>
-                    <option *ngFor="let category of categoryList" [value]="category._id">
-                        {{category.titleCategory}}
-                    </option>
-                </select>
-            </mat-form-field>
-            <p>categoryControl: {{categoryControl.value}}</p>
-            <!-- Works -->
-            <mat-form-field appearance="fill">
-                <mat-label>Favorite Food</mat-label>
-                <select matNativeControl [formControl]="foodControl" name="food">
-                    <option>None</option>
-                    <option *ngFor="let food of foods" [value]="food.value">
-                        {{food.viewValue}}
-                    </option>
-                </select>
-            </mat-form-field>
-            <p>Selected foodControl: {{foodControl.value}}</p>
-
-            <h4>Native select</h4>
-            <mat-form-field appearance="fill">
-                <mat-label>Favorite Car</mat-label>
-                <select matNativeControl [formControl]="carControl" name="car">
-                    <option value="">None</option>
-                    <option *ngFor="let car of cars" [value]="car.value">
-                        {{car.viewValue}}
-                    </option>
-                </select>
-            </mat-form-field>
-
-            <p>Selected carControl: {{carControl.value}}</p>
-
-            <!-- <p>Form value: {{ form.value | json }}</p>
-            <mat-form-field appearance="fill">
-                <mat-label>Choose Category</mat-label>
-                <select formControlName="selectedCategory" required>
-                    <option mat-option *ngFor="let category of categoryList" [ngValue]="category._id">
-                        {{category.titleCategory}}
-                    </option>
-                </select>
-                <mat-error *ngIf="form.get('selectedCategory')?.errors?.['required']">Please choose an animal
+                <input matInput placeholder="Title of recipe" ngModel name="titleRecipe" minlength="3" #titleRecipe
+                    required>
+                <mat-error *ngIf="titleRecipe.required">
+                    Title is required!
                 </mat-error>
-            </mat-form-field> -->
+                <mat-error *ngIf="titleRecipe.minLength">
+                    Title is must be at least 3 characters!
+                </mat-error>
+            </mat-form-field>
 
-            <!-- Main Ingredient -->
+            <!-- shortDescription -->
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Introduce recipe" ngModel name="shortDescription" minlength="3"
+                    #shortDescription>
+                <mat-error *ngIf="shortDescription.minLength">
+                    Short description must be at least 3 characters!
+                </mat-error>
+            </mat-form-field>
 
-            <!-- <mat-form-field appearance="fill">
-                    <mat-label>Choose Main Ingredient</mat-label>
-                    <mat-select [(ngModel)]="selectedIngredient" name="mainIngredient" required>
-                        <mat-option *ngFor="let mainIngredient of mainIngredientList"
-                            [value]="mainIngredient.titleIngredient">
-                            {{mainIngredient.titleIngredient}}
+            <p>
+                <!-- Category -->
+                <mat-form-field>
+                    <mat-label>Category</mat-label>
+                    <mat-select matInput class="form-control" id="idCategory" name="idCategory" [(ngModel)]="idCategory"
+                        required>
+                        <mat-option *ngFor="let category of categoryList" [value]="category._id">
+                            {{category.titleCategory}}
                         </mat-option>
                     </mat-select>
-                </mat-form-field> -->
+                </mat-form-field>
 
-            <!-- </p> -->
-            <p>
                 <!-- Meal -->
-                <!-- <mat-form-field appearance="fill">
-                    <mat-label>Choose Meal</mat-label>
-                    <mat-select [(ngModel)]="selectedMeal" name="meal" required>
+                <mat-form-field>
+                    <mat-label>Type of Meal</mat-label>
+                    <mat-select matInput class="form-control" id="meal" name="meal" [(ngModel)]="meal" required>
                         <mat-option *ngFor="let meal of meals" [value]="meal.value">
                             {{meal.viewValue}}
                         </mat-option>
                     </mat-select>
-                </mat-form-field> -->
+                </mat-form-field>
 
-
-                <!-- Season -->
-                <!-- <mat-form-field appearance="fill">
-                    <mat-label>Choose Season</mat-label>
-                    <mat-select [(ngModel)]="selectedSeason" name="season">
-                        <mat-option *ngFor="let season of seasons" [value]="season.value">
-                            {{season.viewValue}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field> -->
-            <p>
                 <!-- Difficulty -->
-                <!-- <mat-form-field appearance="outline">
-                    <mat-label>Choose Difficulty</mat-label>
-                    <mat-select [(ngModel)]="selectedDifficulty" name="difficulty" required>
+                <mat-form-field>
+                    <mat-label>Difficulty</mat-label>
+                    <mat-select matInput class="form-control" id="difficulty" name="difficulty" [(ngModel)]="difficulty"
+                        required>
                         <mat-option *ngFor="let difficulty of difficulties" [value]="difficulty.value">
                             {{difficulty.viewValue}}
                         </mat-option>
                     </mat-select>
-                </mat-form-field> -->
+                </mat-form-field>
 
-
-                <!-- Servings -->
-                <!-- <mat-form-field appearance="fill">
-                    <mat-label>Choose number of Servings</mat-label>
-                    <input matInput type="number" name="servings" #servings="ngModel" ngModel required [min]="1"
-                        id="servings" /> -->
-                <!-- Servings Errors -->
-                <!-- <ng-container *ngIf="servings.touched">
-                        <mat-error class="error" *ngIf="servings.errors?.['required']">
-                            Number of Servings is <strong>required</strong>
-                        </mat-error>
-                    </ng-container>
-                </mat-form-field> -->
             </p>
-            <p>
 
+            <p>
+                <!-- Ingredient -->
+                <mat-form-field>
+                    <mat-label>Main Ingredient</mat-label>
+                    <mat-select matInput class="form-control" id="mainIngredient" name="mainIngredient"
+                        [(ngModel)]="mainIngredient" required>
+                        <mat-option *ngFor="let ingredient of ingredientList" [value]="ingredient._id">
+                            {{ingredient.titleIngredient}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <!-- Season -->
+                <mat-form-field>
+                    <mat-label>Season</mat-label>
+                    <mat-select matInput class="form-control" id="season" name="season" [(ngModel)]="season" required>
+                        <mat-option *ngFor="let season of seasons" [value]="season.value">
+                            {{season.viewValue}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </p>
+
+            <p>
                 <!-- preparationTime -->
-                <!-- <mat-form-field appearance="fill">
-                    <mat-label>Preparation time in minutes</mat-label>
-                    <input matInput type="number" name="preparationTime" ngModel [min]="1" id="preparationTime" />
-                </mat-form-field> -->
+                <mat-form-field>
+                    <input matInput type="number" min="0" placeholder="Preparation time in min" ngModel
+                        name="preparationTime">
+                </mat-form-field>
 
                 <!-- cookingTime -->
-                <!-- <mat-form-field appearance="fill">
-                    <mat-label>Cooking time in minutes</mat-label>
-                    <input matInput type="number" #cookingTime="ngModel" name="cookingTime" ngModel [min]="1"
-                        id="cookingTime" />
-                </mat-form-field> -->
+                <mat-form-field>
+                    <input matInput type="number" min="1" placeholder="Cooking time in min" ngModel name="cookingTime">
+                </mat-form-field>
+
+                <!-- servings -->
+                <mat-form-field>
+                    <input matInput type="number" min="1" placeholder="Servings plate" ngModel name="servings">
+                </mat-form-field>
+
             </p>
 
             <p>
                 <!-- ingredients -->
-                <!-- <mat-form-field class="example-full-width">
-                    <mat-label>Add Needed Ingredients</mat-label>
-                    <textarea matInput name="ingredients" #ingredients="ngModel" ngModel [minlength]="3"
-                        id="ingredients" type="text"></textarea> -->
-                <!-- Ingredients Errors -->
-                <!-- <ng-container *ngIf="ingredients.touched">
-                        <mat-error class="error" *ngIf="ingredients.errors?.['minlength']">
-                            Description must be at least {{ingredients.errors?.['minlength']['requiredLength']}}
-                            characters long.
-                        </mat-error>
-                    </ng-container>
-                </mat-form-field> -->
+                <mat-form-field class="example-full-width">
+                    <textarea matInput placeholder="List with ingredient" ngModel name="ingredients" minlength="10"
+                        #ingredients required> </textarea>
+
+                    <mat-error *ngIf="ingredients.required">
+                        Ingredients list is required!
+                    </mat-error>
+                    <mat-error *ngIf="ingredients.minLength">
+                        Ingredients list must be at least 10 characters!
+                    </mat-error>
+                </mat-form-field>
             </p>
-            <p>
-                <!-- preparation -->
-                <!-- <mat-form-field class="example-full-width">
-                    <mat-label>Steps for preparation</mat-label>
-                    <textarea matInput name="preparation" #preparation="ngModel" ngModel [minlength]="10"
-                        id="preparation" type="text"></textarea> -->
-                <!-- Ingredients Errors -->
-                <!-- <ng-container *ngIf="preparation.touched">
-                        <mat-error class="error" *ngIf="preparation.errors?.['minlength']">
-                            Description must be at least {{preparation.errors?.['minlength']['requiredLength']}}
-                            characters long.
-                        </mat-error>
-                    </ng-container>
-                </mat-form-field>
-            </p> -->
 
             <p>
-                <!-- Image -->
-                <!-- <mat-form-field class="example-full-width">
-                    <mat-label>Add Image URL</mat-label>
-                    <textarea matInput name="image" #image="ngModel" ngModel required [minlength]="3" id="image"
-                        type="text"></textarea> -->
-                <!-- Image Errors -->
-                <!-- <ng-container *ngIf="image.touched">
-                        <mat-error class="error" *ngIf="image.errors?.['minlength']">
-                            Image Url must be at least {{image.errors?.['minlength']['requiredLength']}}
-                            characters long.
-                        </mat-error>
-                    </ng-container>
+                <!-- Preparation -->
+                <mat-form-field class="example-full-width">
+                    <textarea matInput placeholder="Add Recipe preparation" ngModel name="preparation" minlength="10"
+                        #preparation required>
+                    </textarea>
+                    <mat-error *ngIf="preparation.required">
+                        Description is required!
+                    </mat-error>
+                    <mat-error *ngIf="preparation.minLength">
+                        Description must be at least 10 characters!
+                    </mat-error>
                 </mat-form-field>
-            </p> -->
+            </p>
 
+            <!-- Image  -->
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Image URL" type="text" ngModel name="imageUrl" #imageUrl required>
+                <mat-error *ngIf="imageUrl.required">
+                    Image URL is required!
+                </mat-error>
+            </mat-form-field>
+
+            <button mat-raised-button color="primary" [disabled]="!form.form.valid">Create Recipe</button>
         </form>
     </mat-card-content>
-    <mat-card-actions>
-        <button mat-raised-button class="cancel" type="button" routerLink="/recipe/">Cancel</button>
-        <button mat-raised-button class="public" [disabled]="form.invalid">Create Recipe</button>
-    </mat-card-actions>
 </mat-card>

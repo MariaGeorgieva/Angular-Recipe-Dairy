@@ -7,8 +7,9 @@ const { parseError } = require('../util/parser');
 
 
 userController.get('/admin', isAdmin(), async (req, res) => {
+    
     try {
-        const userData = await getAdmin(req.user.email);
+        const userData = await getAdmin(req.user?.email);
         console.log("Admin userData: "+ userData);
         res.json(userData);
     } catch (err) {
@@ -19,10 +20,8 @@ userController.get('/admin', isAdmin(), async (req, res) => {
 
 userController.get('/profile', async (req, res) => {
 
-    console.log("userController req.user: "+ req.user);
     try {
         const userData = await getUserProfile(req.user?.email);
-        console.log("userController userData: "+ userData);
         res.json(userData);
     } catch (err) {
         const message = parseError(err);

@@ -1,6 +1,6 @@
 function hasUser() {
     return (req, res, next) => {
-        console.log("hasUser(): " + req.user);
+        console.log("hasUser(): " + req.user.username);
         if (req.user) {
             next();
         } else {
@@ -22,7 +22,7 @@ function isGuest() {
 
 function isAdmin() {
     return (req, res, next) => {
-        console.log("Guard isAdmin(): " + req.user);
+        console.log("Guard isAdmin(): " + req.user.roles);
         if (req.user == undefined || req.user.roles.includes('roles') == false) {
             res.redirect('/auth/login');
             // res.redirect('/login');

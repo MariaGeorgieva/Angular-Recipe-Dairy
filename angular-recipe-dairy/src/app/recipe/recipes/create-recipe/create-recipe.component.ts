@@ -1,11 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-// import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ICategory } from 'src/app/shared/interfaces/category';
 import { IIngredient } from 'src/app/shared/interfaces/ingredient';
+import { IRecipe } from 'src/app/shared/interfaces/recipe';
 import { RecipeService } from '../../recipe.service';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
-
 
 interface Season {
   value: string;
@@ -22,78 +21,25 @@ interface Difficulty {
   viewValue: string;
 }
 
-interface Food {
-  value: string;
-  viewValue: string;
-}
-
-interface Car {
-  value: string;
-  viewValue: string;
-}
-
 @Component({
   selector: 'app-create-recipe',
   templateUrl: './create-recipe.component.html',
   styleUrls: ['./create-recipe.component.css']
 })
 export class CreateRecipeComponent implements OnInit {
+
+  @ViewChild(
+    NgForm,
+    { static: true }
+  ) form!: ElementRef<HTMLInputElement>;
+
   constructor(
+    private activatedRoute: ActivatedRoute,
     private recipeService: RecipeService,
-    private router: Router,
-    public fb: FormBuilder) { }
+    private router: Router) { }
 
-    categoryList: ICategory[] | null = null;
-    mainIngredientList: IIngredient[] | null = null;
-
-    foods: Food[] = [
-      {value: 'steak-0', viewValue: 'Steak'},
-      {value: 'pizza-1', viewValue: 'Pizza'},
-      {value: 'tacos-2', viewValue: 'Tacos'},
-    ];
-    cars: Car[] = [
-      {value: 'volvo', viewValue: 'Volvo'},
-      {value: 'saab', viewValue: 'Saab'},
-      {value: 'mercedes', viewValue: 'Mercedes'},
-    ];
-    foodControl = new FormControl(this.foods[2].value);
-    carControl = new FormControl(this.cars[1].value);
-    categoryControl = new FormControl(this.categoryList);
-    // form = new FormGroup({
-    
-    // });
-  form = this.fb.group({
-    titleRecipe: ['', [Validators.required, Validators.minLength(3)]],
-    shortDescription: ['', [Validators.required, Validators.minLength(3)]],
-    // selectedCategory: ['', [Validators.required]],
-    food: this.foodControl,
-    car: this.carControl,
-    selectedCategory: this.categoryControl,
-
-    // selectFormControl: ['', [Validators.required]],
-    // selectedMeal: ['', [Validators.required]],
-    // selectedDifficulty: ['', [Validators.required]],
-    // selectedIngredient: ['', [Validators.required]],
-    // tel: [''],
-    // pass: this.fb.group({
-    //   password: ['', [Validators.required, Validators.minLength(5)]],
-    //   rePassword: []
-    // }, {
-    // validators: [sameValueGroupValidator('password', 'rePassword')]
-
-  });
-
-
-
-  // isSubmitted = false;
-  // animalControl: Animal[] | null = null;
-
-
-  // selectedSeason: string | undefined;
-  // selectedMeal: string | undefined;
-  // selectedDifficulty: string | undefined;
-  // selectedCategory: string | undefined;
-  // selectedIngredient: string | undefined;
+  categoryList: ICategory[] | null = null
+  ingredientList: IIngredient[] | null = null
 
   difficulties: Difficulty[] = [
     { value: 'easy', viewValue: 'Easy' },
@@ -118,23 +64,61 @@ export class CreateRecipeComponent implements OnInit {
     { value: 'other', viewValue: 'Other' },
   ];
 
-  // changeCategory(e: any) {
-  //   this.category?.setValue(, {
-  //     onlySelf: true,
-  //   });
-  // }
-  
-  // get value () {
-  //   return this.form.get('userName').value
-  // }
-  // categoryList.recipeService.loadAllRecipeCategories();
- 
-  
+
+  idCategory = '';
+  mainIngredient = '';
+  difficulty = '';
+  season = ''
+  meal = '';
+
+  newRecipeHandler(form: NgForm): void {
+    if (form.invalid) {
+      console.log("Invalid Form");
+      return;
+    }
+    const {
+      titleRecipe,
+      shortDescription,
+      idCategory,
+      meal,
+      difficulty,
+      mainIngredient,
+      season,
+      preparationTime,
+      cookingTime,
+      servings,
+      ingredients,
+      preparation,
+      imageUrl
+    } = form.value;
+
+    this.recipeService.createRecipe(titleRecipe,
+      shortDescription,
+      idCategory,
+      meal,
+      difficulty,
+      mainIngredient,
+      season,
+      preparationTime,
+      cookingTime,
+      servings,
+      ingredients,
+      preparation,
+      imageUrl)
+      .subscribe((user) => {
+        this.router.navigate(['/recipe'])
+      });
+    const returnUrl = this.activatedRoute.snapshot.queryParams['returnUrl'] || '/';
+
+    this.router.navigate([returnUrl]);
+  }
+
+
   ngOnInit(): void {
     this.recipeService.loadAllRecipeCategories().subscribe({
       next: (value) => {
+        console.log(value);
         this.categoryList = value
-        console.log("categoryList" + this.categoryList)
       },
       error: (err) => {
         console.error(err);
@@ -143,27 +127,13 @@ export class CreateRecipeComponent implements OnInit {
 
     this.recipeService.loadAllIngredients().subscribe({
       next: (value) => {
-        this.mainIngredientList = value
+        console.log(value);
+        this.ingredientList = value
       },
       error: (err) => {
         console.error(err);
       }
-    })
-
+    });
   }
 
-
-  newRecipeHandler(): void {
-    // this.authService.register(username!, email!, password!, rePassword!, tel || undefined)
-    if (this.form.invalid) {
-      console.log("Invalid Form");
-      return;
-    }
-    // this.isSubmitted = true;
-    const { titleRecipe, shortDescription, selectedCategory } = this.form.value;
-    this.recipeService.createRecipe(titleRecipe, shortDescription, selectedCategory)
-      .subscribe((user) => {
-        this.router.navigate(['/recipe'])
-      })
-  }
 }

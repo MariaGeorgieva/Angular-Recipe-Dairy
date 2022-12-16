@@ -7,7 +7,15 @@
 }
 
 .example-full-width {
+  
   width: 100%;
+  background-color: white;
+  /* background-color: white;
+    color: black; */
+}
+.example-half-width {
+  width: 50%;
+  display: inline-block;
   background-color: white;
   /* background-color: white;
     color: black; */
@@ -32,6 +40,7 @@ mat-form-field {
   margin-left: 12px;
 
 }
+
 
 mat-card-header{
   margin-bottom: 10px;

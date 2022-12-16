@@ -10,6 +10,7 @@ import { AuthService } from '../auth.service';
 })
 
 export class LoginComponent {
+  
   @ViewChild(
     NgForm,
     { static: true }

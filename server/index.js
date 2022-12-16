@@ -46,18 +46,15 @@ async function start() {
     app.use(express.json());
     app.use(express.static(path.resolve(__basedir, 'static')));
     app.use(cookieParser());
-    // app.use(authMiddleware());
-    // app.use(auth());
     app.use(trimBody());
     app.use(cors());
-    // app.use(session());
     app.use(auth());
 
     app.get('/', (req, res) => {
         res.json({ message: 'REST service operational' });
     });
 
-   
+
     app.use('/auth', authController);
     app.use('/category', categoryController);
     app.use('/ingredient', ingredientController);// isAdmin(), 

@@ -1,10 +1,20 @@
 <p>recipe-main works!</p>
 
-<div class="container">
-    <main>
-      <div class="recipe-title">
-        <app-recipe-list></app-recipe-list>
-      </div>
-    </main>
-    <!-- <app-recent-posts></app-recent-posts> -->
-  </div>
+<div>
+  <mat-grid-list cols="4" rowHeight="1:1.5" class="container">
+      <mat-grid-tile *ngFor="let recipe of recipeList" class="my-mat-grid-tile">
+          <mat-card class="my-card">
+              <img mat-card-image class="my-card-image" src="{{recipe.imageUrl}}" alt="{{recipe.titleRecipe}}">
+              <mat-card-header>
+                  <mat-card-title>{{recipe.shortDescription}}</mat-card-title>
+              </mat-card-header>
+              
+              <mat-card-actions>
+                  <button mat-raised-button [routerLink]="['/edit', recipe._id]" color="primary">Details</button>
+                  <button mat-raised-button [routerLink]="['/list', recipe._id]" color="primary">view all recipes</button>
+              </mat-card-actions>
+          </mat-card>
+      </mat-grid-tile>
+  </mat-grid-list>
+</div>
+

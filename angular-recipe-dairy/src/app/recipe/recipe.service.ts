@@ -66,10 +66,21 @@ export class RecipeService {
     return this.httpClient.get<IRecipe>(`${apiUrl}/recipe/${id}`);
   }
   createRecipe(
-    titleRecipe: string | undefined | null,
-    shortDescription: string | undefined | null,
-    selectedCategory: ICategory[] | null | undefined) {
-    return this.httpClient.post<IRecipe[]>(`${apiUrl}/recipe/create`, { titleRecipe, shortDescription, selectedCategory });
+    titleRecipe: string,
+    shortDescription: string,
+    idCategory: string | undefined | null,
+    meal: string | undefined | null,
+    difficulty: string | undefined | null,
+    mainIngredient: string | undefined | null,
+    season: string | undefined | null,
+    preparationTime: number,
+    cookingTime: number,
+    servings: number,
+    ingredients: string,
+    preparation: string,
+    imageUrl: string,
+  ) {
+    return this.httpClient.post<IRecipe[]>(`${apiUrl}/recipe/create`, { titleRecipe, shortDescription, idCategory, mainIngredient, difficulty, season, meal, preparationTime, cookingTime, servings, ingredients, preparation, imageUrl }, { withCredentials: true });
   }
   //TODO
   updateRecipe(id: string | undefined, titleIngredient: string) {

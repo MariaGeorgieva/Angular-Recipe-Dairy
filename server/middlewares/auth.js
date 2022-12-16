@@ -6,10 +6,8 @@ const tokenBlacklist = require('../models/tokenBlacklistModel');
 
 
 function auth(redirectUnauthenticated = true) {
-    console.log('Auth Middleware')
     return function (req, res, next) {
         const token = req.cookies[authCookieName] || '';
-        console.log("token " + token);
         if(token == ''){return next()}
         Promise.all([
             jwt.verifyToken(token),
@@ -17,12 +15,10 @@ function auth(redirectUnauthenticated = true) {
         ])
             .then(([data, blacklistedToken]) => {
                 if (blacklistedToken) {
-                    console.log("blacklistedToken")
                     return Promise.reject(new Error('blacklisted token'));
                 }
                 User?.findOne({ email: data.email })
                     .then(user => {
-                        console.log("Find it in Auth" + user.username)
                         req.user = user;
                         req.isLoggedIn = true;
                         next();
@@ -41,7 +37,6 @@ function auth(redirectUnauthenticated = true) {
                         .send({ message: "Invalid token!" });
                     return;
                 }
-                console.log("Nothing Auth")
                 next(err);
             });
     }

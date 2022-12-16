@@ -12,8 +12,13 @@ authController.post('/register', isGuest(),
     body('email').isEmail().withMessage('Invalid email'),
     body('password').isLength({ min: 5 }).withMessage('Password must be at least 5 characters long'),
     async (req, res) => {
+
+    
+
         try {
             const { errors } = validationResult(req);
+
+            console.log('Register')
             if (errors.length > 0) {
                 throw errors;
             }
@@ -21,7 +26,7 @@ authController.post('/register', isGuest(),
             const user = await register(req.body.username, req.body.email, req.body.password, req.body.rePassword);
             const token = createToken(user);
             res.cookie(authCookieName, token, { httpOnly: true })
-            res.res.status(201).json(user); 
+            res.status(201).json(user);
 
         } catch (error) {
             const message = parseError(error);

@@ -2,9 +2,10 @@ import { IIngredient } from "./ingredient";
 import { IUser } from "./user";
 
 export interface IRecipe {
+    _id: string;
     titleRecipe: string;
     shortDescription: string;
-    category: string[];
+    category: string;
     meal: string;
     preparationTime: number;
     cookingTime: number;
@@ -15,7 +16,7 @@ export interface IRecipe {
     preparation: string[];
     season: string;
     stars: number;
-    image: string;
+    imageUrl: string;
     ownerID: IUser;
     userLiked: IUser[];
     userSaved: IUser[];
