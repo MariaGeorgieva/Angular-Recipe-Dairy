@@ -3,18 +3,12 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { ErrorComponent } from './core/error/error.component';
 import { HomepageComponent } from './core/homepage/homepage.component';
 import { PageNotFoundComponent } from './core/page-not-found/page-not-found.component';
-import { AuthActivate } from './shared/guards/auth.activate';
 
 const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
     component: HomepageComponent,
-    canActivate: [AuthActivate],
-    data: {
-      title: 'Homepage',
-      loginRequired: false
-    }
   },
   {
     path: 'not-found',
@@ -31,6 +25,14 @@ const routes: Routes = [
   },
   {
     path: 'recipe',
+    loadChildren: () => import('./recipe/recipe.module').then(m => m.RecipeModule)
+  },
+  {
+    path: 'category',
+    loadChildren: () => import('./recipe/recipe.module').then(m => m.RecipeModule)
+  },
+  {
+    path: 'ingredient',
     loadChildren: () => import('./recipe/recipe.module').then(m => m.RecipeModule)
   },
   {

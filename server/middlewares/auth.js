@@ -3,12 +3,10 @@ const { authCookieName } = require('../app-config');
 const User = require('../models/User');
 const tokenBlacklist = require('../models/tokenBlacklistModel');
 
-
-
 function auth(redirectUnauthenticated = true) {
     return function (req, res, next) {
         const token = req.cookies[authCookieName] || '';
-        if(token == ''){return next()}
+        if (token == '' ){ return next() }
         Promise.all([
             jwt.verifyToken(token),
             tokenBlacklist?.findOne({ token })
@@ -17,6 +15,7 @@ function auth(redirectUnauthenticated = true) {
                 if (blacklistedToken) {
                     return Promise.reject(new Error('blacklisted token'));
                 }
+                console.log("no blacklisted");
                 User?.findOne({ email: data.email })
                     .then(user => {
                         req.user = user;

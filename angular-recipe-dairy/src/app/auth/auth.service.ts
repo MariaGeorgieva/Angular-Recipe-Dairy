@@ -50,7 +50,8 @@ export class AuthService implements OnDestroy {
   }
 
   getProfile() {
-    return this.http.get<any>('/user/profile', { withCredentials: true }) //if cookies-parser
+    
+    return this.http.get<IUser>('/user/profile') //if cookies-parser
       .pipe(
         tap(user => {
           this.user$$.next(user)

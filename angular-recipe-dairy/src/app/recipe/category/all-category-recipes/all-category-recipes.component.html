@@ -1,0 +1,18 @@
+<div class="main">
+    <mat-grid-list cols="4" rowHeight="1:1" class="container">
+        <mat-grid-tile *ngFor="let recipe of categoryRecipe?.recipesID" class="my-mat-grid-tile">
+            <mat-card class="my-card">
+                <img mat-card-image class="my-card-image" src="{{recipe.imageUrl}}" alt="{{recipe.titleRecipe}}">
+                <mat-card-header>
+                    <mat-card-title>{{recipe.shortDescription}}</mat-card-title>
+                </mat-card-header>
+                <mat-card-actions>
+                    <button mat-raised-button [routerLink]="['/recipe/details/', recipe._id]"
+                        color="primary">Details</button>
+                    <button mat-raised-button [routerLink]="['/category/', categoryRecipe?._id]" color="primary">Bac to
+                        all {{categoryRecipe?.titleCategory}} recipes</button>
+                </mat-card-actions>
+            </mat-card>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>

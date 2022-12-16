@@ -1,4 +1,6 @@
-const  Recipe  = require('../models/Recipe');
+const Category = require('../models/Category');
+const Ingredient = require('../models/Ingredient');
+const Recipe = require('../models/Recipe');
 
 
 async function getAllRecipes() {
@@ -28,15 +30,13 @@ async function getLatestsRecipes(limit) {
         .populate();
 }
 
-
-
 // create Recipe
-
 async function createRecipe(recipe) {
-    return Recipe.create(recipe);
+    return Recipe?.create(recipe);
 }
 
 // edit Recipe
+
 // delete Recipe
 
 module.exports = {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,SimpleChanges,ViewChild } from '@angular/core';
 import { IRecipe } from 'src/app/shared/interfaces/recipe';
 import { RecipeService } from '../../recipe.service';
 
@@ -7,10 +7,10 @@ import { RecipeService } from '../../recipe.service';
   templateUrl: './recipe-main.component.html',
   styleUrls: ['./recipe-main.component.css']
 })
-export class RecipeMainComponent implements OnInit{
+export class RecipeMainComponent implements OnInit {
 
-
-  recipeList: IRecipe[]| null = null;
+  breakpoint: number | 0 = 0;
+  recipeList: IRecipe[] | null = null;
 
   constructor(private recipeService: RecipeService) { }
 
@@ -22,6 +22,17 @@ export class RecipeMainComponent implements OnInit{
       error: (err) => {
         console.error(err);
       }
-    })
+    });
+    this.breakpoint = (window.innerWidth <= 400) ? 1 : 3;
   }
+
+ngOnChanges(changes:SimpleChanges){
+   console.log(changes)
+  }
+
+
+  onResize(event:any) {
+    this.breakpoint = (event.target.innerWidth <= 400) ? 1 : 3;
+  }
+
 }

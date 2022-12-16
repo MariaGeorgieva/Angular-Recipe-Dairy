@@ -9,11 +9,12 @@ async function getCategoryById(categoryId) {
     return Category?.findById(categoryId).populate();
 }
 
-// create Category, admin permission
+// create Category, admin permission TODO
 async function createCategory(category) {
     return Category.create(category);
 }
 
+//update Category
 async function updateCategory(categoryId, data) {
     const existing = await Category.findById(categoryId);
 
@@ -23,14 +24,22 @@ async function updateCategory(categoryId, data) {
     return await existing.save();
 }
 
+//delete Category
 async function deleteCategory(categoryId) {
     return Category.findByIdAndRemove(categoryId);
 }
 
-
+//Get recipes by category
 async function getRecipesByCategory(categoryId) {
-    const allRecipes = await Category?.findById(categoryId);
-    return Category?.findOne({ allRecipes: recipesID }).populate();
+    const category= await Category?.findById(categoryId).populate({
+        path : 'recipesID',
+        populate : {
+          path : '_id'
+        }
+      });
+
+    // return Category?.findOne({ recipesID }).populate();
+    return category
 }
 
 module.exports = {

@@ -23,7 +23,7 @@ function isGuest() {
 function isAdmin() {
     return (req, res, next) => {
         console.log("Guard isAdmin(): " + req.user.roles);
-        if (req.user == undefined || req.user.roles.includes('roles') == false) {
+        if (req.user == undefined || req.user.roles.includes('admin') == false) {
             res.redirect('/auth/login');
             // res.redirect('/login');
         } else {

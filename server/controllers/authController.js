@@ -12,9 +12,6 @@ authController.post('/register', isGuest(),
     body('email').isEmail().withMessage('Invalid email'),
     body('password').isLength({ min: 5 }).withMessage('Password must be at least 5 characters long'),
     async (req, res) => {
-
-    
-
         try {
             const { errors } = validationResult(req);
 
@@ -35,9 +32,7 @@ authController.post('/register', isGuest(),
     });
 
 authController.post('/login', isGuest(), async (req, res) => {//isGuest(),
-    console.log('Login')
     try {
-
         const user = await login(req.body.email, req.body.password);
         const token = createToken(user);
         res.cookie(authCookieName, token, { httpOnly: true })
@@ -51,9 +46,8 @@ authController.post('/login', isGuest(), async (req, res) => {//isGuest(),
 
 
 //We are here after successful decode
-authController.post('/logout', async (req, res) => {  //hasUser(),
+authController.post('/logout', hasUser(), async (req, res) => {  //hasUser(),
 
-    console.log("authController logout IN: ");
     try {
         const token = req.cookies[authCookieName];
         await blacklistToken(token);

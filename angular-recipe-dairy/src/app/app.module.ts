@@ -9,7 +9,7 @@ import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
 import { CoreModule } from './core/core.module';
 import { RecipeModule } from './recipe/recipe.module';
-import { AppInterceptor, appInterceptorProvider } from './app.interceptor';
+import { AppInterceptor } from './app.interceptor';
 import { AuthenticateComponent } from './authenticate/authenticate.component';
 import { SharedModule } from './shared/shared.module';
 import { API_ERROR } from './shared/constants';

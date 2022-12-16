@@ -1,7 +1,7 @@
  mat-card {
      /* card padding other cards row/column*/
-     width: calc(100% - 20px);
-     height: calc(100% - 20px);
+     /* width: calc(100% - 20px);
+     height: calc(100% - 20px); */
      background-color: white;
      color: black;
  }
@@ -15,4 +15,7 @@
  .container {
      margin-left: 10px;
      margin-right: 10px;
+ }
+ mat-card-content{
+display: flex;
  }

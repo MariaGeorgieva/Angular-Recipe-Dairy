@@ -1,11 +1,12 @@
 const { hasUser } = require('../middlewares/guards');
-const { getAllRecipes, createRecipe } = require('../services/recipeService');
+const Category = require('../models/Category');
+const { getAllRecipes, createRecipe, getRecipeById } = require('../services/recipeService');
 
 const recipeController = require('express').Router();
 
 const { parseError } = require('../util/parser');
 
-
+//Get All Recipes
 recipeController.get('/', async (req, res) => {
 
     let recipes = [];
@@ -13,6 +14,19 @@ recipeController.get('/', async (req, res) => {
     res.json(recipes);
 });
 
+//Get recipe by id
+recipeController.get('/:id', async (req, res) => {
+    try {
+        const category = await getRecipeById(req.params.id);
+        res.json(category);
+    } catch (err) {
+        const message = parseError(err);
+        res.status(400).json({ message });
+    }
+
+});
+
+//Create Recipe
 recipeController.post('/create', hasUser(), async (req, res) => {// hasUser(),
 
     try {
@@ -34,11 +48,31 @@ recipeController.post('/create', hasUser(), async (req, res) => {// hasUser(),
         }
 
         const recipe = await createRecipe(data);
+        const idCategory = recipe?.category;
+
+        const existingCategory = await Category.findById(idCategory);
+        existingCategory.recipesID.push(recipe?._id);
+        await existingCategory.save();
+
         res.json(recipe);
     } catch (err) {
         const message = parseError(err);
         res.status(400).json({ message });
     }
 });
+
+
+
+//edit recipe owner id
+
+
+//delete recipe owner id
+
+
+//last 4 recipes
+
+
+//most liked????
+
 
 module.exports = recipeController;

@@ -4,7 +4,6 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { RecipeRoutingModule } from './recipe-routing.module';
 import { RecipeMainComponent } from './recipes/recipe-main/recipe-main.component';
-import { EditRecipeComponent } from './recipes/edit-recipe/edit-recipe.component';
 import { CreateRecipeComponent } from './recipes/create-recipe/create-recipe.component';
 import { RecipeListComponent } from './recipes/recipe-list/recipe-list.component';
 import { RecipeDetailsComponent } from './recipes/recipe-details/recipe-details.component';
@@ -31,13 +30,13 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/material/core';
 // import { MaterialExampleModule } from 'src/material.module';
 import {MatNativeDateModule} from '@angular/material/core';
+import { AllCategoryRecipesComponent } from './category/all-category-recipes/all-category-recipes.component';
 
 
 
 @NgModule({
   declarations: [
     CreateRecipeComponent,
-    EditRecipeComponent,
     RecipeListComponent,
     RecipeDetailsComponent,
     RecipeMainComponent,
@@ -45,7 +44,8 @@ import {MatNativeDateModule} from '@angular/material/core';
     CreateCategoryRecipeComponent,
     CategoryDetailsComponent,
     RecipeIngredientComponent,
-    CreateIngredientComponent
+    CreateIngredientComponent,
+    AllCategoryRecipesComponent
   ],
   imports: [
     CommonModule,

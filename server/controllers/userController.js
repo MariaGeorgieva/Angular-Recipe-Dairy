@@ -10,7 +10,6 @@ userController.get('/admin', isAdmin(), async (req, res) => {
     
     try {
         const userData = await getAdmin(req.user?.email);
-        console.log("Admin userData: "+ userData);
         res.json(userData);
     } catch (err) {
         const message = parseError(err);
@@ -19,7 +18,6 @@ userController.get('/admin', isAdmin(), async (req, res) => {
 });
 
 userController.get('/profile', async (req, res) => {
-
     try {
         const userData = await getUserProfile(req.user?.email);
         res.json(userData);

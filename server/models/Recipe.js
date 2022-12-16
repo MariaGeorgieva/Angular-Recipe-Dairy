@@ -7,8 +7,7 @@ const recipeSchema = new Schema({
     titleRecipe: { type: String, required: true, minlength: [3, 'Title must be at least 3 characters long'] },
     shortDescription: { type: String, minlength: [3, 'Intro must be at least 3 characters long'] },
     category: {
-        type: [Types.ObjectId],
-        default: [],
+        type: Types.ObjectId,
         required: true,
         ref: 'Category'
     },

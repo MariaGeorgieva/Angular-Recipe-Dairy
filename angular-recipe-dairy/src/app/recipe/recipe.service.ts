@@ -28,6 +28,10 @@ export class RecipeService {
     return this.httpClient.get<ICategory>(`${apiUrl}/category/${id}`);
   }
 
+  getAllCategoryRecipe(id: number) {
+    return this.httpClient.get<ICategory>(`${apiUrl}/category/all-category-recipes/${id}`);
+  }
+
   updateCategoryForRecipes(id: string | undefined, titleCategory: string, image: string) {
     return this.httpClient.put<ICategory>(`${apiUrl}/category/${id}`, { titleCategory: titleCategory, image: image });
   }
@@ -68,7 +72,7 @@ export class RecipeService {
   createRecipe(
     titleRecipe: string,
     shortDescription: string,
-    idCategory: string | undefined | null,
+    category: string | undefined | null,
     meal: string | undefined | null,
     difficulty: string | undefined | null,
     mainIngredient: string | undefined | null,
@@ -80,7 +84,7 @@ export class RecipeService {
     preparation: string,
     imageUrl: string,
   ) {
-    return this.httpClient.post<IRecipe[]>(`${apiUrl}/recipe/create`, { titleRecipe, shortDescription, idCategory, mainIngredient, difficulty, season, meal, preparationTime, cookingTime, servings, ingredients, preparation, imageUrl }, { withCredentials: true });
+    return this.httpClient.post<IRecipe[]>(`${apiUrl}/recipe/create`, { titleRecipe, shortDescription, category, mainIngredient, difficulty, season, meal, preparationTime, cookingTime, servings, ingredients, preparation, imageUrl }, { withCredentials: true });
   }
   //TODO
   updateRecipe(id: string | undefined, titleIngredient: string) {

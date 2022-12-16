@@ -8,6 +8,7 @@ import { API_ERROR } from 'src/app/shared/constants';
   templateUrl: './error.component.html',
   styleUrls: ['./error.component.css']
 })
+
 export class ErrorComponent implements OnDestroy{
   apiError$ = this.apiError.asObservable();
 

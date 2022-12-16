@@ -9,24 +9,19 @@ import { AuthService } from '../auth.service';
 })
 export class ProfileComponent {
 
- 
-  // get user() {
-  //   const { username, email} = this.authService.user!;
-  //   return {
-  //     username,
-  //     email
-  //   };
-  // }
   get user() {
-    const { username, email} = this.authService.user!;
+    
+    const { username, email, roles, ownRecipes, likedRecipes, savedRecipes } = this.authService.user!;
     return {
       username,
-      email
+      email,
+      roles,
+      ownRecipes,
+      likedRecipes,
+      savedRecipes
 
     }
   }
-
-  
 
   form!: FormGroup;
 
@@ -52,7 +47,7 @@ export class ProfileComponent {
 
   // }
 
-  
+
   // saveProfile(): void {
   //   this.formSubmitted = true;
   //   if (this.form.invalid) { return; }

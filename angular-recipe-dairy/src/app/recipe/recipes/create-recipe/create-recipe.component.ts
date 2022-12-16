@@ -79,7 +79,7 @@ export class CreateRecipeComponent implements OnInit {
     const {
       titleRecipe,
       shortDescription,
-      idCategory,
+      idCategory: category,
       meal,
       difficulty,
       mainIngredient,
@@ -94,7 +94,7 @@ export class CreateRecipeComponent implements OnInit {
 
     this.recipeService.createRecipe(titleRecipe,
       shortDescription,
-      idCategory,
+      category,
       meal,
       difficulty,
       mainIngredient,
