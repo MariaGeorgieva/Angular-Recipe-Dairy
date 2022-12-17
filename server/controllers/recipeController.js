@@ -1,5 +1,6 @@
 const { hasUser } = require('../middlewares/guards');
 const Category = require('../models/Category');
+const User = require('../models/User');
 const { getAllRecipes, createRecipe, getRecipeById } = require('../services/recipeService');
 
 const recipeController = require('express').Router();
@@ -53,6 +54,10 @@ recipeController.post('/create', hasUser(), async (req, res) => {// hasUser(),
         const existingCategory = await Category.findById(idCategory);
         existingCategory.recipesID.push(recipe?._id);
         await existingCategory.save();
+
+        const existingUser = await User.findById(req.user._id);
+        existingUser.ownRecipes.push(recipe?._id)
+        existingUser.save();
 
         res.json(recipe);
     } catch (err) {

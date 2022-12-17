@@ -19,7 +19,6 @@ export class ProfileComponent {
       ownRecipes,
       likedRecipes,
       savedRecipes
-
     }
   }
 

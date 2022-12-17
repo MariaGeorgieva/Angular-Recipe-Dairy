@@ -33,17 +33,17 @@ export class AuthService implements OnDestroy {
   }
 
   register(username: string, email: string, password: string, rePassword: string) {
-    return this.http.post<IUser>('/auth/register', { username, email, password, rePassword })
+    return this.http.post<IUser>('api/auth/register', { username, email, password, rePassword })
       .pipe(tap(user => this.user$$.next(user)));
   }
 
   login(email: string, password: string) {
-    return this.http.post<IUser>('/auth/login', { email, password })
+    return this.http.post<IUser>('api/auth/login', { email, password })
       .pipe(tap(user => this.user$$.next(user)));;
   }
 
   logout() {
-    return this.http.post<void>('/auth/logout', {}, { withCredentials: true })
+    return this.http.post<void>('api/auth/logout', {}, { withCredentials: true })
       .pipe(tap(() => {
         this.user$$.next(null)
       }));
@@ -51,7 +51,7 @@ export class AuthService implements OnDestroy {
 
   getProfile() {
     
-    return this.http.get<IUser>('/user/profile') //if cookies-parser
+    return this.http.get<IUser>('api/user/profile') //if cookies-parser
       .pipe(
         tap(user => {
           this.user$$.next(user)
@@ -64,7 +64,7 @@ export class AuthService implements OnDestroy {
   }
 
   setProfile(username: string, email: string) {
-    return this.http.put<IUser>('/user/profile', { username, email })
+    return this.http.put<IUser>('api/user/profile', { username, email })
       .pipe(tap(user => this.user$$.next(user)));
   }
 

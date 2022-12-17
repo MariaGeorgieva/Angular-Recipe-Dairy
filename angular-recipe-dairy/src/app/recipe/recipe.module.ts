@@ -27,10 +27,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatInputModule } from '@angular/material/input';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatDialogModule } from '@angular/material/dialog';
-import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/material/core';
-// import { MaterialExampleModule } from 'src/material.module';
 import {MatNativeDateModule} from '@angular/material/core';
 import { AllCategoryRecipesComponent } from './category/all-category-recipes/all-category-recipes.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -66,7 +65,8 @@ import { AllCategoryRecipesComponent } from './category/all-category-recipes/all
     MatButtonModule,
     MatFormFieldModule,
     MatDialogModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    SharedModule,
     
     // MaterialExampleModule
   ],
@@ -77,8 +77,6 @@ import { AllCategoryRecipesComponent } from './category/all-category-recipes/all
     CreateCategoryRecipeComponent,
     CategoryDetailsComponent
   ],
-  providers: [
-    {provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher}
-  ]
+  
 })
 export class RecipeModule { }

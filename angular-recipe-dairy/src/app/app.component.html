@@ -1,7 +1,13 @@
 <app-authenticate>
-    <app-navigation></app-navigation>
     <mat-sidenav-container mat-app-background>
-        <router-outlet></router-outlet>
+        <div class="navigation" #navigation>
+            <app-navigation></app-navigation>
+        </div>
+        <div class="outlet" #outlet>
+            <router-outlet></router-outlet>
+        </div>
+        <div class="footer" #footer>
+            <app-footer></app-footer>
+        </div>
     </mat-sidenav-container>
-    <app-footer></app-footer>
 </app-authenticate>

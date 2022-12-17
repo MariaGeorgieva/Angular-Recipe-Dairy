@@ -1,18 +1,19 @@
 <div>
     <mat-grid-list cols="4" rowHeight="1:1.5" class="container">
-        <mat-grid-tile *ngFor="let category of categoryList" class="my-mat-grid-tile">
+        <mat-grid-tile role="listitem" *ngFor="let category of categoryList" class="my-mat-grid-tile">
             <mat-card class="my-card">
                 <img mat-card-image class="my-card-image" src="{{category.image}}" alt="{{category.titleCategory}}">
                 <mat-card-header>
                     <mat-card-title>{{category.titleCategory}}</mat-card-title>
                 </mat-card-header>
-                
+
                 <mat-card-actions>
-                    <button mat-raised-button [routerLink]="['/category', category._id]" color="primary">Details</button>
-                    <button mat-raised-button [routerLink]="['/category/all-category-recipes', category._id]" color="primary">view all recipes</button>
+                    <button mat-raised-button [routerLink]="['/category', category._id]"
+                       >Details</button>
+                    <button mat-raised-button [routerLink]="['/category/all-category-recipes', category._id]"
+                        color="primary">view all recipes</button>
                 </mat-card-actions>
             </mat-card>
         </mat-grid-tile>
     </mat-grid-list>
 </div>
-

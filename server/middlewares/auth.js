@@ -15,7 +15,6 @@ function auth(redirectUnauthenticated = true) {
                 if (blacklistedToken) {
                     return Promise.reject(new Error('blacklisted token'));
                 }
-                console.log("no blacklisted");
                 User?.findOne({ email: data.email })
                     .then(user => {
                         req.user = user;

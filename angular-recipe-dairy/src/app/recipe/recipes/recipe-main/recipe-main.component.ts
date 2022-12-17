@@ -1,4 +1,4 @@
-import { Component, OnInit,SimpleChanges,ViewChild } from '@angular/core';
+import { Component, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { IRecipe } from 'src/app/shared/interfaces/recipe';
 import { RecipeService } from '../../recipe.service';
 
@@ -23,16 +23,7 @@ export class RecipeMainComponent implements OnInit {
         console.error(err);
       }
     });
-    this.breakpoint = (window.innerWidth <= 400) ? 1 : 3;
   }
 
-ngOnChanges(changes:SimpleChanges){
-   console.log(changes)
-  }
-
-
-  onResize(event:any) {
-    this.breakpoint = (event.target.innerWidth <= 400) ? 1 : 3;
-  }
 
 }

@@ -2,19 +2,19 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
-const authController = require('./controllers/authController');
-const categoryController = require('./controllers/categoryController');
-const ingredientController = require('./controllers/IngredientController');
-const recipeController = require('./controllers/recipeController');
+// const authController = require('./controllers/authController');
+// const categoryController = require('./controllers/categoryController');
+// const ingredientController = require('./controllers/IngredientController');
+// const recipeController = require('./controllers/recipeController');
 const cors = require('./middlewares/cors');
 // const cors = require('cors');
 const { isAdmin, hasUser } = require('./middlewares/guards');
-const session = require('./middlewares/session');
+// const session = require('./middlewares/session');
 const trimBody = require('./middlewares/trimBody');
-const userController = require('./controllers/userController');
+// const userController = require('./controllers/userController');
 const auth = require('./middlewares/auth');
 // const auth = require('./middlewares/auth');
-
+const apiRouter = require('./router');
 
 
 global.__basedir = __dirname;
@@ -34,7 +34,7 @@ const config = {
         origin: []
     }
 };
-const jwtSecret = 'TwIdhjw*ACShA$yz';
+// const jwtSecret = 'TwIdhjw*ACShA$yz';
 start();
 
 async function start() {
@@ -55,11 +55,14 @@ async function start() {
     });
 
 
-    app.use('/auth', authController);
-    app.use('/category', categoryController);
-    app.use('/ingredient', ingredientController);// isAdmin(), 
-    app.use('/recipe', recipeController);
-    app.use('/user', userController); //hasUser(),
+    app.use('/api', apiRouter);
+
+    // app.use()
+    // app.use('/auth', authController);
+    // app.use('/category', categoryController);
+    // app.use('/ingredient', ingredientController);// isAdmin(), 
+    // app.use('/recipe', recipeController);
+    // app.use('/user', userController); //hasUser(),
 
     app.listen(config[env].port, () => console.log(`Server is running on port ${config[env].port}.`));
 }

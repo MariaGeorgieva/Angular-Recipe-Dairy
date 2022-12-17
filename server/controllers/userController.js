@@ -7,7 +7,7 @@ const { parseError } = require('../util/parser');
 
 
 userController.get('/admin', isAdmin(), async (req, res) => {
-    
+
     try {
         const userData = await getAdmin(req.user?.email);
         res.json(userData);

@@ -1,11 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environments'
 import { ICategory } from '../shared/interfaces/category';
 import { IIngredient } from '../shared/interfaces/ingredient';
 import { IRecipe } from '../shared/interfaces/recipe';
+import { environment } from '../../environments/environments';
 
-const apiUrl = environment.apiURL;
+const apiUrl = environment.apiURL
 
 @Injectable({
   providedIn: 'root'

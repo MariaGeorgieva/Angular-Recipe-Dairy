@@ -67,8 +67,6 @@ categoryController.put('/:id', hasUser(), isAdmin(), async (req, res) => {
 categoryController.get('/all-category-recipes/:id', async (req, res) => {
     try {
         const recipesByCategory = await getRecipesByCategory(req.params.id);
-
-        console.log('recipesByCategory' + recipesByCategory)
         res.json(recipesByCategory);
     } catch (err) {
         const message = parseError(err);

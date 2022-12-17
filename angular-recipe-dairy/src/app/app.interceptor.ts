@@ -2,7 +2,7 @@ import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HTTP_INTERCEPTORS
 import { Inject, Injectable, Provider } from "@angular/core";
 import { Router } from "@angular/router";
 import { BehaviorSubject, catchError, map, Observable, of, switchMap, take, throwError, zip } from "rxjs";
-import { environment } from '../environments/environments';
+import { environment } from './../environments/environments';
 import { AuthService } from "./auth/auth.service";
 import { API_ERROR } from "./shared/constants";
 
@@ -20,9 +20,9 @@ export class AppInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    if (req.url.startsWith('/')) {
+    if (req.url.startsWith('/api')) {
       req = req.clone({
-        url: req.url.replace('/', apiURL + '/'),
+        url: req.url.replace('/api', apiURL),
         withCredentials: true
       })//
     }
