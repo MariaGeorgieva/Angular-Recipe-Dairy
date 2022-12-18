@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, OnDestroy } from '@angular/core';
+import { Injectable, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, catchError, filter, of, Subscription, tap } from 'rxjs';
 import { IUser } from '../shared/interfaces/user';
@@ -9,7 +9,7 @@ import { IUser } from '../shared/interfaces/user';
   providedIn: 'root'
 })
 
-export class AuthService implements OnDestroy {
+export class AuthService implements OnInit, OnDestroy {
 
   private user$$ = new BehaviorSubject<undefined | null | IUser>(undefined);
 
@@ -31,6 +31,9 @@ export class AuthService implements OnDestroy {
         this.user = user;
       });
   }
+  ngOnInit(): void {
+    this.getUserRecipes();
+  }
 
   register(username: string, email: string, password: string, rePassword: string) {
     return this.http.post<IUser>('api/auth/register', { username, email, password, rePassword })
@@ -50,8 +53,21 @@ export class AuthService implements OnDestroy {
   }
 
   getProfile() {
-    
+
     return this.http.get<IUser>('api/user/profile') //if cookies-parser
+      .pipe(
+        tap(user => {
+          this.user$$.next(user)
+        }),
+        catchError((err) => {
+          this.user$$.next(null);
+          return of(err); //  send err to next catch
+        })
+      );
+  }
+
+  getUserRecipes() {
+    return this.http.get<IUser>('api/user/recipes') //if cookies-parser
       .pipe(
         tap(user => {
           this.user$$.next(user)

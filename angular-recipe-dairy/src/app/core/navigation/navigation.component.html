@@ -43,14 +43,15 @@
             <mat-icon>menu_book</mat-icon>
             All Recipes
           </button>
-         
+
           <button mat-button routerLink="/category">
             Recipes Categories <mat-icon>restaurant_menu</mat-icon>
           </button>
-          <button mat-button routerLink="/ingredient">
-            All Ingredients <mat-icon>restaurant_menu</mat-icon>
-          </button>
-
+          <ng-container *ngIf="isAdmin">
+            <button mat-button routerLink="/ingredient">
+              All Ingredients <mat-icon>restaurant_menu</mat-icon>
+            </button>
+          </ng-container>
 
         </div>
       </section>
@@ -86,23 +87,23 @@
               <span (mouseleave)="menuTrigger.closeMenu()">
 
                 <!-- Admin Dashboard -->
-                <button mat-menu-item routerLink="/admin">
+                <!-- <button mat-menu-item routerLink="/admin">
                   <mat-icon>admin_panel_settings</mat-icon>
                   Admin Dashboard
-                </button>
+                </button> -->
+                <ng-container *ngIf="isAdmin">
+                  <!-- Create Category Recipe  -->
+                  <button mat-menu-item routerLink="/category/create">
+                    <mat-icon>admin_panel_settings</mat-icon>
+                    Create Category Recipe
+                  </button>
 
-                <!-- Create Category Recipe  -->
-                <button mat-menu-item routerLink="/category/create">
-                  <mat-icon>admin_panel_settings</mat-icon>
-                  Create Category Recipe
-                </button>
-
-                <!-- Create Ingredient Recipe  -->
-                <button mat-menu-item routerLink="/ingredient/create">
-                  <mat-icon>admin_panel_settings</mat-icon>
-                  Create Ingredient Recipe
-                </button>
-
+                  <!-- Create Ingredient Recipe  -->
+                  <button mat-menu-item routerLink="/ingredient/create">
+                    <mat-icon>admin_panel_settings</mat-icon>
+                    Create Ingredient Recipe
+                  </button>
+                </ng-container>
                 <!--  My Profile -->
                 <button mat-menu-item routerLink="/profile">
                   <mat-icon>person</mat-icon>
@@ -119,8 +120,8 @@
                   <mat-icon>list</mat-icon>
                   <span>My Recipes</span>
                 </button>
-
-                <button mat-menu-item routerLink="/user/favorite-recipes">
+                <!-- TODO -->
+                <!-- <button mat-menu-item routerLink="/user/favorite-recipes">
                   <mat-icon>favorite</mat-icon>
                   <span>Liked Recipes</span>
                 </button>
@@ -128,9 +129,9 @@
                 <button mat-menu-item routerLink="/user/saved-recipes">
                   <mat-icon>bookmarks</mat-icon>
                   <span>Saved Recipes</span>
-                </button>
+                </button> -->
 
-                <!-- <button mat-menu-item routerLink="/logout" > -->
+                
                 <button mat-menu-item routerLink="/logout">
 
                   <mat-icon>logout</mat-icon>

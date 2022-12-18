@@ -1,27 +1,198 @@
-# AngularRecipeDairy
+# AngularRecipeDairy app for Angular course in SoftUni
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.1.
+This project was generated with
 
-## Development server
+## Base URL
+The Base URL is the root URL for all of the API, if you ever make a request to the API and you get back a 404 NOT FOUND response then check the Base URL first.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+The Base URL for the API is:
 
-## Code scaffolding
+```https://localhost:3030/api```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+The documentation below assumes you are prepending the Base URL to the endpoints in order to make requests.
 
 ## Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+## Authentication
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+# Endpoints: Users
 
-## Running end-to-end tests
+* ```/register``` -- signing up;
+* ```login``` -- signing in;
+* ```logout``` -- logging out;
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Register User
 
-## Further help
+## Register User
+Signs up user and returns the registered data as json.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+### URL --> ```/users/register```
+
+### Method --> ```POST```
+
+### Body -->
+
+```
+{
+    "name":"John Doe",
+    "email":"john@email.com",
+    "username":"Johny",
+    "password":"12345",
+    "rePassword":"12345"
+}
+```
+
+Required:
+
+```email``` : [string] -- The email of the person is required and must be unique;
+
+```username``` : [string] -- The username of the person is required and must be unique, also there is a minimum length of 3 chars, allowed are latin letters and numbers;
+
+```password``` : [string] -- The password of the person is required and must be unique, also there is a minimum length of 5 chars, allowed are latin letters and numbers;
+
+### Success Response:
+
+Code: 200
+
+Content: 
+``` 
+    {
+  _id: new ObjectId("6391128ce6d4b94ed3d53e71"),
+  username: 'mlove',
+  email: 'm.georgieva17@icloud.com',
+  hashedPassword: '$2b$10$5eNWp9.dNsF2hzeYZjc/cuno.Db.w.kc5XF/J.hRkKzIdySLZaPTG',
+  roles: 'admin',
+  ownRecipes: [
+    new ObjectId("6391128ce6d4b94ed3d53e71"),
+    new ObjectId("639e680f2ce373e422ec889b")
+  ],
+  likedRecipes: [],
+  savedRecipes: [],
+  __v: 1
+}
+```
+
+## Login User
+Signs in user and returns the registered data as json.
+
+### URL --> ```/users/login```
+
+### Method --> ```POST```
+
+### Body -->
+
+```
+{
+    "email":"m.georgieva17@icloud.com",
+    "password":"12345"
+}
+```
+
+Required:
+
+```email``` : [string] -- The email of the person 
+
+```password``` : [string] -- The password of the person 
+
+### Success Response:
+
+Code: 200
+
+Content: 
+``` 
+{
+    _id: new ObjectId("6391128ce6d4b94ed3d53e71"),
+  username: 'mlove',
+  email: 'm.georgieva17@icloud.com',
+  hashedPassword: '$2b$10$5eNWp9.dNsF2hzeYZjc/cuno.Db.w.kc5XF/J.hRkKzIdySLZaPTG',
+  roles: 'admin',
+  ownRecipes: [
+    new ObjectId("6391128ce6d4b94ed3d53e71"),
+    new ObjectId("639e680f2ce373e422ec889b")
+  ],
+  likedRecipes: [],
+  savedRecipes: [],
+  __v: 1
+}
+
+### Error Response:
+
+Code: 401 Unauthorized
+
+Content: 
+```
+{ 
+    "message": "Wrong username or password"
+}
+```
+
+## Logout User
+Logout user.
+
+### URL --> ```/logout```
+
+### Method --> ```POST```
+
+### Success Response:
+
+Code: 401 Unauthorized
+
+Content: 
+``` 
+{ 
+    "message": "Logged out!"
+}
+```
+
+## Endpoints: Recipes
+
+* ```/recipe```
+* ```/recipe/:recipeId```
+* ```/recipe/:create```
+* ```/recipe/:delete```
+* ```/recipe/:recipeId```
+
+## Endpoints: categories
+
+* ```/category```
+* ```/category/:categoryId```
+* ```/category/create``` 
+* ```/category/create``` 
+* ```/category/all-category-recipes/:id``` 
+
+
+## Endpoints: ingredients
+
+* ```/ingredient```
+* ```/ingredient/create```
+* ```/ingredient/delete```
+
+
+
+## User Part
+
+User functionality:
+
+**create recipe
+**edit own recipe
+**delete own recipe
+
+
+## Admin Part
+
+Admin functionality + User functionality:
+
+**create category
+**edit category
+**delete category
+
+**create main ingredient
+**edit main ingredient
+**delete main ingredient
+
+
+
+
+

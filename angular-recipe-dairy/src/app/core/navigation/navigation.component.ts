@@ -1,18 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
-// import {
-//   ChangeDetectionStrategy,
-//   Component,
-//   Inject,
-//   PLATFORM_ID,
-// } from '@angular/core';
-// import { filter, map, pairwise, throttleTime, switchMap } from 'rxjs/operators';
-
-// import { fromEvent, of } from 'rxjs';
-// import { isPlatformBrowser } from '@angular/common';
-
-
 
 @Component({
   selector: 'app-navigation',
@@ -21,11 +9,18 @@ import { AuthService } from 'src/app/auth/auth.service';
 })
 export class NavigationComponent {
   constructor(private authService: AuthService, private router: Router) { }
+
+  isAdmin: boolean = false;
   get isLoggedIn() {
     return this.authService.isLoggedIn;
   }
 
   get user() {
+    if(this.authService.user?.roles === 'admin'){
+      this.isAdmin = true
+    }else {
+      this.isAdmin = false;
+    }
     return this.authService.user;
   }
 

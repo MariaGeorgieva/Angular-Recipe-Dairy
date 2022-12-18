@@ -1,7 +1,7 @@
 const userController = require('express').Router();
 const { body, validationResult } = require('express-validator');
 const { isAdmin, hasUser } = require('../middlewares/guards');
-const { getUserProfile } = require('../services/userService');
+const { getUserProfile, getUserRecipes } = require('../services/userService');
 
 const { parseError } = require('../util/parser');
 
@@ -20,6 +20,15 @@ userController.get('/admin', isAdmin(), async (req, res) => {
 userController.get('/profile', async (req, res) => {
     try {
         const userData = await getUserProfile(req.user?.email);
+        res.json(userData);
+    } catch (err) {
+        const message = parseError(err);
+        res.status(400).json({ message });
+    }
+});
+userController.get('/recipes', async (req, res) => {
+    try {
+        const userData = await getUserRecipes(req.user?._id);
         res.json(userData);
     } catch (err) {
         const message = parseError(err);

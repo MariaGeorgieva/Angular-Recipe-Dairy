@@ -8,7 +8,8 @@ async function getAllRecipes() {
 }
 
 async function getRecipeById(recipeId) {
-    return Recipe.findById(recipeId).populate({
+    return Recipe.findById(recipeId)
+    .populate({
         path: 'ownerID',
         populate: {
             path: '_id'

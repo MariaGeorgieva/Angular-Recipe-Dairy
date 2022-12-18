@@ -14,9 +14,9 @@
                 <input matInput type="password" placeholder="Password" ngModel type="password" name="password" required>
 
             </mat-form-field>
-            <ng-container *ngIf="!loginForm.form.valid">
+            <!-- <ng-container *ngIf="!loginForm.form.valid">
                 The username or password were not recognized
-            </ng-container> 
+            </ng-container>  -->
             <button mat-raised-button color="primary" [disabled]="!loginForm.form.valid">Login</button>
         </form>
     </mat-card-content>
