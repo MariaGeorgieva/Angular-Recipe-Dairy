@@ -8,8 +8,9 @@
                 </mat-card-header>
 
                 <mat-card-actions>
-                    <button mat-raised-button [routerLink]="['/category', category._id]"
-                       >Details</button>
+                    <ng-container *ngIf="isAdmin">
+                        <button mat-raised-button [routerLink]="['/category', category._id]">Details</button>
+                    </ng-container>
                     <button mat-raised-button [routerLink]="['/category/all-category-recipes', category._id]"
                         color="primary">view all recipes</button>
                 </mat-card-actions>

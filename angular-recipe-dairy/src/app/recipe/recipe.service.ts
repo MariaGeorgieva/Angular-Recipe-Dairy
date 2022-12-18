@@ -21,7 +21,7 @@ export class RecipeService {
   }
 
   createCategoryForRecipes(titleCategory: string, image: string) {
-    return this.httpClient.post<ICategory[]>(`${apiUrl}/category/create`, { titleCategory: titleCategory, image: image });
+    return this.httpClient.post<ICategory[]>(`${apiUrl}/category/create`, { titleCategory: titleCategory, image: image }, {withCredentials:true});
   }
 
   getCategoryById(id: number) {
@@ -33,7 +33,7 @@ export class RecipeService {
   }
 
   updateCategoryForRecipes(id: string | undefined, titleCategory: string, image: string) {
-    return this.httpClient.put<ICategory>(`${apiUrl}/category/${id}`, { titleCategory: titleCategory, image: image });
+    return this.httpClient.put<ICategory>(`${apiUrl}/category/${id}`, { titleCategory: titleCategory, image: image }, {withCredentials:true});
   }
 
   deleteCategoryForRecipes(id: string | undefined) {

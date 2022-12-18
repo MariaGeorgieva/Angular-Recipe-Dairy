@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/app/auth/auth.service';
 import { ICategory } from 'src/app/shared/interfaces/category';
 import { RecipeService } from '../../recipe.service';
 
@@ -13,9 +14,10 @@ import { RecipeService } from '../../recipe.service';
 export class CategoryDetailsComponent {
   category: ICategory | undefined;
   inEditMode: boolean = false;
-  // isAdmin: boolean = false;
+  isAdmin: boolean = false;
+  
 
-  constructor(private recipeService: RecipeService, private activatedRoute: ActivatedRoute, private router: Router) {
+  constructor(private authService:AuthService, private recipeService: RecipeService, private activatedRoute: ActivatedRoute, private router: Router) {
     this.getCategory();
 
   }
@@ -25,12 +27,13 @@ export class CategoryDetailsComponent {
     this.recipeService.getCategoryById(id).subscribe({
       next: (category) => {
         this.category = category;
-        //TODO
-        // if(this.userService.user?._id == category.owner._id){
-        //   this.isAuthor = true
-        // }else {
-        //   this.isAuthor = false;
-        // }
+      
+        if(this.authService.user?.roles === 'admin'){
+          this.isAdmin = true
+          console.log("Is Admin")
+        }else {
+          this.isAdmin = false;
+        }
       },
       error: (err) => {
         console.log(err)

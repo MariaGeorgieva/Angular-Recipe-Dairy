@@ -26,7 +26,55 @@
     </ng-container>
 
 
+    <!-- Edit -->
     <ng-container *ngIf="inEditMode">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>
+                <h2> Edit Category</h2>
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+    
+            <form #form="ngForm" (ngSubmit)="editCategory(form)">
+    
+                <!-- Category Title -->
+                <mat-form-field class="example-full-width">
+                    <mat-label>Category Title </mat-label>
+                    <input matInput  #titleCategory="ngModel" placeholder="Title for category" ngModel name="titleCategory" minlength="3"
+                         required [ngModel]="category?.titleCategory">
+    
+                    <ng-container *ngIf="titleCategory.touched">
+                        <mat-error *ngIf="titleCategory.errors?.['required']">
+                            Title is required!
+                        </mat-error>
+                        <mat-error *ngIf="titleCategory.errors?.['minLength']">
+                            Title is must be at least 3 characters!
+                        </mat-error>
+                    </ng-container>
+                </mat-form-field>
+                <p>
+                    <!-- Image  -->
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Image URL</mat-label>
+                        <input matInput #image="ngModel" ngModel required [minlength]="3" name="image" [ngModel]="category?.image">
+                        <ng-container *ngIf="image.touched">
+                            <mat-error class="error" *ngIf="image.errors?.['required']">
+                                The field is required.
+                            </mat-error>
+                            <mat-error class="error" *ngIf="image.errors?.['minlength']">
+                                Image must be at least {{image.errors?.['minlength']['requiredLength']}} characters long.
+                            </mat-error>
+                        </ng-container>
+                    </mat-form-field>
+                </p>
+                <button mat-raised-button color="primary" [disabled]="!form.form.valid">Create Category</button>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</ng-container>
+
+    <!-- <ng-container *ngIf="inEditMode">
         <div class="title">
             <h1>Edit Category</h1>
         </div>
@@ -51,5 +99,5 @@
                 <input [disabled]="form.invalid" type="submit" value="Edit Category">
             </form>
         </div>
-    </ng-container>
+    </ng-container> -->
 </div>

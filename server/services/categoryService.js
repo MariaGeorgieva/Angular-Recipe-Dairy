@@ -37,8 +37,6 @@ async function getRecipesByCategory(categoryId) {
           path : '_id'
         }
       });
-
-    // return Category?.findOne({ recipesID }).populate();
     return category
 }
 

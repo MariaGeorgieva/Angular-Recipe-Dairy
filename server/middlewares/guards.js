@@ -23,17 +23,13 @@ function isGuest() {
 function isAdmin() {
     return (req, res, next) => {
         console.log("Guard isAdmin(): " + req.user.roles);
-        if (req.user == undefined || req.user.roles.includes('admin') == false) {
-            res.redirect('/auth/login');
-            // res.redirect('/login');
-        } else {
-            if (req.user.roles == 'admin') {
-                next();
-            }
-            else {
-                res.status(403).json({ message: 'You don\'n have permission!!!' });
-            }
+        if (req.user?.roles == 'admin') {
+            next();
         }
+        else {
+            res.status(403).json({ message: 'You don\'n have permission!!!' });
+        }
+
     };
 }
 

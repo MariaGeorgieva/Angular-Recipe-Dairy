@@ -2,10 +2,11 @@ const User = require('../models/User');
 
 
 async function getUserProfile(email) {
-    return User?.findOne({ email }).collation({ locale: 'en', strength: 2 }).populate({
+    return User?.find({ email }).collation({ locale: 'en', strength: 2 })
+    .populate({
         path : 'ownRecipes',
         populate : {
-          path : '_id'
+          path : '_id',
         }
       });
 }
