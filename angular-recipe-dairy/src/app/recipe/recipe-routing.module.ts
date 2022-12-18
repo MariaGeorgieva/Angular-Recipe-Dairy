@@ -80,7 +80,6 @@ const routes: Routes = [
   }
 ];
 
-// export const RecipeRoutingModule = RouterModule.forChild(routes);
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]

@@ -1,3 +1,4 @@
+import { ICategory } from "./category";
 import { IIngredient } from "./ingredient";
 import { IUser } from "./user";
 
@@ -5,7 +6,7 @@ export interface IRecipe {
     _id: string;
     titleRecipe: string;
     shortDescription: string;
-    category: string;
+    category: ICategory;
     meal: string;
     preparationTime: number;
     cookingTime: number;

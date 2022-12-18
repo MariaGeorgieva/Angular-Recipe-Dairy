@@ -87,12 +87,27 @@ export class RecipeService {
     return this.httpClient.post<IRecipe[]>(`${apiUrl}/recipe/create`, { titleRecipe, shortDescription, category, mainIngredient, difficulty, season, meal, preparationTime, cookingTime, servings, ingredients, preparation, imageUrl }, { withCredentials: true });
   }
   //TODO
-  updateRecipe(id: string | undefined, titleIngredient: string) {
-    return this.httpClient.put<IRecipe>(`${apiUrl}/recipe/${id}`, { titleIngredient: titleIngredient });
+  updateRecipe(
+    id: string | undefined,
+    titleRecipe: string,
+    shortDescription: string,
+    category: string | undefined | null,
+    meal: string | undefined | null,
+    difficulty: string | undefined | null,
+    mainIngredient: string | undefined | null,
+    season: string | undefined | null,
+    preparationTime: number,
+    cookingTime: number,
+    servings: number,
+    ingredients: string,
+    preparation: string,
+    imageUrl: string,
+    ) {
+    return this.httpClient.put<IRecipe>(`${apiUrl}/recipe/${id}`, {id,titleRecipe, shortDescription, category, mainIngredient, difficulty, season, meal, preparationTime, cookingTime, servings, ingredients, preparation, imageUrl }, { withCredentials: true });
   }
 
   deleteRecipes(id: string | undefined) {
-    return this.httpClient.delete<IRecipe>(`${apiUrl}/recipe/${id}`);
+    return this.httpClient.delete<IRecipe>(`${apiUrl}/recipe/${id}`, {withCredentials:true});
   }
 
 }

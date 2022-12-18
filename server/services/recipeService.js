@@ -8,7 +8,22 @@ async function getAllRecipes() {
 }
 
 async function getRecipeById(recipeId) {
-    return Recipe.find(recipeId).populate();
+    return Recipe.findById(recipeId).populate({
+        path: 'ownerID',
+        populate: {
+            path: '_id'
+        }
+    }).populate({
+        path: 'mainIngredient',
+        populate: {
+            path: '_id'
+        }
+    }).populate({
+        path: 'category',
+        populate: {
+            path: '_id'
+        }
+    })
 }
 
 /**
@@ -35,13 +50,39 @@ async function createRecipe(recipe) {
     return Recipe?.create(recipe);
 }
 
-// edit Recipe
+//update recipe
+async function updateRecipe(recipeId, data) {
+    const existing = await Recipe.findById(recipeId);
+
+    existing.titleRecipe = data.titleRecipe;
+    existing.shortDescription = data.shortDescription;
+    existing.category = data.category;
+    existing.meal = data.meal;
+    existing.difficulty = data.difficulty;
+    existing.mainIngredient = data.mainIngredient;
+    existing.preparationTime = data.preparationTime;
+    existing.cookingTime = data.cookingTime;
+    existing.servings = data.servings;
+    existing.ingredients = data.ingredients;
+    existing.preparation = data.preparation;
+    existing.imageUrl = data.imageUrl;
+
+
+    return await existing.save();
+}
+
 
 // delete Recipe
+//delete Category
+async function deleteRecipe(recipeId) {
+    return Recipe.findByIdAndRemove(recipeId);
+}
 
 module.exports = {
     getAllRecipes,
     getRecipeById,
     getLatestsRecipes,
     createRecipe,
+    updateRecipe,
+    deleteRecipe
 }

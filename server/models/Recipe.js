@@ -32,7 +32,7 @@ const recipeSchema = new Schema({
         type: [String],
         required: true,
         enum: ['spring', 'summer', 'autumn', 'winter', 'all-season'],
-        default: ['all season']
+        default: ['all-season']
     },
     preparationTime: { type: Number },
     cookingTime: { type: Number, min: [1, 'Time for cooking must be at least 1 min'] },

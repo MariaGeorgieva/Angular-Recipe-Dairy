@@ -1,0 +1,61 @@
+.svg {
+
+    width: 40px;
+    height: auto;
+    fill: #558b2f;
+}
+
+section {
+    display: table;
+  }
+  
+  .example-label {
+    display: table-cell;
+    font-size: 14px;
+    margin-left: 8px;
+    min-width: 120px;
+  }
+  
+  .example-button-row {
+    display: table-cell;
+    max-width: 600px;
+  }
+  
+  .example-button-row .mat-mdc-button-base {
+    margin: 8px 8px 8px 0;
+  }
+  
+  .example-flex-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  
+  .example-button-container {
+    display: flex;
+    justify-content: center;
+    width: 120px;
+  }
+
+  .example-form {
+    min-width: 150px;
+    max-width: 800px;
+    width: calc(100% - 20px);
+    /* height: calc(100% - 20px); */
+    /* width: 100%; */
+  }
+  
+  .example-full-width {
+    
+    width: 100%;
+    background-color: white;
+    /* background-color: white;
+      color: black; */
+  }
+  .example-half-width {
+    width: 50%;
+    display: inline-block;
+    background-color: white;
+    /* background-color: white;
+      color: black; */
+  }

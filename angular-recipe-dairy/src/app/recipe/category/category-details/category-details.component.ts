@@ -17,7 +17,6 @@ export class CategoryDetailsComponent {
 
   constructor(private recipeService: RecipeService, private activatedRoute: ActivatedRoute, private router: Router) {
     this.getCategory();
-    console.log(this.activatedRoute.snapshot.data?.['category']);
 
   }
 

@@ -75,7 +75,7 @@ categoryController.get('/all-category-recipes/:id', async (req, res) => {
 
 });
 
-//details category
+//delete category
 categoryController.delete('/:id', async (req, res) => {//hasUser(), isAdmin(),
     const id = req.params.id;
     await deleteCategory(id)

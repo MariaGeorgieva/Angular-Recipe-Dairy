@@ -1,7 +1,9 @@
 <mat-card>
-    <mat-card-title>
-        <h2>Create Recipe</h2>
-    </mat-card-title>
+    <mat-card-header>
+        <mat-card-title>
+            <h2> Add your favorite recipe to your Recipe Diary            </h2>
+        </mat-card-title>
+    </mat-card-header>
     <mat-card-content>
 
         <form #form="ngForm" (ngSubmit)="newRecipeHandler(form)">
@@ -126,10 +128,10 @@
                         #preparation required>
                     </textarea>
                     <mat-error *ngIf="preparation.required">
-                        Description is required!
+                        Preparation is required!
                     </mat-error>
                     <mat-error *ngIf="preparation.minLength">
-                        Description must be at least 10 characters!
+                        Preparation must be at least 10 characters!
                     </mat-error>
                 </mat-form-field>
             </p>
