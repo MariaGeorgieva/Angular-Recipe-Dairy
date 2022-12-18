@@ -1,14 +1,15 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { ErrorComponent } from './core/error/error.component';
-import { HomepageComponent } from './core/homepage/homepage.component';
+// import { HomepageComponent } from './core/homepage/homepage.component';
 import { PageNotFoundComponent } from './core/page-not-found/page-not-found.component';
+import { RecipeMainComponent } from './recipe/recipes/recipe-main/recipe-main.component';
 
 const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    component: HomepageComponent,
+    component: RecipeMainComponent,
   },
   {
     path: 'not-found',
