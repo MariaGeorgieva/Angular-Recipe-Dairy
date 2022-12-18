@@ -1,21 +1,29 @@
-<div>
-    <!-- <mat-grid-list cols="4" rowHeight="1:1.5" class="container"> -->
-    <!-- <mat-grid-tile class="my-mat-grid-tile"> -->
-    <mat-card class="my-card">
-        <!-- <img mat-card-image class="my-card-image" src="{{user.email}}" alt="{{category.titleCategory}}"> -->
-        <mat-card-header>
-            <mat-card-title>{{user.email}}</mat-card-title>
-            <mat-card-title>{{user.username}}</mat-card-title>
-            <mat-card-title>{{user.ownRecipes}}</mat-card-title>
-            <mat-card-title>{{user.likedRecipes}}</mat-card-title>
-            <!-- <mat-card-title>{{}}</mat-card-title> -->
-
-        </mat-card-header>
-
-        <mat-card-actions>
-            <!-- <button mat-raised-button color="primary">view all recipes</button> -->
-        </mat-card-actions>
-
-    </mat-card>
-    <!-- </mat-grid-tile> -->
-    <!-- </mat-grid-list> -->
+<p>
+    <mat-grid-list cols="1" rowHeight="1:1" class="container">
+        <mat-card class="my-card">
+            <mat-card-header>
+                <img mat-card-avatar src="/assets/images/profile.png" alt="default user">
+                <mat-card-title>Hello {{user.username}}</mat-card-title>
+                <mat-card-subtitle>{{user.email}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <mat-grid-tile *ngFor="let recipe of user.ownRecipes" class="my-mat-grid-tile">
+                    <mat-card>
+                        <mat-card-header>
+                            <img mat-card-md-image src="{{recipe?.imageUrl}}" alt="{{recipe?.imageUrl}}">
+                            <mat-card-title>Title{{recipe?.titleRecipe}}</mat-card-title>
+                        </mat-card-header>
+                        <mat-card-content>
+                            <p>
+                                {{recipe?.shortDescription}}
+                            </p>
+                        </mat-card-content>
+                        <mat-card-actions>
+                            <button mat-raise-button [routerLink]="['/recipe', recipe?._id]">view recipe</button>
+                        </mat-card-actions>
+                    </mat-card>
+                </mat-grid-tile>
+            </mat-card-content>
+        </mat-card>
+    </mat-grid-list>
+</p>

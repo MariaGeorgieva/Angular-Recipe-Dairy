@@ -32,7 +32,7 @@ export class AuthService implements OnInit, OnDestroy {
       });
   }
   ngOnInit(): void {
-    this.getUserRecipes();
+    // this.getUserRecipes();
   }
 
   register(username: string, email: string, password: string, rePassword: string) {
@@ -66,18 +66,18 @@ export class AuthService implements OnInit, OnDestroy {
       );
   }
 
-  getUserRecipes() {
-    return this.http.get<IUser>('api/user/recipes') //if cookies-parser
-      .pipe(
-        tap(user => {
-          this.user$$.next(user)
-        }),
-        catchError((err) => {
-          this.user$$.next(null);
-          return of(err); //  send err to next catch
-        })
-      );
-  }
+  // getUserRecipes() {
+  //   return this.http.get<IUser>('api/user/recipes') //if cookies-parser
+  //     .pipe(
+  //       tap(user => {
+  //         this.user$$.next(user)
+  //       }),
+  //       catchError((err) => {
+  //         this.user$$.next(null);
+  //         return of(err); //  send err to next catch
+  //       })
+  //     );
+  // }
 
   setProfile(username: string, email: string) {
     return this.http.put<IUser>('api/user/profile', { username, email })

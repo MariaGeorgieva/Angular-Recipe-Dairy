@@ -3,17 +3,17 @@ const User = require('../models/User');
 
 async function getUserProfile(email) {
   return User?.findOne({ email }).collation({ locale: 'en', strength: 2 })
-    .populate();
-}
-
-async function getUserRecipes(userId) {
-  return User?.findById(userId)
     .populate({
       path: 'ownRecipes',
       populate: {
         path: '_id'
       }
-    })
+    });
+}
+
+async function getUserRecipes(userId) {
+  return User?.findById({ userId })
+    .populate({ ownRecipes })
 }
 
 

@@ -32,8 +32,7 @@ export class ProfileComponent {
   //   this.form = this.fb.group({
   //     username: [formValue.username, [Validators.required, Validators.minLength(5)]],
   //     email: [formValue.email, [Validators.required, appEmailValidator(appEmailDomains)]],
-  //     ext: [formValue.ext],
-  //     tel: [formValue.tel],
+  //    
   //     addresses: this.fb.array(
   //       new Array(this.counter).fill(null).map((_, i) => {
   //         return this.fb.group({
