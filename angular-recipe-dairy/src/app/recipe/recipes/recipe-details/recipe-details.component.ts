@@ -3,11 +3,11 @@ import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 import { ICategory } from 'src/app/shared/interfaces/category';
-import { Difficulty } from 'src/app/shared/interfaces/difficulty';
+import { difficulties, Difficulty } from 'src/app/shared/interfaces/difficulty';
 import { IIngredient } from 'src/app/shared/interfaces/ingredient';
-import { Meal } from 'src/app/shared/interfaces/meal';
+import { Meal, meals } from 'src/app/shared/interfaces/meal';
 import { IRecipe } from 'src/app/shared/interfaces/recipe';
-import { Season } from 'src/app/shared/interfaces/season';
+import { Season, seasons } from 'src/app/shared/interfaces/season';
 import { RecipeService } from '../../recipe.service';
 
 
@@ -20,7 +20,10 @@ import { RecipeService } from '../../recipe.service';
 
 export class RecipeDetailsComponent implements OnInit, OnChanges {
   @Input()
-  difficulties?: Difficulty[];
+  @Input()
+  difficulties: Difficulty[] = difficulties;
+  seasons: Season[] = seasons;
+  meals: Meal[] = meals;
 
   [x: string]: any;
   recipe: IRecipe | undefined;
@@ -53,30 +56,6 @@ export class RecipeDetailsComponent implements OnInit, OnChanges {
 
   categoryList: ICategory[] | null = null
   ingredientList: IIngredient[] | null = null
-
-  // difficulties: Difficulty[] = [
-  //   { value: 'easy', viewValue: 'Easy' },
-  //   { value: 'moderate', viewValue: 'Moderate' },
-  //   { value: 'hard', viewValue: 'Hard' },
-  // ];
-
-  seasons: Season[] = [
-    { value: 'spring', viewValue: 'Spring' },
-    { value: 'summer', viewValue: 'Summer' },
-    { value: 'autumn', viewValue: 'Autumn' },
-    { value: 'winter', viewValue: 'Winter' },
-    { value: 'all-season', viewValue: 'All Season' },
-  ];
-
-  meals: Meal[] = [
-    { value: 'breakfast', viewValue: 'Breakfast' },
-    { value: 'lunch', viewValue: 'Lunch' },
-    { value: 'Dinner', viewValue: 'Dinner' },
-    { value: 'drinks', viewValue: 'Drinks' },
-    { value: 'special-occasion', viewValue: 'Special occasion' },
-    { value: 'other', viewValue: 'Other' },
-  ];
-
 
   selectedCategory: ICategory | string | undefined;
   selectedIngredient: IIngredient | string | undefined;

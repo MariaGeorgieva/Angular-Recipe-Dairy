@@ -8,3 +8,4 @@ export const difficulties: Difficulty[] = [
     { value: 'moderate', viewValue: 'Moderate' },
     { value: 'hard', viewValue: 'Hard' },
 ];
+

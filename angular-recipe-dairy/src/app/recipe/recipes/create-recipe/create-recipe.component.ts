@@ -2,10 +2,10 @@ import { Component, ElementRef, ViewChild, OnInit, Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ICategory } from 'src/app/shared/interfaces/category';
-import { Difficulty } from 'src/app/shared/interfaces/difficulty';
+import { difficulties, Difficulty } from 'src/app/shared/interfaces/difficulty';
 import { IIngredient } from 'src/app/shared/interfaces/ingredient';
-import { Meal } from 'src/app/shared/interfaces/meal';
-import { Season } from 'src/app/shared/interfaces/season';
+import { Meal, meals } from 'src/app/shared/interfaces/meal';
+import { Season, seasons } from 'src/app/shared/interfaces/season';
 import { RecipeService } from '../../recipe.service';
 
 
@@ -16,8 +16,12 @@ import { RecipeService } from '../../recipe.service';
 })
 export class CreateRecipeComponent implements OnInit {
 
-  @Input() difficulties? : Difficulty[];
-  
+  @Input()
+  difficulties: Difficulty[] = difficulties;
+  seasons: Season[] = seasons;
+  meals: Meal[] = meals;
+
+
   @ViewChild(
     NgForm,
     { static: true }
@@ -30,29 +34,6 @@ export class CreateRecipeComponent implements OnInit {
 
   categoryList: ICategory[] | null = null
   ingredientList: IIngredient[] | null = null
-
-  // difficulties: Difficulty[] = [
-  //   { value: 'easy', viewValue: 'Easy' },
-  //   { value: 'moderate', viewValue: 'Moderate' },
-  //   { value: 'hard', viewValue: 'Hard' },
-  // ];
-
-  seasons: Season[] = [
-    { value: 'spring', viewValue: 'Spring' },
-    { value: 'summer', viewValue: 'Summer' },
-    { value: 'autumn', viewValue: 'Autumn' },
-    { value: 'winter', viewValue: 'Winter' },
-    { value: 'all-season', viewValue: 'All Season' },
-  ];
-
-  meals: Meal[] = [
-    { value: 'breakfast', viewValue: 'Breakfast' },
-    { value: 'lunch', viewValue: 'Lunch' },
-    { value: 'Dinner', viewValue: 'Dinner' },
-    { value: 'drinks', viewValue: 'Drinks' },
-    { value: 'special-occasion', viewValue: 'Special occasion' },
-    { value: 'other', viewValue: 'Other' },
-  ];
 
 
   idCategory = '';
@@ -108,7 +89,9 @@ export class CreateRecipeComponent implements OnInit {
     this.recipeService.loadAllRecipeCategories().subscribe({
       next: (value) => {
         console.log(value);
-        this.categoryList = value
+        this.categoryList = value;
+        console.log("difficulties " + difficulties.values);
+
       },
       error: (err) => {
         console.error(err);
