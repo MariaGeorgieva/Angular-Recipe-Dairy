@@ -2,51 +2,120 @@
     <ng-container *ngIf="!inEditMode">
         <mat-card class="example-card">
             <mat-card-header>
-                <mat-card-title-group>
+                <div class="recipe-title">
+
+                    <div class="container-half-divider">
+                        <div class="line">
+                            <mat-divider></mat-divider>
+                        </div>
+                        <div class="category"> {{recipe?.category?.titleCategory}}</div>
+                        <div class="line">
+                            <mat-divider></mat-divider>
+                        </div>
+                    </div>
+
                     <mat-card-title>{{recipe?.titleRecipe}}</mat-card-title>
-                    <img mat-card-xl-image src="{{recipe?.imageUrl}}">
+
+                    <mat-divider></mat-divider>
+                    <div class="center">
+                        <div class="types-center">
+                            <mat-icon svgIcon="mainIngredient" class="svg small"></mat-icon>
+                            <p>Main ingredient:</p>
+                            <span class="recipe-types">{{recipe?.mainIngredient?.titleIngredient}}</span>
+                            <mat-divider style="height: 20px; margin: 0 5px;" [vertical]="true"></mat-divider>
+                        </div>
+                        <div class="types-center">
+                            <mat-icon svgIcon="meal" class="svg small"></mat-icon>
+                            <p>Meal: </p>
+                            <span class="recipe-types">{{recipe?.meal}}</span>
+                            <mat-divider style="height: 20px; margin: 0 5px;" [vertical]="true"></mat-divider>
+                        </div>
+                        <div class="types-center">
+                            <mat-icon svgIcon="season" class="svg small"></mat-icon>
+                            <p>Season: </p>
+                            <span class="recipe-types">{{recipe?.season}}</span>
+                        </div>
+                    </div>
+
+                    <mat-divider></mat-divider>
+
+                    <div class="center">
+
+                        <!-- <mat-divider [vertical]="true" color="primary" style="height: 20px"></mat-divider> -->
+                        <div class="types-center">
+                            <mat-icon svgIcon="servings" class="svg small"></mat-icon>
+                            <p>Servings : </p>
+                            <span class="recipe-types">{{recipe?.servings}}</span>
+                            <mat-divider style="height: 20px; margin: 0 5px;" [vertical]="true"></mat-divider>
+                        </div>
+                        <div class="types-center">
+                            <mat-icon svgIcon="difficulty" class="svg small"></mat-icon>
+                            <p>Difficulty:</p>
+                            <span class="recipe-types">{{recipe?.difficulty}}</span>
+                            <mat-divider style="height: 20px; margin: 0 5px;" [vertical]="true"></mat-divider>
+                        </div>
+
+                        <div class="types-center">
+                            <mat-icon svgIcon="time" class="svg small"></mat-icon>
+                            <p>Prep Time: </p>
+                            <span class="recipe-types">{{recipe?.preparationTime}} min</span>
+                            <mat-divider style="height: 20px; margin: 0 5px;" [vertical]="true"></mat-divider>
+                        </div>
+
+                        <div class="types-center">
+                            <mat-icon svgIcon="time" class="svg small"> </mat-icon>
+                            <p>Cooking Time: </p>
+                            <span class="recipe-types">{{recipe?.cookingTime}} min</span>
+                        </div>
+                    </div>
+                    <mat-divider></mat-divider>
                     <mat-card-subtitle>"{{recipe?.shortDescription}}"</mat-card-subtitle>
-                </mat-card-title-group>
+
+                </div>
+
+                <div class="recipe-img">
+                    <img mat-card-image src="{{recipe?.imageUrl}}">
+                </div>
+
             </mat-card-header>
+
             <mat-card-content>
-                <section>
-                    <div class="example-flex-container">
-                        <p>
-                            <mat-icon svgIcon="category" class="svg"></mat-icon>
-                            Category: {{recipe?.category?.titleCategory}}
-                            <!-- <mat-divider [vertical]="true" color="primary" style="height: 20px"></mat-divider> -->
-                            <mat-icon svgIcon="mainIngredient" class="svg"></mat-icon>
-                            Main ingredient: {{recipe?.mainIngredient?.titleIngredient}}
-                            <mat-icon svgIcon="meal" class="svg"></mat-icon>
-                            Meal: {{recipe?.meal}}
-                            <mat-icon svgIcon="season" class="svg"></mat-icon>
-                            Season: {{recipe?.season}}
-                        </p>
-                        <p>
-                            <mat-icon svgIcon="servings" class="svg"></mat-icon>
-                            Servings : {{recipe?.servings}}
-                            <mat-icon svgIcon="difficulty" class="svg"></mat-icon>
-                            Difficulty: {{recipe?.difficulty}}
-                            <mat-icon svgIcon="time" class="svg"></mat-icon>
-                            Preparation Time: {{recipe?.preparationTime}} min
-                            <mat-icon svgIcon="time" class="svg"></mat-icon>
-                            Cooking Time: {{recipe?.cookingTime}} min
+                <div class="recipe-body left">
+                    <!-- <mat-divider></mat-divider> -->
+                    <div class="container-half-divider">
+                        <div class="line">
+                            <mat-divider></mat-divider>
+                        </div>
+                        <mat-icon svgIcon="ingredients" class="svg"></mat-icon>
+                        <div class="category">Ingredients:</div>
+                        <div class="line">
+                            <mat-divider></mat-divider>
+                        </div>
+                    </div>
+                    <p class="ingredients">
+                        {{recipe?.ingredients}}
+                    </p>
+                </div>
+            
+                <!-- <div class="recipe-body line">
+                    <mat-divider style="height: 20rem; margin: 0 5px;" [vertical]="true"></mat-divider>
+                </div> -->
+                    <div class="recipe-body right">
+                        <div class="container-half-divider">
+                            <div class="line">
+                                <mat-divider></mat-divider>
+                            </div>
+                            <mat-icon svgIcon="preparation" class="svg"></mat-icon>
+                            <div class="category">Preparation:</div>
+                            <div class="line">
+                                <mat-divider></mat-divider>
+                            </div>
+                        </div>
+                        <p class="ingredients">
+
+                            {{recipe?.preparation}}
                         </p>
                     </div>
-                </section>
-
-                <h2>Ingredients:</h2>
-                <p>
-                    <mat-icon svgIcon="ingredients" class="svg"></mat-icon>
-                    {{recipe?.ingredients}}
-                </p>
-
-                <h2>Preparation:</h2>
-                <p>
-                    <mat-icon svgIcon="preparation" class="svg"></mat-icon>
-                    {{recipe?.preparation}}
-                </p>
-
             </mat-card-content>
             <mat-card-actions>
                 <section>
@@ -173,7 +242,7 @@
                         </mat-select>
                     </mat-form-field>
 
-                             </p>
+                </p>
 
                 <p>
                     <!-- *preparationTime -->
@@ -199,7 +268,7 @@
 
                 </p>
                 <p>
-                    
+
                     <!-- ingredients -->
                     <mat-form-field class="example-full-width">
                         <mat-label>Edit short Ingredients</mat-label>
@@ -240,17 +309,17 @@
                     <input matInput type="text" #imageUrl="ngModel" ngModel type="text" name="imageUrl" required
                         minlength="3" [ngModel]="recipe?.imageUrl">
                     <mat-error *ngIf=" imageUrl?.errors?.['required']">
-                    Image URL is required!
+                        Image URL is required!
                     </mat-error>
                 </mat-form-field>
                 <mat-card-actions>
-                    <button mat-raised-button class="cancel" type="button"
-                        (click)="inEditMode=false">Back to recipe</button>
+                    <button mat-raised-button class="cancel" type="button" (click)="inEditMode=false">Back to
+                        recipe</button>
                     <button mat-raised-button class="public" [disabled]="form.invalid">Edit Recipe</button>
                 </mat-card-actions>
             </form>
         </mat-card-content>
-       
+
     </mat-card>
 </ng-container>
 <!-- </div> -->

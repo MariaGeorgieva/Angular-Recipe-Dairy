@@ -7,18 +7,15 @@
 // @include mat.all-component-themes($my-material);
 // @include angular-recipe-dairy($my-material);
 // @include my-app-theme($my-material);
-
-
-
-
 html,
 body {
     min-height: 100vh;
     // height: 100%;
+    font-family: 'Jost', sans-serif;
+    font-size: 16px;
 }
 
 body {
-  
     margin: 0;
-    font-family: Jost, sans-serif;
+
 }

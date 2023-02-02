@@ -1,34 +1,28 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 import { ICategory } from 'src/app/shared/interfaces/category';
+import { Difficulty } from 'src/app/shared/interfaces/difficulty';
 import { IIngredient } from 'src/app/shared/interfaces/ingredient';
+import { Meal } from 'src/app/shared/interfaces/meal';
 import { IRecipe } from 'src/app/shared/interfaces/recipe';
+import { Season } from 'src/app/shared/interfaces/season';
 import { RecipeService } from '../../recipe.service';
 
-interface Season {
-  value: string;
-  viewValue: string;
-}
-
-interface Meal {
-  value: string;
-  viewValue: string;
-}
-
-interface Difficulty {
-  value: string;
-  viewValue: string;
-}
 
 @Component({
   selector: 'app-recipe-details',
   templateUrl: './recipe-details.component.html',
   styleUrls: ['./recipe-details.component.css']
 })
-export class RecipeDetailsComponent implements OnInit, OnChanges {
 
+
+export class RecipeDetailsComponent implements OnInit, OnChanges {
+  @Input()
+  difficulties?: Difficulty[];
+
+  [x: string]: any;
   recipe: IRecipe | undefined;
   inEditMode: boolean = false;
   isAuthor: boolean = false;
@@ -60,11 +54,11 @@ export class RecipeDetailsComponent implements OnInit, OnChanges {
   categoryList: ICategory[] | null = null
   ingredientList: IIngredient[] | null = null
 
-  difficulties: Difficulty[] = [
-    { value: 'easy', viewValue: 'Easy' },
-    { value: 'moderate', viewValue: 'Moderate' },
-    { value: 'hard', viewValue: 'Hard' },
-  ];
+  // difficulties: Difficulty[] = [
+  //   { value: 'easy', viewValue: 'Easy' },
+  //   { value: 'moderate', viewValue: 'Moderate' },
+  //   { value: 'hard', viewValue: 'Hard' },
+  // ];
 
   seasons: Season[] = [
     { value: 'spring', viewValue: 'Spring' },

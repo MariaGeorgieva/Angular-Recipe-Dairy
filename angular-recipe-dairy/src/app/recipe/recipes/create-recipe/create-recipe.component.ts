@@ -1,25 +1,13 @@
-import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
+import { Component, ElementRef, ViewChild, OnInit, Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ICategory } from 'src/app/shared/interfaces/category';
+import { Difficulty } from 'src/app/shared/interfaces/difficulty';
 import { IIngredient } from 'src/app/shared/interfaces/ingredient';
-import { IRecipe } from 'src/app/shared/interfaces/recipe';
+import { Meal } from 'src/app/shared/interfaces/meal';
+import { Season } from 'src/app/shared/interfaces/season';
 import { RecipeService } from '../../recipe.service';
 
-interface Season {
-  value: string;
-  viewValue: string;
-}
-
-interface Meal {
-  value: string;
-  viewValue: string;
-}
-
-interface Difficulty {
-  value: string;
-  viewValue: string;
-}
 
 @Component({
   selector: 'app-create-recipe',
@@ -28,6 +16,8 @@ interface Difficulty {
 })
 export class CreateRecipeComponent implements OnInit {
 
+  @Input() difficulties? : Difficulty[];
+  
   @ViewChild(
     NgForm,
     { static: true }
@@ -41,11 +31,11 @@ export class CreateRecipeComponent implements OnInit {
   categoryList: ICategory[] | null = null
   ingredientList: IIngredient[] | null = null
 
-  difficulties: Difficulty[] = [
-    { value: 'easy', viewValue: 'Easy' },
-    { value: 'moderate', viewValue: 'Moderate' },
-    { value: 'hard', viewValue: 'Hard' },
-  ];
+  // difficulties: Difficulty[] = [
+  //   { value: 'easy', viewValue: 'Easy' },
+  //   { value: 'moderate', viewValue: 'Moderate' },
+  //   { value: 'hard', viewValue: 'Hard' },
+  // ];
 
   seasons: Season[] = [
     { value: 'spring', viewValue: 'Spring' },

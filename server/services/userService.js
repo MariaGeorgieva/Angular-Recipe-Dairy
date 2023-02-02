@@ -13,7 +13,7 @@ async function getUserProfile(email) {
 
 async function getUserRecipes(userId) {
   return User?.findById({ userId })
-    .populate({ ownRecipes })
+    .populate({ ownRecipes });
 }
 
 
