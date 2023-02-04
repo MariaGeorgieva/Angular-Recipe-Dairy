@@ -1,31 +1,23 @@
+global.__basedir = __dirname;
 const express = require('express');
-const path = require('path');
+require('dotenv').config({ path: '.env' });
+
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
-// const authController = require('./controllers/authController');
-// const categoryController = require('./controllers/categoryController');
-// const ingredientController = require('./controllers/IngredientController');
-// const recipeController = require('./controllers/recipeController');
+
 const cors = require('./middlewares/cors');
-// const cors = require('cors');
 const { isAdmin, hasUser } = require('./middlewares/guards');
-// const session = require('./middlewares/session');
 const trimBody = require('./middlewares/trimBody');
-// const userController = require('./controllers/userController');
 const auth = require('./middlewares/auth');
-// const auth = require('./middlewares/auth');
 const apiRouter = require('./router');
-
-
-global.__basedir = __dirname;
+const path = require('path');
 
 
 const env = process.env.NODE_ENV || 'development';
-
 const config = {
     development: {
         port: process.env.PORT || 3030,
-        dbURL: 'mongodb://127.0.0.1:27017/recipesDB',
+        dbURL: process.env.DB_URL_CREDENTIALS,
         origin: ['http://localhost:5555', 'http://localhost:4200']
     },
     production: {
